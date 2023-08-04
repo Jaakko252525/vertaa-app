@@ -8,23 +8,25 @@ import {
 } from "react-router-dom";
 
 
-import './index.css';
 
 // importing components
 import App from './App';
 import Login from "./components/Login";
+import Frontpage from "./components/Frontpage";
+
+
 
 // apollo
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 
-
 import reportWebVitals from './reportWebVitals';
 
 
-const client = new ApolloClient({
-  uri: 'https://flyby-router-demo.herokuapp.com/',
+export const client = new ApolloClient({
+  uri: 'http://localhost:4000/',
   cache: new InMemoryCache(),
 });
+
 
 
 const root = ReactDOM.createRoot(
@@ -41,14 +43,22 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login  />
+  },
+  {
+    path: "etusivu",
+    element: <Frontpage />
   }
 ]);
 
 
 root.render(
+     
   <React.StrictMode>
+ <ApolloProvider client={client}>
     <RouterProvider router={router} />
+    </ApolloProvider>
   </React.StrictMode>
+  
 );
 
 // If you want to start measuring performance in your app, pass a function
