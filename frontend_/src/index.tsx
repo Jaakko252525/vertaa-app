@@ -14,8 +14,18 @@ import './index.css';
 import App from './App';
 import Login from "./components/Login";
 
+// apollo
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+
 
 import reportWebVitals from './reportWebVitals';
+
+
+const client = new ApolloClient({
+  uri: 'https://flyby-router-demo.herokuapp.com/',
+  cache: new InMemoryCache(),
+});
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
