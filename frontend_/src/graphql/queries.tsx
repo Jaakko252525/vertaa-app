@@ -26,11 +26,11 @@ interface dataInterface {
 }
 
 
-export const getAllSales = () => {
+export const getAllSales = async () => {
 
 
     // calling client
-    client
+    const data = await client
     .query({
     query: gql`
         query {
@@ -42,7 +42,9 @@ export const getAllSales = () => {
         
     `,
     })
-    .then((result) => console.log('this is result', result) );
+
+    return data.data
+
 
 
 

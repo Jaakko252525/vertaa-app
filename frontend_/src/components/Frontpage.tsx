@@ -10,22 +10,13 @@
 
 
 
-// importing useEffect and useState
+// importing useState
 import { useEffect, useState } from "react"
 
 
 
 import { getAllSales } from "../graphql/queries"
 
-
-const getData = async () => {
-
-
-    // getting all Sale data from DB
-    const data = await getAllSales
-    console.log('data fetched', data)
-    return data
-}
 
 
 
@@ -39,20 +30,38 @@ const Frontpage = () => {
 
     const [sales, setSales] = useState<dataInterface[]>()
 
-    // fetch data
+
+    const getData = async () => {
+
+        // use query
+        const data = await getAllSales()
+
+        setSales(data.allSales)
+
+    }
+
+
+
     useEffect(() => {
 
-        // setting state
-        // @ts-ignore
-        const data = getData()
-        setSales(data);
-        console.log('sales', sales);
+        getData()
 
+    },[])
 
-
-    }, [])
-    
-
+    // if sales not empty
+    if (sales !== undefined) {
+        return (
+            <div>
+                <ul>
+                    {sales.map(s => 
+                        <li>
+                            Product name: {s.product} <br/>
+                            Price: {s.price}
+                        </li>)}
+                </ul>
+            </div>
+        )
+    }
 
     return (
 
