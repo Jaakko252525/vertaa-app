@@ -10,6 +10,10 @@
 
 
 
+
+
+
+
 // importing apollo client
 
 
@@ -18,21 +22,16 @@
 import { gql } from "@apollo/client";
 import { client } from "..";
 
+// importing graphql client
+import { client_2 } from '../index'
 
-// interface
-interface dataInterface {
-    product: string
-    price: string
-}
 
 
 export const getAllSales = async () => {
-
-
     // calling client
     const data = await client
     .query({
-    query: gql`
+      query: gql`
         query {
         allSales {
             price
@@ -49,6 +48,49 @@ export const getAllSales = async () => {
 
 
 }
+
+
+
+// login query
+export const LOGIN_MUTATION = async () => {
+    
+    const LOGIN = gql`
+        mutation Login($username: String!, $password: String!) {
+           login(username: $username, password:$password) {
+             username
+             password
+           } 
+        }`
+    
+        console.log('this is login in gql', LOGIN)
+
+    // returning data
+    return LOGIN
+}
+
+
+
+
+
+export const LOGIN = gql`
+mutation Login($username: String!, $password: String!) {
+   login(username: $username, password:$password) {
+     username
+     password
+   } 
+}`
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

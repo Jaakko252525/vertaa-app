@@ -3,8 +3,11 @@
 // importing jwt generating function
 import { generateAccessToken } from "../JWT/jwt";
 
+// jwt import
+const jwt = require('jsonwebtoken')
 
-
+// crypt password
+const bcrypt = require('bcrypt')
 
 
 // importing model
@@ -168,13 +171,36 @@ export const resolvers = {
 
     },
 
-    login: async (root: String, args: interfaceForUser, _context: string) => {
+    login: async (_root: string, args: interfaceForUser, _context: string) => {
         const { username, password } = args;
 
 
+        // connecting to db
+        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+        // finding user
+        const user = await User.findOne({ username })
+        // check if password correct
 
 
-   }
+        if (user.password === password) {
+            // user for token
+            const userForToken = {
+                username: user.username
+            }
+
+            const token = await jwt.sign(username, process.env.TOKEN_SECRET)
+
+            return {
+                username: username,
+                password: token
+            } }else return {
+                username: 'wrong',
+                password: 'credentials :('
+            }
+
+    },
+
+
 
 
 }}

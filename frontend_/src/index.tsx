@@ -17,22 +17,53 @@ import Frontpage from "./components/Frontpage";
 
 
 // apollo
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+
+//link making thing???
+import { setContext } from '@apollo/client/link/context';
 
 import reportWebVitals from './reportWebVitals';
 
 
+
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000/',
+});
+
+
+// client
 export const client = new ApolloClient({
   uri: 'http://localhost:4000/',
   cache: new InMemoryCache(),
 });
 
+// authentication link
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
+
+// another client that need authentication to get through?
+export const client_2 = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
+});
 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+
+// router for pages
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,7 +81,7 @@ const router = createBrowserRouter([
   }
 ]);
 
-
+// render
 root.render(
      
   <React.StrictMode>
@@ -61,7 +92,6 @@ root.render(
   
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
+
 reportWebVitals();

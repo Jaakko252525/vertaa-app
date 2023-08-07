@@ -1,10 +1,14 @@
 
+import { useMutation } from "@apollo/client"
 
-
-
+// importing login query
+import { LOGIN_MUTATION, LOGIN } from "../graphql/queries"
 
 // importing useState
 import { useState } from "react"
+
+
+
 
 // Login component
 const Login = () => {
@@ -13,11 +17,15 @@ const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    /// useMutation
+    const [Login, {data, loading, error}] = useMutation(LOGIN)
+
     // submit function
-    const submit = (event:React.FormEvent<HTMLFormElement>) => {
+    const submit = async (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        console.log('form submitted!')
+        // using mutation
+        console.log('wut here?', await Login({ variables: {username: username, password: password} }))
         
     }
 
