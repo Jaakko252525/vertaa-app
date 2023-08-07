@@ -3,17 +3,6 @@
 
 
 
-export let sales = [
-    {
-      product: 'phone',
-      price: '200'
-    },
-    {
-      product: 'reppu',
-      price: '20'
-    },
-  ]
-  
 
 
 export const typeDefs = `
@@ -22,12 +11,21 @@ export const typeDefs = `
     price: String
   }
 
+  type User {
+    username: String,
+    password: String
+  }
+
+
   type Query {
     allSales: [Sale!]!
   }
 
   type Mutation {
     addSale(product:String!, price: String!): Sale
+    createNewUser(username:String!, password: String!): User
+    login(username: String!, password:String!): User
   }
+
 
 `
