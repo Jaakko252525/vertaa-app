@@ -181,26 +181,36 @@ export const resolvers = {
         const user = await User.findOne({ username })
         // check if password correct
 
-
+        try {
         if (user.password === password) {
             // user for token
             const userForToken = {
                 username: user.username
             }
 
-            const token = await jwt.sign(username, process.env.TOKEN_SECRET)
+            // token expires in 60*60 seconds, that is, in one hour
+            const token = await jwt.sign(
+                username,
+                process.env.TOKEN_SECRET              
+                )
 
             return {
                 username: username,
                 password: token
-            } }else return {
-                username: 'wrong',
-                password: 'credentials :('
-            }
+            } }
+        else return 'wrong credentials'
+        
+        }
 
+        catch (error) {
+                // Handle any errors that occur during the process
+                console.error('Error during login:', error);
+                throw new Error('An error occurred during login.');
+              }
+            } 
     },
 
 
 
 
-}}
+}

@@ -8,30 +8,58 @@ import { LOGIN_MUTATION, LOGIN } from "../graphql/queries"
 import { useState } from "react"
 
 
-
+interface userObjetInterface {
+    username: string
+}
 
 // Login component
 const Login = () => {
 
     // states for username and password
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] = useState('Jaakko')
+    const [password, setPassword] = useState('123')
+
+    // user state
+    const [user, setUser] = useState()
 
     /// useMutation
-    const [Login, {data, loading, error}] = useMutation(LOGIN)
+    const [Login, {data, loading, error}] = useMutation<userObjetInterface>(LOGIN)
 
     // submit function
     const submit = async (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
         // using mutation
-        console.log('wut here?', await Login({ variables: {username: username, password: password} }))
+        const login = await Login({ variables: {username: username, password: password} })
         
+
+
+       
+
+        // setting user to state
+        // @ts-ignore comment
+        if (login.data.login.username !== null) {
+
+            //making userObject
+            const userObject = {
+                // @ts-ignore comment
+                username: login.data.login.username
+            }
+            // @ts-ignore comment
+            setUser(userObject)
+
+        }
     }
 
-
- 
-
+    
+   if (user !== undefined) {
+    return (
+        <div>
+            siuu
+            <button onClick={() => setUser(undefined)}>Logout</button>
+        </div>
+    )
+   }
 
     return (
         <div>
