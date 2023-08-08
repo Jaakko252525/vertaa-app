@@ -1,16 +1,39 @@
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { useMutation } from "@apollo/client"
 
 // importing login query
-import { LOGIN_MUTATION, LOGIN } from "../graphql/queries"
+import { LOGIN } from "../graphql/queries"
 
 // importing useState
 import { useState } from "react"
 
+// importing react redux hooks
+import { useSelector, useDispatch } from "react-redux"
+
+// importing slicer
+import userSlice from "../Redux/userSlice"
+
+import { userToStore } from "../Redux/userSlice"
 
 interface userObjetInterface {
     username: string
 }
+
 
 // Login component
 const Login = () => {
@@ -19,11 +42,17 @@ const Login = () => {
     const [username, setUsername] = useState('Jaakko')
     const [password, setPassword] = useState('123')
 
+    // useSelector and useDispatch
+    // @ts-ignore
+    const userVar = useSelector(state => state.user.username)
+    const dispatch = useDispatch()
+
     // user state
     const [user, setUser] = useState()
 
     /// useMutation
     const [Login, {data, loading, error}] = useMutation<userObjetInterface>(LOGIN)
+
 
     // submit function
     const submit = async (event:React.FormEvent<HTMLFormElement>) => {
@@ -41,10 +70,13 @@ const Login = () => {
         if (login.data.login.username !== null) {
 
             //making userObject
-            const userObject = {
+            const userObject: userObjetInterface = {
                 // @ts-ignore comment
                 username: login.data.login.username
             }
+
+            // using slicer
+            dispatch(userToStore(userObject))
             // @ts-ignore comment
             setUser(userObject)
 

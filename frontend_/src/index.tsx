@@ -17,19 +17,16 @@ import Frontpage from "./components/Frontpage";
 
 
 // apollo
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-//link making thing???
-import { setContext } from '@apollo/client/link/context';
 
 import reportWebVitals from './reportWebVitals';
 
+// redux
+import { Provider } from 'react-redux'
 
-
-
-const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/',
-});
+// store 
+import store from './Redux/store'
 
 
 // client
@@ -38,24 +35,8 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// authentication link
-const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('token');
-  // return the headers to the context so httpLink can read them
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    }
-  }
-});
 
-// another client that need authentication to get through?
-export const client_2 = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
-});
+
 
 
 const root = ReactDOM.createRoot(
@@ -64,7 +45,8 @@ const root = ReactDOM.createRoot(
 
 
 // router for pages
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
   {
     path: "/",
     element: <div>
@@ -78,18 +60,24 @@ const router = createBrowserRouter([
   {
     path: "etusivu",
     element: <Frontpage />
+  },
+  {
+    path: "*",
+    element: <div> Theres nothing here: 404!</div>
   }
 ]);
 
 // render
 root.render(
-     
+
   <React.StrictMode>
- <ApolloProvider client={client}>
-    <RouterProvider router={router} />
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </ApolloProvider>
   </React.StrictMode>
-  
+   
 );
 
 

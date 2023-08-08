@@ -18,6 +18,10 @@ import { useEffect, useState } from "react"
 import { getAllSales } from "../graphql/queries"
 
 
+// redux hooks
+import { useSelector, useDispatch } from 'react-redux'
+// redux actions
+import { decrement, increment } from '../Redux/counterSlice'
 
 
 // interface
@@ -27,9 +31,13 @@ interface dataInterface {
 }
 
 const Frontpage = () => {
-
+    // state for sales
     const [sales, setSales] = useState<dataInterface[]>()
 
+    // redux store
+    // @ts-ignore
+    const count = useSelector(state => state.counter.count)
+    const dispatch = useDispatch()
 
     const getData = async () => {
 
@@ -45,6 +53,7 @@ const Frontpage = () => {
     useEffect(() => {
 
         getData()
+
 
     },[])
 

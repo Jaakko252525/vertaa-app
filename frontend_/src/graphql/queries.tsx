@@ -22,8 +22,7 @@
 import { gql } from "@apollo/client";
 import { client } from "..";
 
-// importing graphql client
-import { client_2 } from '../index'
+
 
 
 
