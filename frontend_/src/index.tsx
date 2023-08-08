@@ -1,19 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 
-// react router
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
 
 
 
 // importing components
 import App from './App';
-import Login from "./components/Login";
-import Frontpage from "./components/Frontpage";
-
 
 
 // apollo
@@ -44,28 +36,6 @@ const root = ReactDOM.createRoot(
 );
 
 
-// router for pages
-const router = createBrowserRouter(
-  [
-  {
-    path: "/",
-    element: <div>
-      <App  />
-    </div>,
-  },
-  {
-    path: "login",
-    element: <Login  />
-  },
-  {
-    path: "etusivu",
-    element: <Frontpage />
-  },
-  {
-    path: "*",
-    element: <div> Theres nothing here: 404!</div>
-  }
-]);
 
 // render
 root.render(
@@ -73,7 +43,7 @@ root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <App  />  
       </Provider>
     </ApolloProvider>
   </React.StrictMode>
