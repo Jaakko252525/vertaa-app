@@ -44,7 +44,7 @@ const Login = () => {
 
     // useSelector and useDispatch
     // @ts-ignore
-    const userVar = useSelector(state => state.user.username)
+    const userVar = useSelector(state => state.user)
     const dispatch = useDispatch()
 
     // user state
@@ -69,16 +69,20 @@ const Login = () => {
         // @ts-ignore comment
         if (login.data.login.username !== null) {
 
+
             //making userObject
             const userObject: userObjetInterface = {
                 // @ts-ignore comment
                 username: login.data.login.username
             }
 
+            console.log('user:', userObject.username)
+
             // using slicer
-            dispatch(userToStore(userObject))
+            await dispatch(userToStore(userObject))
             // @ts-ignore comment
-            setUser(userObject)
+            await setUser(userObject)
+            console.log('user logged in is:', userVar)
 
         }
     }

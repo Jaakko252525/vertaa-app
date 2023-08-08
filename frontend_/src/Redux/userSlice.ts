@@ -33,7 +33,7 @@ interface UserState {
 
 
 // initialState
-const initialState = {
+let initialState = {
      username: ''
     } as UserState
 
@@ -43,9 +43,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     userToStore(state, action) {
-      console.log('inside userSlice', action)
-      // @ts-ignore
-      state.username = action
+      console.log('inside userSlice', action.payload)
+      return initialState = action.payload
     }
   },
 })

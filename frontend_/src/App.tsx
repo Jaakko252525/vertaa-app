@@ -4,6 +4,10 @@ import './App.css';
 // router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+
+// importing PrivateRoute
+import PrivateRoute from './components/PrivateRoute';
+
 // components
 import Login from './components/Login';
 import Frontpage from './components/Frontpage';
@@ -24,7 +28,9 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/login" element={<Login  />}></Route>
-            <Route path='frontpage' element={<Frontpage  />} />
+            <Route path='frontpage' element={
+              <PrivateRoute childrenProp={<Frontpage/>} />
+            } />
           </Routes>
       </Router>
       </div>
