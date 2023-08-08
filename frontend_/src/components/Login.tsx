@@ -47,8 +47,6 @@ const Login = () => {
     const userVar = useSelector(state => state.user)
     const dispatch = useDispatch()
 
-    // user state
-    const [user, setUser] = useState()
 
     /// useMutation
     const [Login, {data, loading, error}] = useMutation<userObjetInterface>(LOGIN)
@@ -58,6 +56,8 @@ const Login = () => {
     const submit = async (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
+
+        console.log('user before', userVar.username )
         // using mutation
         const login = await Login({ variables: {username: username, password: password} })
         
@@ -80,19 +80,29 @@ const Login = () => {
 
             // using slicer
             await dispatch(userToStore(userObject))
-            // @ts-ignore comment
-            await setUser(userObject)
-            console.log('user logged in is:', userVar)
-
+            
         }
     }
 
+    // logout function
+    const logout = async () => {
+
+        console.log(' inner')
+        const userObject = {
+            username: ''
+        }
+        // using slicer
+        await dispatch(userToStore(userObject))
+
+        return
+    }
+
     
-   if (user !== undefined) {
+   if (userVar.username !== '') {
     return (
-        <div>
-            siuu
-            <button onClick={() => setUser(undefined)}>Logout</button>
+        <div >
+            Succesfully logged in with user: {userVar.username} <br/>
+            <button onClick={() => logout()}>Logout</button>
         </div>
     )
    }

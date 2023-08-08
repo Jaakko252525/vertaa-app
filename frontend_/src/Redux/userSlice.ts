@@ -31,20 +31,27 @@ interface UserState {
   username: string
 }
 
-
+/*
 // initialState
 let initialState = {
      username: ''
     } as UserState
-
+*/
 
 const userSlice = createSlice({
   name: 'user',
-  initialState,
+
+  initialState: {
+    username: ''
+  },
+
   reducers: {
-    userToStore(state, action) {
-      console.log('inside userSlice', action.payload)
-      return initialState = action.payload
+    userToStore: (state, action) => {
+      const payload = action.payload
+
+      state.username = payload.username
+
+
     }
   },
 })
