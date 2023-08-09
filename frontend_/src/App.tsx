@@ -28,9 +28,10 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/login" element={<Login  />}></Route>
-            <Route path='frontpage' element={
-              <PrivateRoute childrenProp={<Frontpage/>} />
-            } />
+            <Route path='frontpage' element={<PrivateRoute childrenProp={<Frontpage/>}/>}>
+
+
+            </Route>
           </Routes>
       </Router>
       </div>
