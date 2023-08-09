@@ -13,7 +13,6 @@
 
 
 
-
 import { useMutation } from "@apollo/client"
 
 // importing login query
@@ -22,11 +21,13 @@ import { LOGIN } from "../graphql/queries"
 // importing useState
 import { useState } from "react"
 
+// navigate hook
+import { useNavigate } from "react-router-dom"
+
+
 // importing react redux hooks
 import { useSelector, useDispatch } from "react-redux"
 
-// importing slicer
-import userSlice from "../Redux/userSlice"
 
 import { userToStore } from "../Redux/userSlice"
 
@@ -35,12 +36,16 @@ interface userObjetInterface {
 }
 
 
+
 // Login component
 const Login = () => {
 
     // states for username and password
     const [username, setUsername] = useState('Jaakko')
     const [password, setPassword] = useState('123')
+
+    // navigation hook to a variable
+    const navigate = useNavigate()
 
     // useSelector and useDispatch
     // @ts-ignore
@@ -62,7 +67,6 @@ const Login = () => {
         const login = await Login({ variables: {username: username, password: password} })
         
 
-
        
 
         // setting user to state
@@ -80,6 +84,8 @@ const Login = () => {
 
             // using slicer
             await dispatch(userToStore(userObject))
+
+
             
         }
     }
@@ -97,12 +103,29 @@ const Login = () => {
         return
     }
 
+
+    // Navigate
+    const frontpageRoute = () => {
+        const path = `/frontpage`;
+        navigate(path)
+    }
+
+    // userProfile route
+    const userProfileRoute = () => {
+        const path = "/userProfile"
+        navigate(path)
+    }
+
+
     
    if (userVar.username !== '') {
     return (
         <div >
             Succesfully logged in with user: {userVar.username} <br/>
             <button onClick={() => logout()}>Logout</button>
+            <button onClick={frontpageRoute} >Frontpage</button>
+            <button onClick={userProfileRoute} >Profile</button>
+
         </div>
     )
    }

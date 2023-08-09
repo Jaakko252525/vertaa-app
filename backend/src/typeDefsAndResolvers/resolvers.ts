@@ -158,6 +158,22 @@ export const resolvers = {
         // saving args to db
         //connecting to db
         await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+        
+
+        let data = []
+        // finding usern in DB
+        // @ts-ignore
+        await User.find({ username: username }).then(result => {
+            data = result
+            console.log('data', data, 'and typeof data:', typeof data)
+            
+        })
+        
+        // if user not used. Make user in db
+        if (data.length === 0) {
+
+        
+        
         // making new user
         const newUser =  await new User({username: username, password: password})
         // saving user
@@ -168,6 +184,10 @@ export const resolvers = {
             username: username,
             password: token
         }
+    } else return {
+        username: "already in",
+        password: "database"
+    }
 
     },
 

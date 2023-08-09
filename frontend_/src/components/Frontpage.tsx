@@ -20,9 +20,11 @@ import { getAllSales } from "../graphql/queries"
 
 // redux hooks
 import { useSelector, useDispatch } from 'react-redux'
-// redux actions
-import { decrement, increment } from '../Redux/counterSlice'
 
+
+
+// redux actions
+import { userToStore } from "../Redux/userSlice"
 
 // interface
 interface dataInterface {
@@ -30,13 +32,14 @@ interface dataInterface {
     price: string
 }
 
+// Frontpage component
 const Frontpage = () => {
     // state for sales
     const [sales, setSales] = useState<dataInterface[]>()
 
     // redux store
     // @ts-ignore
-    const count = useSelector(state => state.counter.count)
+    const user = useSelector(state => state.user.count)
     const dispatch = useDispatch()
 
     const getData = async () => {
@@ -48,6 +51,16 @@ const Frontpage = () => {
 
     }
 
+    // logout function
+    const logout = () => {
+
+        const userObject = {
+            username: ''
+        }
+
+        // user to 
+        dispatch(userToStore(userObject))
+    }
 
 
     useEffect(() => {
@@ -61,6 +74,7 @@ const Frontpage = () => {
     if (sales !== undefined) {
         return (
             <div>
+                <h1>Frontpage</h1>
                 <ul>
                     {sales.map(s => 
                         <li>
@@ -68,6 +82,10 @@ const Frontpage = () => {
                             Price: {s.price}
                         </li>)}
                 </ul>
+
+                <div>
+                    <button onClick={logout} >Logout</button>
+                </div>
             </div>
         )
     }
@@ -76,6 +94,7 @@ const Frontpage = () => {
 
         <div>
             hello frontpage
+            
         </div>
     )
 }

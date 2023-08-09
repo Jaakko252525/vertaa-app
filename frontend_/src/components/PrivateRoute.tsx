@@ -1,6 +1,4 @@
 
-// useState
-import { useState } from "react";
 
 
 // importing redux things
@@ -11,13 +9,6 @@ import { Navigate } from 'react-router-dom';
 
 // @ts-ignore
 const PrivateRoute = ({ childrenProp }) => {
-    
-    
-    //checking if token
-    //const { user: authUser } = useSelector(x => x.auth);
-    // hardcoded auth
-    //const [token, setToken] = useState('token')
-
 
     // redux store to check if user logged in
     //@ts-ignore
