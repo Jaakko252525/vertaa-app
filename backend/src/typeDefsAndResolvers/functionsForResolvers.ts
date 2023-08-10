@@ -1,6 +1,7 @@
 
 
 
+
 // mongoose import
 const mongoose = require('mongoose');
 
@@ -16,79 +17,10 @@ interface ForSaleInterface {
 }
 
 
-// 
-export const updateUser = async (sale:ForSaleInterface ) => {
-
-    
-    const { product, price, userId } = sale
-
-
-    try {
-        
-        //connecting to db
-       await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
-       let data = []
-       const userInDb =  await User.findOneAndUpdate(
-        { _id: userId },
-        { $addToSet: { forSale: product } },
-        { new: true })
-
-
-
-       // saving update
-       userInDb.save()
-
-       
-       console.log('user updated succesfully!')
-
-        return
-    } catch (error) {
-        console.error('Error finding user:', error);
-        throw error;
-      }
-
-}
 
 
 
 
-// add forSale to db
-export const addForSaleToDB = async (sale: ForSaleInterface) => {
-
-
-
-         
-    // variables
-    const { product, price, userId } = sale
-
-
-
-
-    try {
-
-
-        //connecting to db
-        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
-       
-        const newSale = await new ForSale({
-            product,
-            price,
-            userId
-        })
-
-
-
-        // saving new sale in db
-        await newSale.save()
-
-        console.log(' sale added succesfully!')
-        return
-
-
-    }catch (error) {
-        console.log('error is:', error)
-    }
-}
 
 
 // getUserSales
@@ -114,6 +46,62 @@ export const getUserSales = async (id: string) => {
     }
 
 }
+
+
+// new sale then update user, then update sale
+
+export const newSale = async (sale: ForSaleInterface) => {
+
+    // destructed variables
+    const { product, price, userId } = sale
+
+
+    try {
+
+        //connecting to db
+        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+        console.log('connected to db')
+
+ 
+
+        // creating sale object
+        const newSale = await new ForSale({ 
+            product: product,
+            price: price,
+            userId: userId
+         })
+
+        // save new sale
+        await newSale.save()
+
+        console.log('new sale made succesfully')
+
+
+
+        // finding user and updating its forSale value
+        const user =  await User.findOneAndUpdate(
+            { _id: userId },
+            { $addToSet: { forSale: newSale } },
+            { new: true })
+        
+        await user.save()
+
+        console.log('user updated succesfully')
+
+        
+        return user
+
+ 
+
+    } catch (error) {
+        console.log(error)
+    }
+
+
+    
+}
+
+
 
 
 // delete user and return its id

@@ -2,7 +2,7 @@
 
 
 // importing functionsForResolvers
-import { updateUser, addForSaleToDB, getUserSales, deleteUserFunction } from './functionsForResolvers'
+import { getUserSales, deleteUserFunction, newSale } from './functionsForResolvers'
 
 
 // importing jwt generating function
@@ -177,13 +177,8 @@ export const resolvers = {
         }
 
 
-        // calling addForSaleFunc
-        await updateUser(forSaleObject)
 
-
-
-        // callig addForSaleToDB
-        await addForSaleToDB(forSaleObject)
+        await newSale(forSaleObject)
 
 
         return
