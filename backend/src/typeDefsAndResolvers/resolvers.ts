@@ -2,7 +2,7 @@
 
 
 // importing functionsForResolvers
-import { getUserSales, deleteUserFunction, newSale } from './functionsForResolvers'
+import { getUserSales, deleteUserFunction, newSale, updateSale } from './functionsForResolvers'
 
 
 // importing jwt generating function
@@ -118,6 +118,7 @@ async function main() {
 
 // sale interface
 interface forSaleInterface {
+    id: string
     product: string,
     price: string,
     userId: string
@@ -177,7 +178,7 @@ export const resolvers = {
         }
 
 
-
+        // using function
         await newSale(forSaleObject)
 
 
@@ -284,6 +285,36 @@ export const resolvers = {
 
 
         return userObject
+
+
+
+    },
+    modifySale: async (root: string, args: forSaleInterface, _context: string) => {
+
+        
+        // destructing variables
+        const { id, product, price, userId } = args
+
+        // making sale object
+        const sale = {
+            id,
+            product,
+            price,
+            userId
+        }
+
+        console.log('sale', sale)
+
+
+
+        await updateSale(sale)
+
+
+        console.log('sale updated succesfully!')
+
+
+        return sale
+
 
 
 

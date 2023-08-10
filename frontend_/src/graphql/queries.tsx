@@ -84,14 +84,6 @@ mutation Login($username: String!, $password: String!) {
 
 
 
-export const USER_SALES = gql`
-  query GetUserSales($userSalesId: String!) {
-    userSales(id: $userSalesId)
-  }
-
-
-`
-
 
 
 // mutation to create user
@@ -115,6 +107,21 @@ export const DELETE_USER =
               password
           }
         }  `
+
+
+// userSales query
+export const USER_SALES = gql`
+    query($userSalesId: String!) {
+      userSales(id: $userSalesId) {
+        id
+        price
+        product
+        user
+      }
+}
+`
+
+
 
 
 

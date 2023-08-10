@@ -7,6 +7,7 @@
 
 export const typeDefs = `
   type Sale {
+    id: String
     product: String,
     price: String,
     user: String,
@@ -23,7 +24,7 @@ export const typeDefs = `
 
   type Query {
     allSales: [Sale!]!
-    userSales(id:String!): [String]
+    userSales(id:String!): [Sale]
   }
 
   type Mutation {
@@ -31,6 +32,7 @@ export const typeDefs = `
     createNewUser(username:String!, password: String!): User
     login(username: String!, password:String!): User
     deleteUser(username: String!, password: String!): User
+    modifySale(product: String!, price: String!, userId: String!, id: String!): Sale
   }
 
 

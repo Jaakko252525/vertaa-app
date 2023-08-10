@@ -16,10 +16,53 @@ interface ForSaleInterface {
     userId: string
 }
 
+interface SaleInterfaceWithId {
+    id: string
+    product: string,
+    price: string,
+    userId: string
+}
 
 
 
+export const updateSale = async (sale: SaleInterfaceWithId) => {
 
+
+    const { product, price, id, userId } = sale
+
+    try {
+
+        
+        //connecting to db
+        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+
+        console.log('connected to db')
+
+        // find sale with id and update vales
+        const updatedSale = await ForSale.findOneAndUpdate({_id: id}, 
+            {
+                product: product,
+                price: price,
+                userId: userId
+            }
+
+            )
+
+        // saving updated sale
+        await updatedSale.save()
+
+
+        return updateSale
+
+
+
+    
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
 
 
 
