@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 // schema for user
 export const userSchema = new mongoose.Schema({
     username: String,
-    password: String
+    password: String,
+    forSale: []
   });
 
 

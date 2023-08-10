@@ -25,7 +25,8 @@ const mongoose = require('mongoose');
 // forSaleSchema for user
 export const forSaleSchema = new mongoose.Schema({
   "product": String,
-  "price": String
+  "price": String,
+  "userId": String
   });
 
 

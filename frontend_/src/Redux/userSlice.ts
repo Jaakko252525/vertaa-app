@@ -42,14 +42,17 @@ const userSlice = createSlice({
   name: 'user',
 
   initialState: {
-    username: ''
+    username: '',
+    id: ''
   },
 
   reducers: {
     userToStore: (state, action) => {
       const payload = action.payload
 
+      console.log('payload', payload)
       state.username = payload.username
+      state.id = payload.id
 
 
     }

@@ -1,5 +1,10 @@
 
 
+
+// importing functionsForResolvers
+import { updateUser, addForSaleToDB, getUserSales } from './functionsForResolvers'
+
+
 // importing jwt generating function
 import { generateAccessToken } from "../JWT/jwt";
 
@@ -17,6 +22,7 @@ import { ForSale } from "../models/ForSale";
 import { User } from "../models/User";
 
 import mongoose from 'mongoose';
+import { type } from 'os';
 
 // getForSale DB connection
 async function getForSale() {
@@ -111,15 +117,21 @@ async function main() {
 
 
 // sale interface
-interface argssss {
+interface forSaleInterface {
     product: string,
-    price: string
+    price: string,
+    userId: string
 }
 
 // user interface
 interface interfaceForUser {
     username: string
     password: string
+}
+
+// userId interface
+interface userIdInterface {
+    id: string
 }
 
 export const resolvers = {
@@ -132,20 +144,49 @@ export const resolvers = {
 
         
         return data
+    },
+    // @ts-ignore
+    userSales: async (obj, args: userIdInterface, context, info) => {
+
+
+        const { id } = args
+
+        // using function that returns users sales
+        const sales = await getUserSales(id)
+        console.log('sales', sales, 'type', typeof sales)
+
+
+
+        return sales
+
     }
+    
   
 },
 
   Mutation: {
-    addSale: async (_root: string, args: argssss, _context: string) => {
-        const { product, price } = args;
-        // adding args to db
+    addSale: async (_root: string, args: forSaleInterface, _context: string) => {
+        const { product, price, userId } = args;
 
 
-        return {
+        // making object
+        const forSaleObject = {
             product,
-            price
+            price,
+            userId
         }
+
+
+        // calling addForSaleFunc
+        await updateUser(forSaleObject)
+
+
+
+        // callig addForSaleToDB
+        await addForSaleToDB(forSaleObject)
+
+
+        return
     },
 
     createNewUser: async (root: String, args: interfaceForUser, _context: string) => {
@@ -175,14 +216,19 @@ export const resolvers = {
         
         
         // making new user
-        const newUser =  await new User({username: username, password: password})
+        const newUser =  await new User({
+            username: username,
+            password: password,
+            forSale: []
+            })
         // saving user
         await newUser.save()
 
         // returning JWT token
         return {
             username: username,
-            password: token
+            password: token,
+            forSale: []
         }
     } else return {
         username: "already in",
@@ -213,9 +259,10 @@ export const resolvers = {
                 username,
                 process.env.TOKEN_SECRET              
                 )
-
+                
             return {
                 username: username,
+                id: user.id,
                 password: token
             } }
         else return 'wrong credentials'
@@ -229,8 +276,4 @@ export const resolvers = {
               }
             } 
     },
-
-
-
-
 }

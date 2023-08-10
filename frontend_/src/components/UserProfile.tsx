@@ -3,23 +3,53 @@
 
 
 
-// useSelector
-import { useSelector } from "react-redux"
 
+
+
+// useSelector
+import { useSelector, useDispatch } from "react-redux"
+
+// redux slicer
+import { userToStore } from "../Redux/userSlice"
+
+/*
+// graphql query
+import { userSales } from "../graphql/queries"
+*/
+
+interface interfaceForUser {
+    username: string,
+    id: string
+}
 
 const UserProfile = () => {
 
     // @ts-ignore
-    const user = useSelector(state => state.user)
+    const user: interfaceForUser =  useSelector(state => state.user)
+
+    // useDispatch
+    const dispatch = useDispatch()
 
 
-    // get users ForSales
+    // logout function
+    const logout = () => {
 
+        const userObject = {
+            username: ''
+        }
 
+        // user to 
+        dispatch(userToStore(userObject))
+    }
 
     return (
         <div>
-            User profile: {user.username}
+            {user.username} profile
+
+            <button onClick={logout} >Logout</button>
+
+
+
         </div>
     )
 }

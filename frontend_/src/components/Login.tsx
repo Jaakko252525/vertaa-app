@@ -10,6 +10,8 @@
 
 
 
+// component to create new user
+import CreateNewUser from "./CreateNewUser"
 
 
 
@@ -32,7 +34,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { userToStore } from "../Redux/userSlice"
 
 interface userObjetInterface {
-    username: string
+    username: string,
+    id: string | undefined
 }
 
 
@@ -41,7 +44,7 @@ interface userObjetInterface {
 const Login = () => {
 
     // states for username and password
-    const [username, setUsername] = useState('Jaakko')
+    const [username, setUsername] = useState('testi_1')
     const [password, setPassword] = useState('123')
 
     // navigation hook to a variable
@@ -67,18 +70,21 @@ const Login = () => {
         const login = await Login({ variables: {username: username, password: password} })
         
 
-       
+       console.log('login', login)
 
         // setting user to state
         // @ts-ignore comment
         if (login.data.login.username !== null) {
-
-
+            
+            console.log('here')
             //making userObject
             const userObject: userObjetInterface = {
                 // @ts-ignore comment
-                username: login.data.login.username
+                username: login.data.login.username,
+                //@ts-ignore
+                id: login.data.login.id
             }
+            console.log('here2')
 
             console.log('user:', userObject.username)
 
@@ -116,8 +122,15 @@ const Login = () => {
         navigate(path)
     }
 
+    // create new user route
+    const createNewUserRoute = () => {
+        const path = "/createNewUser"
+        navigate(path)
+    }
 
-    
+
+
+    // if logged in then render other pages
    if (userVar.username !== '') {
     return (
         <div >
@@ -148,6 +161,11 @@ const Login = () => {
 
 
             </form>
+            <br/>
+            <br/>
+            <div>
+                <button onClick={createNewUserRoute} >Create user</button>
+            </div>
 
         </div>
     )

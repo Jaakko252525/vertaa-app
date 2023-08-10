@@ -5,6 +5,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
+
 // importing PrivateRoute
 import PrivateRoute from './components/PrivateRoute';
 
@@ -12,12 +13,12 @@ import PrivateRoute from './components/PrivateRoute';
 import Login from './components/Login';
 import Frontpage from './components/Frontpage';
 import UserProfile from './components/UserProfile';
+import CreateNewUser from './components/CreateNewUser';
 
-// functions for routes
+
 
 
 const App = () => {
-
 
 
 
@@ -29,9 +30,11 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<Login  />}></Route>
             <Route path="/frontpage" element={<PrivateRoute childrenProp={<Frontpage/>}/>}></Route>
-            <Route path="userProfile" element={<PrivateRoute childrenProp={<UserProfile/>}/> }></Route>
+            <Route path="/userProfile" element={<PrivateRoute childrenProp={<UserProfile/>}/> }></Route>
+            <Route path="/createNewUser" element={<CreateNewUser/>}  ></Route>
           </Routes>
       </Router>
+
       </div>
 
     </div>
