@@ -116,7 +116,54 @@ export const getUserSales = async (id: string) => {
 }
 
 
+// delete user and return its id
+export const deleteUserFunction = async (username: string, password: string) => {
 
+
+
+    try {
+
+        //connecting to db
+        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+    
+        // finding user and making variable
+        const user = await User.findOne({ username: username })
+
+        const userObject = {
+            username: user.username,
+            password: user.password,
+
+        }
+        console.log('here')
+
+
+        // check if password correct
+        if (password !== user.password) {
+
+            // find all sales with users id and delete
+            await ForSale.deleteMany({ userId: user.id })
+
+
+
+            // take id 
+            await user.deleteOne({ username: user.username })
+
+            console.log('succesfully deleted')
+
+            return userObject
+
+        } else {
+            console.log('password incorrect or something else..')
+            return
+        } 
+        
+
+    } catch (error) {
+        console.log('error is:', error)
+    }
+
+
+}
 
 
 

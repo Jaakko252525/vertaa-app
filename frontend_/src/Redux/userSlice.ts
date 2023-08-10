@@ -43,7 +43,8 @@ const userSlice = createSlice({
 
   initialState: {
     username: '',
-    id: ''
+    id: '',
+    password: ''
   },
 
   reducers: {
@@ -53,6 +54,7 @@ const userSlice = createSlice({
       console.log('payload', payload)
       state.username = payload.username
       state.id = payload.id
+      state.password = payload.password
 
 
     }

@@ -3,6 +3,8 @@
 
 
 
+// navigate hook
+import { useNavigate } from "react-router-dom"
 
 
 
@@ -27,6 +29,9 @@ const UserProfile = () => {
     // @ts-ignore
     const user: interfaceForUser =  useSelector(state => state.user)
 
+    // navigate
+    const navigate = useNavigate()
+
     // useDispatch
     const dispatch = useDispatch()
 
@@ -42,11 +47,24 @@ const UserProfile = () => {
         dispatch(userToStore(userObject))
     }
 
+
+    // deleteUser route
+    const deleteUserRoute = () => {
+        const path = "/deleteUser"
+        navigate(path)
+    }
+
+
+
     return (
         <div>
             {user.username} profile
 
             <button onClick={logout} >Logout</button>
+
+            <br/>
+            <br/>
+            <button onClick={deleteUserRoute} >Info for deleting user</button>
 
 
 

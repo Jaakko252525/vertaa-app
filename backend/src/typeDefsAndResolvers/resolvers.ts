@@ -2,7 +2,7 @@
 
 
 // importing functionsForResolvers
-import { updateUser, addForSaleToDB, getUserSales } from './functionsForResolvers'
+import { updateUser, addForSaleToDB, getUserSales, deleteUserFunction } from './functionsForResolvers'
 
 
 // importing jwt generating function
@@ -274,6 +274,27 @@ export const resolvers = {
                 console.error('Error during login:', error);
                 throw new Error('An error occurred during login.');
               }
-            } 
-    },
+            },
+    
+    deleteUser: async (root: string, args: interfaceForUser, _context: string) => {
+
+        const { username, password } = args
+
+        const userObject = {
+            username: username,
+            password: password
+        }
+
+        await deleteUserFunction(username, password)
+
+
+        return userObject
+
+
+
+    }
+
 }
+}
+
+

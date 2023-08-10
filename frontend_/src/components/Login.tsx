@@ -10,11 +10,6 @@
 
 
 
-// component to create new user
-import CreateNewUser from "./CreateNewUser"
-
-
-
 import { useMutation } from "@apollo/client"
 
 // importing login query
@@ -44,7 +39,7 @@ interface userObjetInterface {
 const Login = () => {
 
     // states for username and password
-    const [username, setUsername] = useState('testi_1')
+    const [username, setUsername] = useState('jaakko')
     const [password, setPassword] = useState('123')
 
     // navigation hook to a variable
@@ -82,7 +77,9 @@ const Login = () => {
                 // @ts-ignore comment
                 username: login.data.login.username,
                 //@ts-ignore
-                id: login.data.login.id
+                id: login.data.login.id,
+                //@ts-ignore
+                password: login.data.login.password
             }
             console.log('here2')
 
@@ -127,6 +124,7 @@ const Login = () => {
         const path = "/createNewUser"
         navigate(path)
     }
+
 
 
 

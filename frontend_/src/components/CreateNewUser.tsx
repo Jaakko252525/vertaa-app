@@ -50,6 +50,7 @@ const CreateNewUser = () => {
     return (
 
         <div>
+            <h1>Create user</h1>
             <form onSubmit={submit} > 
 
                 Username: <input

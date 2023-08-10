@@ -19,9 +19,7 @@ export const typeDefs = `
     forSale: [Sale]
   }
 
-  type salesObject {
-    forSale: [String]
-  }
+
 
   type Query {
     allSales: [Sale!]!
@@ -32,6 +30,7 @@ export const typeDefs = `
     addSale(product:String!, price: String!, userId: String!): Sale
     createNewUser(username:String!, password: String!): User
     login(username: String!, password:String!): User
+    deleteUser(username: String!, password: String!): User
   }
 
 

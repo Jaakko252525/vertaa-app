@@ -95,11 +95,22 @@ export const USER_SALES = gql`
 
 
 // mutation to create user
-
 export const CREATE_USER = 
       
       gql`mutation($username: String!, $password: String!) { 
             createNewUser(username: $username, password: $password) {
+              username
+              password
+          }
+        }  `
+
+
+
+// mutation to delete user
+export const DELETE_USER = 
+      
+      gql`mutation($username: String!, $password: String!) { 
+            deleteUser(username: $username, password: $password) {
               username
               password
           }
