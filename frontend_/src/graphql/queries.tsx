@@ -25,7 +25,6 @@ import { client } from "..";
 
 
 
-
 export const getAllSales = async () => {
     // calling client
     const data = await client
@@ -49,25 +48,27 @@ export const getAllSales = async () => {
 }
 
 
+/*
+// apollo client userSales gql
+export const userSales = async () => {
+  // calling client
+  const data = await client
+  .query({
+    query: gql`
+      query($userSalesId: String) {
+        userSales(id: $userSalesId)
+  }
+      
+  `,
+  })
 
-// login query
-export const LOGIN_MUTATION = async () => {
-    
-    const LOGIN = gql`
-        mutation Login($username: String!, $password: String!) {
-           login(username: $username, password:$password) {
-             username
-             password
-           } 
-        }`
-    
-        console.log('this is login in gql', LOGIN)
+  return data.data
 
-    // returning data
-    return LOGIN
+
+
+
 }
-
-
+*/
 
 
 
@@ -76,16 +77,33 @@ mutation Login($username: String!, $password: String!) {
    login(username: $username, password:$password) {
      username
      password
+     id
    } 
 }`
 
 
 
 
+export const USER_SALES = gql`
+  query GetUserSales($userSalesId: String!) {
+    userSales(id: $userSalesId)
+  }
+
+
+`
 
 
 
+// mutation to create user
 
+export const CREATE_USER = 
+      
+      gql`mutation($username: String!, $password: String!) { 
+            createNewUser(username: $username, password: $password) {
+              username
+              password
+          }
+        }  `
 
 
 
