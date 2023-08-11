@@ -60,18 +60,15 @@ const Login = () => {
         event.preventDefault()
 
 
-        console.log('user before', userVar.username )
         // using mutation
         const login = await Login({ variables: {username: username, password: password} })
         
 
-       console.log('login', login)
 
         // setting user to state
         // @ts-ignore comment
         if (login.data.login.username !== null) {
             
-            console.log('here')
             //making userObject
             const userObject: userObjetInterface = {
                 // @ts-ignore comment
@@ -81,9 +78,7 @@ const Login = () => {
                 //@ts-ignore
                 password: login.data.login.password
             }
-            console.log('here2')
 
-            console.log('user:', userObject.username)
 
             // using slicer
             await dispatch(userToStore(userObject))
@@ -96,7 +91,6 @@ const Login = () => {
     // logout function
     const logout = async () => {
 
-        console.log(' inner')
         const userObject = {
             username: ''
         }

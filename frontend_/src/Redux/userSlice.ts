@@ -51,7 +51,6 @@ const userSlice = createSlice({
     userToStore: (state, action) => {
       const payload = action.payload
 
-      console.log('payload', payload)
       state.username = payload.username
       state.id = payload.id
       state.password = payload.password

@@ -30,6 +30,7 @@ import { userToStore } from "../Redux/userSlice"
 interface dataInterface {
     product: string
     price: string
+    _id: string
 }
 
 // Frontpage component
@@ -38,8 +39,6 @@ const Frontpage = () => {
     const [sales, setSales] = useState<dataInterface[]>()
 
     // redux store
-    // @ts-ignore
-    const user = useSelector(state => state.user.count)
     const dispatch = useDispatch()
 
     const getData = async () => {
@@ -77,10 +76,14 @@ const Frontpage = () => {
                 <h1>Frontpage</h1>
                 <ul>
                     {sales.map(s => 
-                        <li>
+                        <li key={s._id} >
                             Product name: {s.product} <br/>
-                            Price: {s.price}
+                            Price: {s.price} <br/>
+                            ID: {s._id}
+                            <br/>
+                            <br/>
                         </li>)}
+                        
                 </ul>
 
                 <div>

@@ -7,10 +7,10 @@
 
 export const typeDefs = `
   type Sale {
-    id: String
+    _id: String
     product: String,
     price: String,
-    user: String,
+    userId: String,
   }
 
   type User {

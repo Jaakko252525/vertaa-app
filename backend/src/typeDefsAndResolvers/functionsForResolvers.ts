@@ -41,6 +41,7 @@ export const updateSale = async (sale: SaleInterfaceWithId) => {
         // find sale with id and update vales
         const updatedSale = await ForSale.findOneAndUpdate({_id: id}, 
             {
+                _id: id,
                 product: product,
                 price: price,
                 userId: userId
@@ -79,7 +80,7 @@ export const getUserSales = async (id: string) => {
 
         const user = await User.findOne({ _id: id })
 
-        console.log('user', user)
+        console.log('users sales', user.forSale)
 
         return user.forSale
         

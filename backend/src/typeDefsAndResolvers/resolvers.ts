@@ -154,7 +154,7 @@ export const resolvers = {
 
         // using function that returns users sales
         const sales = await getUserSales(id)
-        console.log('sales', sales, 'type', typeof sales)
+        console.log('saleeeeeeeee', sales)
 
 
 

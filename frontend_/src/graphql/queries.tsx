@@ -32,8 +32,10 @@ export const getAllSales = async () => {
       query: gql`
         query {
         allSales {
+            _id  
             price
             product
+            
         }
     }
         
@@ -113,18 +115,13 @@ export const DELETE_USER =
 export const USER_SALES = gql`
     query($userSalesId: String!) {
       userSales(id: $userSalesId) {
-        id
+        _id
         price
         product
-        user
+        userId
       }
 }
 `
-
-
-
-
-
 
 
 

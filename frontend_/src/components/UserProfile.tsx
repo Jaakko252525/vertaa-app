@@ -18,8 +18,8 @@ import { useQuery } from "@apollo/client"
 // gql
 import { USER_SALES } from "../graphql/queries"
 
-// useState
-import { useState } from "react"
+// useState, useEffect
+import { useState, useEffect } from "react"
 
 // interface for user
 interface interfaceForUser {
@@ -35,44 +35,71 @@ interface saleInterface {
     user: string
 }
 
+
+
+// function to convert object to array
+//@ts-ignore
+const objectToArray = (sales) => {
+
+
+
+    const arrayOfObj = Object.entries(sales).map((e) => ( { [e[0]]: e[1] } ));
+
+    // array of objects
+    const array = arrayOfObj[0].userSales
+
+
+    return array
+
+}
+
+
+
+
+
+// component
 const UserProfile = () => {
-
-
     // state for sale
     const [sales, setSales] = useState<saleInterface[]>()
+
+    // state for sales when type array
+    const [salesArray, setSalesArray] = useState()
 
 
     // @ts-ignore
     const user: interfaceForUser =  useSelector(state => state.user)
-
+    // useDispatch
+    const dispatch = useDispatch()
+    // navigate
+    const navigate = useNavigate()
     const query = useQuery(USER_SALES, {variables: { userSalesId: user.id }})
 
-    const func = async () => {
+
+    // function that makes the query to fetch user sales
+    const queryFunction = async () => {
 
         // making gql query
         const { loading, error, data } = await query
 
         // sales to state
-        setSales(data)
+        await setSales(data)
 
-        console.log('sales', sales)
+
+        
+
         
     }
 
+    // useEffect that calls function that fetches data
+    useEffect(() => {
+    
+    queryFunction()
 
-    func()
- 
 
-    // calling create_user mutation
-    //user_sales({ variables: { userSalesId: user.id } })    
+    },[])
 
-    //console.log('sales', user_sales)
 
-    // navigate
-    const navigate = useNavigate()
 
-    // useDispatch
-    const dispatch = useDispatch()
 
 
     // logout function
@@ -94,10 +121,27 @@ const UserProfile = () => {
 
     }
 
-    
 
 
-    return (
+    // if sales !== undefined calle function
+    if (sales !== undefined) {
+        // calling object that converts object to array
+        const arrayOfSales = objectToArray(sales)
+
+
+        // setting state
+        //@ts-ignore
+        setSales(arrayOfSales)
+        
+        const salesArray = Array.isArray(sales) ? sales : [];
+
+        console.log('sales', salesArray, 'typeof', typeof salesArray)
+
+
+
+    }
+
+       return (
         <div>
             {user.username} profile
 
