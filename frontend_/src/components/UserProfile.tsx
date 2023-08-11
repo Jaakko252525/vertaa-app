@@ -63,6 +63,7 @@ const UserProfile = () => {
     const [sales, setSales] = useState<saleInterface[]>()
 
     // state for sales when type array
+    //@ts-ignore
     const [salesArray, setSalesArray] = useState()
 
 
@@ -80,6 +81,7 @@ const UserProfile = () => {
 
         // making gql query
         const { loading, error, data } = await query
+
 
         // sales to state
         await setSales(data)
@@ -132,11 +134,29 @@ const UserProfile = () => {
         // setting state
         //@ts-ignore
         setSales(arrayOfSales)
-        
-        const salesArray = Array.isArray(sales) ? sales : [];
 
-        console.log('sales', salesArray, 'typeof', typeof salesArray)
+        let result = Array.isArray(sales)
 
+
+
+        if (result === true) {
+            
+
+            let count = 0
+            let array = []
+            while (count < sales.length) {
+                array.push(sales[count])
+                count += 1
+            }
+
+            // setting array to state
+            //@ts-ignore
+            setSalesArray(array)
+
+            //@ts-ignore
+            console.log('sss', salesArray)
+
+        }
 
 
     }
@@ -152,7 +172,6 @@ const UserProfile = () => {
             <button onClick={deleteUserRoute} >Info for deleting user</button>
 
             <div> sales query toimii mutta datasciensiä tarvii</div>
-
 
 
         </div>

@@ -20,6 +20,8 @@
     "graphql": "^16.7.1",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.2",
+    "puppeteer": "^21.0.3",
+    "selenium-webdriver": "^4.11.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

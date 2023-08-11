@@ -29,13 +29,10 @@ const DeleteUser = () => {
     // delete function that uses graphql mutation
     const deleteFunction = async () => {
 
-        console.log('username', user.username)
-        console.log('password', user.password)
         // calling create_user mutation
         await delete_user({ variables: { username: user.username, password: user.password } })
     }
 
-    console.log('user', user)
 
     return (
 

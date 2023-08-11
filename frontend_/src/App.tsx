@@ -15,7 +15,7 @@ import Frontpage from './components/Frontpage';
 import UserProfile from './components/UserProfile';
 import CreateNewUser from './components/CreateNewUser';
 import DeleteUser from './components/DeleteUser';
-
+import Vertaa from './components/Vertaa';
 
 
 
@@ -34,6 +34,8 @@ const App = () => {
             <Route path="/userProfile" element={<PrivateRoute childrenProp={<UserProfile/>}/> }></Route>
             <Route path="/createNewUser" element={<CreateNewUser/>}  ></Route>
             <Route path="/deleteUser" element={<PrivateRoute childrenProp={<DeleteUser/>} />}></Route>
+
+            <Route path="/vertaapage" element={<Vertaa  />}  />
           </Routes>
       </Router>
 

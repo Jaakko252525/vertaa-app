@@ -28,13 +28,10 @@ const CreateNewUser = () => {
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        console.log('username', username)
-        console.log('pass', password)
 
         // calling create_user mutation
         await create_user({ variables: { username: username, password: password } })
 
-        console.log('created user succesfully!')
     }
 
 
