@@ -20,6 +20,14 @@ export const typeDefs = `
     forSale: [Sale]
   }
 
+  type ToriSale {
+    id: String
+    product: String
+    price: String
+    date: String
+    location: String
+  }
+
 
 
   type Query {
@@ -33,6 +41,8 @@ export const typeDefs = `
     login(username: String!, password:String!): User
     deleteUser(username: String!, password: String!): User
     modifySale(product: String!, price: String!, userId: String!, id: String!): Sale
+    toriSearch(product: String!): [String]
+
   }
 
 

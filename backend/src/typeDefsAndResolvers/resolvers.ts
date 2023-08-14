@@ -3,7 +3,8 @@
 
 // importing functionsForResolvers
 import { getUserSales, deleteUserFunction, newSale, updateSale } from './functionsForResolvers'
-
+// importing tori scraper
+import { browsing } from '../scrapers/ToriScraper_3'; 
 
 // importing jwt generating function
 import { generateAccessToken } from "../JWT/jwt";
@@ -133,6 +134,15 @@ interface interfaceForUser {
 // userId interface
 interface userIdInterface {
     id: string
+}
+
+// toriSale interface
+interface toriSale {
+    id: string
+    product: string
+    price: string
+    date: string
+    location: string
 }
 
 export const resolvers = {
@@ -318,7 +328,22 @@ export const resolvers = {
 
 
 
+    },
+    toriSearch: async (root: string, args: toriSale, _context: string) => {
+        const { product } = args
+
+        // call browsing function that fetches products from tori
+        const toriSales = await browsing(product)
+
+        console.log('toriSales', toriSales)
+
+
+
+        
+
+        return toriSales
     }
+
 
 }
 }

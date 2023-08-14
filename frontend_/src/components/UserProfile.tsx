@@ -21,6 +21,9 @@ import { USER_SALES } from "../graphql/queries"
 // useState, useEffect
 import { useState, useEffect } from "react"
 
+// components
+import AddSaleForm from "./AddSaleForm"
+
 // interface for user
 interface interfaceForUser {
     username: string,
@@ -66,14 +69,18 @@ const UserProfile = () => {
     //@ts-ignore
     const [salesArray, setSalesArray] = useState()
 
-
+    // getting redux store values
     // @ts-ignore
     const user: interfaceForUser =  useSelector(state => state.user)
+
     // useDispatch
     const dispatch = useDispatch()
     // navigate
     const navigate = useNavigate()
+
+    // useQuery and useMutation
     const query = useQuery(USER_SALES, {variables: { userSalesId: user.id }})
+
 
 
     // function that makes the query to fetch user sales
@@ -134,6 +141,7 @@ const UserProfile = () => {
         // setting state
         //@ts-ignore
         setSales(arrayOfSales)
+        console.log(sales)
 
         let result = Array.isArray(sales)
 
@@ -172,6 +180,11 @@ const UserProfile = () => {
             <button onClick={deleteUserRoute} >Info for deleting user</button>
 
             <div> sales query toimii mutta datasciensiä tarvii</div>
+
+
+            <div>
+                <AddSaleForm userIdProp={user.id} />
+            </div>
 
 
         </div>

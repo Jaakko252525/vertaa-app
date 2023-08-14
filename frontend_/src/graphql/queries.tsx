@@ -123,6 +123,33 @@ export const USER_SALES = gql`
 }
 `
 
+// toriScraper
+export const TORI_SCRAPER = gql `
+      mutation($product: String!) {
+        toriSearch(product: $product)
+      }`
+
+
+
+
+
+
+
+
+// addSale mutation
+export const ADD_SALE = gql`
+      mutation AddSale($product: String!, $price: String!, $userId: String!) {
+        addSale(product: $product, price: $price, userId: $userId) {
+          product
+          price
+          userId
+        }
+      }
+    `
+
+
+
+
 
 
 
