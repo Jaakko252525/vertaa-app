@@ -130,6 +130,12 @@ const UserProfile = () => {
 
     }
 
+    // vertaa page route
+    const vertaaRoute = () => {
+        const path = "/vertaaPage"
+        navigate(path)
+    }
+
 
 
     // if sales !== undefined calle function
@@ -184,6 +190,13 @@ const UserProfile = () => {
 
             <div>
                 <AddSaleForm userIdProp={user.id} />
+            </div>
+
+            <br/>
+            <br/>
+
+            <div>
+                <button onClick={vertaaRoute} >Vertaa page</button>
             </div>
 
 
