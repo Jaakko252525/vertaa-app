@@ -10,13 +10,15 @@ import { TORI_SCRAPER } from "../graphql/queries"
 import { useMutation } from "@apollo/client"
 
 // useState
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Vertaa = () => {
 
+    // sales
+    // @ts-ignore
     const [sales, setSales] = useState([])
 
-    const [searchWord, setSearchWord] = useState('')
+    const [searchWord, setSearchWord] = useState('gameboy')
     // using useMutation
     const [tori_scraper, { data, loading, error }] = useMutation(TORI_SCRAPER)
 
@@ -27,11 +29,33 @@ const Vertaa = () => {
 
 
         // calling create_user mutation
-        const data = await tori_scraper({ variables: { product: searchWord } })
+        const result = await tori_scraper({ variables: { product: searchWord } })
+
+        const lengthOfSales = result.data.toriSearch.length
+        const resultSales = result.data.toriSearch
 
 
-        console.log(data)
+        let count = 0
+        let array: string[] = []
+
+
+
+        while (count < lengthOfSales) {
+
+            array.push(resultSales[count])
+
+
+            count += 1
+        }
+
+        // @ts-ignore
+        await setSales(array)
+
+
     }
+
+
+
 
     return (
         <div>
@@ -47,6 +71,10 @@ const Vertaa = () => {
                 <button type="submit" >Search</button>
 
             </form>
+
+            <div> 
+                Sales: {sales}
+            </div>
         </div>
     )
 }

@@ -337,6 +337,15 @@ export const resolvers = {
 
         console.log('toriSales', toriSales)
 
+        let count = 0
+
+        while (count < toriSales.length) {
+
+            console.log(toriSales[count])
+            count += 1
+        
+        }
+
 
 
         
