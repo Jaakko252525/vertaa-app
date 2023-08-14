@@ -16,6 +16,9 @@ import { useSelector } from "react-redux"
 // useState
 import { useState } from "react"
 
+// components
+import EditSale from "./EditSale"
+
 // interface for user
 interface interfaceForUser {
     username: string,
@@ -66,6 +69,7 @@ const UsersSales =() => {
                 {sales?.map(sale => 
                     <li key={sale._id} >
                         Product: {sale.product} Price: {sale.price}
+                        <EditSale modifiedSaleIdProp={sale._id} userIdProp={user.id} />
                     </li>                    
                     )}
             </ul>
