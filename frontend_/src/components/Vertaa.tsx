@@ -12,6 +12,9 @@ import { useMutation } from "@apollo/client"
 // useState
 import { useEffect, useState } from "react"
 
+// components
+
+
 const Vertaa = () => {
 
     // sales
@@ -50,11 +53,14 @@ const Vertaa = () => {
 
         // @ts-ignore
         await setSales(array)
-
-
     }
 
 
+    useEffect(() => {
+
+        
+
+    },[setSales])
 
 
     return (
@@ -73,7 +79,14 @@ const Vertaa = () => {
             </form>
 
             <div> 
-                Sales: {sales}
+                <p>Sales from Tori</p>
+                <ul> 
+                    {sales.map(sale => 
+                        <li>
+                            {sale}
+                        </li>
+                        )}
+                </ul>
             </div>
         </div>
     )
