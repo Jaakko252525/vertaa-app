@@ -19,13 +19,15 @@ import Vertaa from './components/Vertaa';
 
 
 
+// enabling bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const App = () => {
 
 
 
   return (
     <div>
-      <h1>Vertaa app</h1>
       <div>
         <Router>
           <Routes>
@@ -40,6 +42,7 @@ const App = () => {
       </Router>
 
       </div>
+
 
     </div>
   );

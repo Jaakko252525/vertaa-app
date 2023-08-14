@@ -2,7 +2,8 @@
 
 
 
-
+// bootstrap
+import Card from 'react-bootstrap/Card';
 
 // gql
 import { USER_SALES } from "../graphql/queries"
@@ -62,18 +63,22 @@ const UsersSales =() => {
     }
 
     return (
-        <div>
-            <button onClick={fetchSales} >Your sales</button>
+        <Card style={{ width: '18rem' }}>
+            <Card.Body>
+                <div>
+                    <button onClick={fetchSales} >Your sales</button>
 
-            <ul>
-                {sales?.map(sale => 
-                    <li key={sale._id} >
-                        Product: {sale.product} Price: {sale.price}
-                        <EditSale modifiedSaleIdProp={sale._id} userIdProp={user.id} />
-                    </li>                    
-                    )}
-            </ul>
-        </div>
+                    <ul>
+                        {sales?.map(sale => 
+                            <li key={sale._id} >
+                                Product: {sale.product} Price: {sale.price}
+                                <EditSale modifiedSaleIdProp={sale._id} userIdProp={user.id} />
+                            </li>                    
+                            )}
+                    </ul>
+                </div>
+           </Card.Body>
+        </Card>
     )
 }
 

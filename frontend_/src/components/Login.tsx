@@ -7,6 +7,12 @@
 
 
 
+// bootstrap
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+
+// css
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -27,6 +33,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 
 import { userToStore } from "../Redux/userSlice"
+import { sign } from 'crypto';
 
 interface userObjetInterface {
     username: string,
@@ -125,20 +132,33 @@ const Login = () => {
     // if logged in then render other pages
    if (userVar.username !== '') {
     return (
-        <div >
-            Succesfully logged in with user: {userVar.username} <br/>
-            <button onClick={() => logout()}>Logout</button>
-            <button onClick={frontpageRoute} >Frontpage</button>
-            <button onClick={userProfileRoute} >Profile</button>
+        <div style={{
+            textAlign: 'center'
+
+        }} >
+            <p className='pageText' > Welcome: {userVar.username}</p> <br/>
+            <br/>
+
+            <ButtonGroup size="lg" className="mb-2">
+                <Button variant='dark' onClick={() => logout()} >Logout</Button>
+                <Button variant='dark' onClick={frontpageRoute} >Frontpage</Button>
+                <Button variant='dark' onClick={userProfileRoute}>Profile</Button>
+            </ButtonGroup>           
 
         </div>
     )
    }
 
     return (
-        <div>
-            <h1>Login page</h1>
-            <form onSubmit={submit}>
+        <div style={{
+            textAlign: "center"
+        }} >
+
+            <p className='pageText' >Login page</p>
+            <br/>
+
+            <form className='form'  onSubmit={submit}>
+                
                 Username: <input 
                 value={username}
                 onChange={event => setUsername(event.target.value)}
@@ -148,15 +168,17 @@ const Login = () => {
                 value={password}
                 onChange={event => setPassword(event.target.value)}
                   />
+            
                 
-              <button type="submit">Submit</button>
+              <Button variant='dark' size='sm'  type="submit">Submit</Button>
 
 
             </form>
+
             <br/>
             <br/>
-            <div>
-                <button onClick={createNewUserRoute} >Create user</button>
+            <div className='form' >
+                <Button onClick={createNewUserRoute} variant='dark'  >Create user</Button>
             </div>
 
         </div>

@@ -1,4 +1,7 @@
 
+// bootstrap
+import { Button } from "react-bootstrap"
+
 // use navigation
 import { useNavigate } from "react-router-dom"
 
@@ -46,9 +49,11 @@ const CreateNewUser = () => {
 
     return (
 
-        <div>
-            <h1>Create user</h1>
-            <form onSubmit={submit} > 
+        <div style= {{
+            textAlign: "center"
+        }}>
+            <p className="pageText" >Create user</p>
+            <form className="form" onSubmit={submit} > 
 
                 Username: <input
                             value={username}
@@ -58,11 +63,12 @@ const CreateNewUser = () => {
                             value={password}
                             onChange={sss => setPassword(sss.target.value) }>
                           </input>
-                <button type="submit" >Create</button>
-            </form>
+              <Button variant='dark' size='sm'  type="submit">Create user</Button>            </form>
             <br/>
             <br/>
-            <button onClick={loginRoute} >Login</button>
+            <div>
+                <Button onClick={loginRoute} variant='dark'  >Login</Button>
+            </div>
         </div>
     )
 }
