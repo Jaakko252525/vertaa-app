@@ -8,7 +8,8 @@
 
 
 
-
+// bootstrap
+import { Button } from "react-bootstrap"
 
 // importing useState
 import { useEffect, useState } from "react"
@@ -26,6 +27,9 @@ import { useSelector, useDispatch } from 'react-redux'
 // redux actions
 import { userToStore } from "../Redux/userSlice"
 
+// components
+import SaleSearch from "./SaleSearch"
+
 // interface
 interface dataInterface {
     product: string
@@ -37,6 +41,10 @@ interface dataInterface {
 const Frontpage = () => {
     // state for sales
     const [sales, setSales] = useState<dataInterface[]>()
+
+    // state for searchWord
+    const [searchWord, setSearchWord] = useState('')
+    const [renderSearch, setRenderSearch] = useState(false)
 
     // redux store
     const dispatch = useDispatch()
@@ -69,11 +77,51 @@ const Frontpage = () => {
 
     },[])
 
-    // if sales not empty
-    if (sales !== undefined) {
+
+
+    // submit function. changes render state to true
+    const submit = async () => {
+        
+        console.log('here')
+        setRenderSearch(true)
+    }
+
+
+    // if state === true render SaleSearch component
+    if (renderSearch === true) {
         return (
             <div>
+              <div>
+                <form className="form" onSubmit={submit} >
+                    Search sales <input
+                    value={searchWord}
+                    onChange={e => setSearchWord(e.target.value)}                    
+
+                    />
+                    <Button type="submit" >Search</Button>
+                
+                </form>
+                </div>
+                
+                <SaleSearch searchWordProp={searchWord} />
+            </div>
+        )
+    }else if (sales !== undefined) {
+        return (
+            <div>
+
                 <h1>Frontpage</h1>
+                <div>
+                <form className="form" onSubmit={submit} >
+                    Search sales <input
+                    value={searchWord}
+                    onChange={e => setSearchWord(e.target.value)}                    
+
+                    />
+                    <Button type="submit" >Search</Button>
+                
+                </form>
+                </div>
                 <ul>
                     {sales.map(s => 
                         <li key={s._id} >
@@ -89,6 +137,7 @@ const Frontpage = () => {
                 <div>
                     <button onClick={logout} >Logout</button>
                 </div>
+
             </div>
         )
     }

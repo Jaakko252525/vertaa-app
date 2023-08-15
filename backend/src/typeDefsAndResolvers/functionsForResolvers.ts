@@ -198,7 +198,28 @@ export const deleteUserFunction = async (username: string, password: string) => 
 }
 
 
+// find sales
+export const FindSales = async (product: string) => {
 
+
+    try {
+        //connecting to db
+        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+    
+        // finding user and making variable
+        const sales = await ForSale.find({ product: product })
+
+        console.log(sales)
+
+        return sales
+
+
+
+
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
 

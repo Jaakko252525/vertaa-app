@@ -167,6 +167,17 @@ export const HUUTONET_SEARCH = gql`
 
 `
 
-
+// searchSales mutation
+export const SEARCH_SALE = gql`
+mutation Search_sale($product: String!) {
+  SearchSale(product: $product) {
+    _id
+    product
+    price
+    userId
+    
+  }
+}
+`
 
 

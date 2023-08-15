@@ -41,6 +41,7 @@ export const typeDefs = `
     login(username: String!, password:String!): User
     deleteUser(username: String!, password: String!): User
     modifySale(product: String!, price: String!, userId: String!, id: String!): Sale
+    SearchSale(product: String!): [Sale]
     toriSearch(product: String!): [String]
     huutoNetSearch(product: String!): [String]
 

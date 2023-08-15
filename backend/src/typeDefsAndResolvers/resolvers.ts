@@ -2,7 +2,7 @@
 
 
 // importing functionsForResolvers
-import { getUserSales, deleteUserFunction, newSale, updateSale } from './functionsForResolvers'
+import { getUserSales, deleteUserFunction, newSale, updateSale, FindSales } from './functionsForResolvers'
 // importing scrapers
 import { browsing } from '../scrapers/ToriScraper_3'; 
 import { getHuutoNetSales } from '../scrapers/HuutokaupatcomScraper';
@@ -353,6 +353,19 @@ export const resolvers = {
         
 
         return huutoNetSales
+    },
+    SearchSale: async (root: string, args: toriSale, _context: string) => {
+
+        // product
+        const { product } = args
+
+
+        const sales = await FindSales(product)
+
+
+        return sales
+
+
     }
 
 
