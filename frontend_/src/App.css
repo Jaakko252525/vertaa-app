@@ -9,6 +9,15 @@
 
 }
 
+/* vertaa sales cards   */
+.vertaaSalesCardGroup {
+    position: relative;
+    top: 70px;
+
+}
+
+
+
 /* page text style */
 
 .pageText {

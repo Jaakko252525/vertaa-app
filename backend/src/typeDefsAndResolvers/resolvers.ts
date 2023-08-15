@@ -5,7 +5,7 @@
 import { getUserSales, deleteUserFunction, newSale, updateSale } from './functionsForResolvers'
 // importing scrapers
 import { browsing } from '../scrapers/ToriScraper_3'; 
-import { getSales } from '../scrapers/HuutokaupatcomScraper';
+import { getHuutoNetSales } from '../scrapers/HuutokaupatcomScraper';
 
 // importing jwt generating function
 import { generateAccessToken } from "../JWT/jwt";
@@ -343,7 +343,7 @@ export const resolvers = {
         const { product } = args
 
         // call browsing function that fetches products from tori
-        const huutoNetSales = await browsing(product)
+        const huutoNetSales = await getHuutoNetSales(product)
 
         console.log('huutoNet sales', huutoNetSales)
 

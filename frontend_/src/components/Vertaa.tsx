@@ -1,10 +1,15 @@
 
 
 
+// bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from 'react-bootstrap/Card';
+import { CardGroup } from 'react-bootstrap';
 
 
-// importing toriSearch
-import { TORI_SCRAPER } from "../graphql/queries"
+// importing scrapers
+import { TORI_SCRAPER, HUUTONET_SEARCH } from "../graphql/queries"
+
 
 // useMutation 
 import { useMutation } from "@apollo/client"
@@ -19,30 +24,44 @@ const Vertaa = () => {
 
     // sales
     // @ts-ignore
-    const [sales, setSales] = useState([])
+    const [toriSales, setToriSales] = useState([])
+    const [toriSalesResults, setToriSalesResults] = useState()
+    // @ts-ignore
+    const [huutonetSales, setHuutonetSales] = useState([])
+    const [huutonetSalesResults, setHuutonetSalesResults] = useState()
 
     const [searchWord, setSearchWord] = useState('gameboy')
     // using useMutation
     const [tori_scraper, { data, loading, error }] = useMutation(TORI_SCRAPER)
 
 
+    const [huutonet_scraper, { data: huutonetData, loading: huutonetLoading, error: huutonetError }] = useMutation(HUUTONET_SEARCH)
+    
+
+    
     // function that handles form submit
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
 
         // calling create_user mutation
-        const result = await tori_scraper({ variables: { product: searchWord } })
+        const toriResult = await tori_scraper({ variables: { product: searchWord } })
+        const huutonetResult = await huutonet_scraper({ variables: { product: searchWord } })
 
-        const lengthOfSales = result.data.toriSearch.length
-        const resultSales = result.data.toriSearch
+        
+
+        const huutonetSalesOnArray = huutonetResult.data.huutoNetSearch
+        
+        // huutonet sales to state
+        await setHuutonetSales(huutonetSalesOnArray)
+        await setHuutonetSalesResults(huutonetSalesOnArray.length)
 
 
+        const lengthOfSales = toriResult.data.toriSearch.length
+        const resultSales = toriResult.data.toriSearch
+        // tori sales data manipulation
         let count = 0
         let array: string[] = []
-
-
-
         while (count < lengthOfSales) {
 
             array.push(resultSales[count])
@@ -51,23 +70,26 @@ const Vertaa = () => {
             count += 1
         }
 
+
+
         // @ts-ignore
-        await setSales(array)
+        await setToriSales(array)
+        await setToriSalesResults(lengthOfSales)
+
+
     }
 
 
     useEffect(() => {
 
-        
-
-    },[setSales])
+    },[setToriSales])
 
 
     return (
         <div>
-            Vertaa page
 
-            <form onSubmit={submit}>
+
+            <form className='form' onSubmit={submit}>
 
 
                 <input 
@@ -78,17 +100,65 @@ const Vertaa = () => {
 
             </form>
 
-            <div> 
-                <p>Sales from Tori</p>
+        <div>
+
+
+    <CardGroup className='vertaaSalesCardGroup' >
+      <Card border='Danger' style={{ width: '18rem' }} >
+        <Card.Body>
+          <Card.Title>Tori</Card.Title>
+          <Card.Text>  
+            <div>
+                <p>Sales: {toriSalesResults}</p>
                 <ul> 
-                    {sales.map(sale => 
+                    {toriSales.map(sale => 
                         <li>
                             {sale}
+                            <br/>
+                            <br/>
                         </li>
                         )}
                 </ul>
             </div>
-        </div>
+          </Card.Text>
+        </Card.Body>
+
+      </Card>
+
+      <br/>
+      <Card border='Primary' style={{ width: '18rem' }} >
+        <Card.Body>
+          <Card.Title>Huutonet</Card.Title>
+          <Card.Text>
+            <div>
+                <p>Sales: {huutonetSalesResults}</p>
+                        <ul> 
+                            {huutonetSales.map(sale => 
+                                <li>
+                                    {sale}
+                                    <br/>
+                                    <br/>
+                                </li>
+                                
+                                )}
+                        </ul>
+             </div>
+          </Card.Text>
+        </Card.Body>
+
+      </Card>
+      <Card>
+        <Card.Body>
+          <Card.Title>Huutokaupat.com</Card.Title>
+          <Card.Text>
+            Huutokaupat api coming soon...
+          </Card.Text>
+        </Card.Body>
+
+      </Card>
+    </CardGroup>
+    </div>
+</div>
     )
 }
 

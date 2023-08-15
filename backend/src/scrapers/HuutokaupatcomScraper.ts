@@ -10,7 +10,7 @@ const baseUrl = 'https://www.huuto.net/haku?words='
 
 
 // function that fetches sales
-export const getSales = async (item: string) => {
+export const getHuutoNetSales = async (item: string) => {
 
     // get req to baseURL + item searched
     const loadedPage = await axios.get(baseUrl + item)

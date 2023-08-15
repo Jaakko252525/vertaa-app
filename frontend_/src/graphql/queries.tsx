@@ -159,7 +159,13 @@ export const ADD_SALE = gql`
     `
 
 
+// get huutonetSales mutation
+export const HUUTONET_SEARCH = gql`
+    mutation Huutonet_search($product: String!) {
+      huutoNetSearch(product: $product)
+    }    
 
+`
 
 
 
