@@ -1,5 +1,8 @@
 
 
+// bootstrap
+import { Button } from "react-bootstrap"
+
 // gql
 import { EDIT_SALE } from "../graphql/queries"
 
@@ -59,7 +62,7 @@ const EditSale = ({ modifiedSaleIdProp, userIdProp }) => {
                 onChange={e => setPrice(e.target.value)}
 
                 />
-                <button type="submit" >Submit</button>
+                <Button variant="dark" type="submit" >Submit</Button>
 
             </form>
             <br/>
@@ -67,7 +70,7 @@ const EditSale = ({ modifiedSaleIdProp, userIdProp }) => {
     )} else return (
 
         <div>
-            <button onClick={() => setShowForm(true)} >Edit sale</button>
+            <Button variant="dark" onClick={() => setShowForm(true)} >Edit sale</Button>
         </div>
     )
 }

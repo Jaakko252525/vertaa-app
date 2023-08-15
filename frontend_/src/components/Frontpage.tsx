@@ -109,8 +109,15 @@ const Frontpage = () => {
     }else if (sales !== undefined) {
         return (
             <div>
-
-                <h1>Frontpage</h1>
+               <div>
+                <p style={
+                    {
+                       textAlign: 'center',
+                       position: 'relative',
+                       top: '15px'
+                    }
+                } >Frontpage</p>
+                </div>
                 <div>
                 <form className="form" onSubmit={submit} >
                     Search sales <input

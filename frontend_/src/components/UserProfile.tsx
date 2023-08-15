@@ -1,7 +1,8 @@
 
 
 
-
+// bootstrap
+import { CardGroup, Card, Button } from "react-bootstrap"
 
 // navigate hook
 import { useNavigate } from "react-router-dom"
@@ -59,26 +60,56 @@ const UserProfile = () => {
 
        return (
         <div>
+            <div style={
+                {
+                    textAlign: 'center',
+                    position: 'relative',
+                    top: '15px'
+                }
+            } >
             {user.username} profile
-
-            <button onClick={logout} >Logout</button>
-
-            <br/>
-            <br/>
-            <button onClick={deleteUserRoute} >Info for deleting user</button>
-
-
-            <div>
-                <UsersSales  />
-                <br/>
-                <AddSaleForm userIdProp={user.id} />
             </div>
 
+
+            <Button variant="dark" onClick={logout} >Logout</Button>
+
+            <br/>
+            <br/>
+            <Button variant="dark" onClick={deleteUserRoute} >Info for deleting user</Button>
+        <div>
+
+     <CardGroup className="YourSalesAndCreateSaleCardGroupSize" >
+      <Card className="YourSalesAndCreateSale" >
+        <Card.Body>
+          <Card.Title>Your sales</Card.Title>
+          <Card.Text>    
+                <div>
+                    <UsersSales/>
+                </div>          
+           </Card.Text>
+        </Card.Body>
+      </Card>
+      <Card>
+        <Card.Body>
+          <Card.Title>Create sale</Card.Title>
+          <Card.Text>
+
+
+          <div>
+                    <AddSaleForm userIdProp={user.id} />
+            </div>
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </CardGroup>
+
+                </div>
+
             <br/>
             <br/>
 
             <div>
-                <button onClick={vertaaRoute} >Vertaa page</button>
+                <Button variant="dark" onClick={vertaaRoute} >Vertaa page</Button>
             </div>
         </div>
     )

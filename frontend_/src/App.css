@@ -16,6 +16,22 @@
 
 }
 
+/* style for your sales card */
+
+.yourSales {
+    position: relative;
+    left: 1000px;
+}
+
+/* create sale */
+
+.createSale {
+
+    position: relative;
+    top: 70px;
+
+}
+
 
 
 /* page text style */
@@ -26,9 +42,19 @@
 }
 
 
+/* YourSalesAndCreateSale */
 
+.YourSalesAndCreateSale {
+    border: 10px solid black;
 
+}
 
+.YourSalesAndCreateSaleCardGroupSize {
+    height: 150px;
+    width: 550px;
+    position: relative;
+    right: -700px;
+}
 
 
 

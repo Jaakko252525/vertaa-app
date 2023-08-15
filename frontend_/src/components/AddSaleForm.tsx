@@ -1,6 +1,10 @@
 
 
 
+// bootstrap
+import { Button } from "react-bootstrap";
+
+
 // useState
 import { useState } from "react"
 
@@ -64,8 +68,8 @@ const AddSaleForm:  React.FC<AddSaleFormProps> = ({ userIdProp }) => {
                     onChange={e => setPrice(e.target.value) }
                     
                     />
-                    <button>Create</button>
-                    <button onClick={() => setRender(false)} >Close</button>
+                    <Button variant="dark" >Create</Button>
+                    <Button variant="dark" onClick={() => setRender(false)} >Close</Button>
                 </form>
             </div>
             
@@ -76,7 +80,7 @@ const AddSaleForm:  React.FC<AddSaleFormProps> = ({ userIdProp }) => {
     return (
 
         <div>
-            <button onClick={() => setRender(true)} >Create sale</button>
+            <Button variant="dark" onClick={() => setRender(true)} >Create sale</Button>
         </div>
 
     )
