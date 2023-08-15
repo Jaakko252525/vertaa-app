@@ -3,8 +3,9 @@
 
 // importing functionsForResolvers
 import { getUserSales, deleteUserFunction, newSale, updateSale } from './functionsForResolvers'
-// importing tori scraper
+// importing scrapers
 import { browsing } from '../scrapers/ToriScraper_3'; 
+import { getSales } from '../scrapers/HuutokaupatcomScraper';
 
 // importing jwt generating function
 import { generateAccessToken } from "../JWT/jwt";
@@ -333,24 +334,25 @@ export const resolvers = {
         const { product } = args
 
         // call browsing function that fetches products from tori
-        const toriSales = await browsing(product)
-
-        console.log('toriSales', toriSales)
-
-        let count = 0
-
-        while (count < toriSales.length) {
-
-            console.log(toriSales[count])
-            count += 1
-        
-        }
-
-
-
-        
+        const toriSales = await browsing(product)        
 
         return toriSales
+    },
+
+    huutoNetSearch: async (root: string, args: toriSale, _context: string) => {
+        const { product } = args
+
+        // call browsing function that fetches products from tori
+        const huutoNetSales = await browsing(product)
+
+        console.log('huutoNet sales', huutoNetSales)
+
+
+
+
+        
+
+        return huutoNetSales
     }
 
 

@@ -12,12 +12,6 @@ import { useSelector, useDispatch } from "react-redux"
 // redux slicer
 import { userToStore } from "../Redux/userSlice"
 
-
-
-
-// useState, useEffect
-import { useState } from "react"
-
 // components
 import AddSaleForm from "./AddSaleForm"
 import UsersSales from "./UsersSales"
@@ -73,8 +67,6 @@ const UserProfile = () => {
             <br/>
             <button onClick={deleteUserRoute} >Info for deleting user</button>
 
-            <div> sales query toimii mutta datasciensiä tarvii</div>
-
 
             <div>
                 <UsersSales  />
@@ -88,10 +80,6 @@ const UserProfile = () => {
             <div>
                 <button onClick={vertaaRoute} >Vertaa page</button>
             </div>
-
-
-
-
         </div>
     )
 }
