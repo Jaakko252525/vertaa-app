@@ -8,9 +8,6 @@
 
 
 
-// bootstrap
-import { Button } from "react-bootstrap"
-
 // gql mutation
 import { SEARCH_SALE } from "../graphql/queries";
 
@@ -42,6 +39,7 @@ const SaleSearch = (props: SaleSearchProps) => {
 
     // state for sales
     const [sales, setSales] = useState<SaleInterface[]>()
+    const [renderNotFound, setRenderNotFound] = useState(false)
 
     // mutation
     const [search_sale, {data, loading, error}] = useMutation(SEARCH_SALE)
@@ -53,12 +51,17 @@ const SaleSearch = (props: SaleSearchProps) => {
         // making the mutation and getting data
         const result = await search_sale({ variables: { product: word } })
 
-    
+
         const array = result.data.SearchSale
 
-        console.log(array[0].product)
+        if (array.length > 0) {
+            await setSales(array)
+            await setRenderNotFound(false)
+        } else {
+            await setRenderNotFound(true)
+        }
 
-        setSales(array)
+
 }
 
 
@@ -66,6 +69,7 @@ const SaleSearch = (props: SaleSearchProps) => {
     useEffect(() => {
 
         fetchSales(searchWordProp)
+    
     },[])
 
 
@@ -89,8 +93,13 @@ const SaleSearch = (props: SaleSearchProps) => {
                 </div>
 
                     )
-                    }
-
+    } else if ( renderNotFound === true) {
+        return (
+            <div>
+                No sales!
+            </div>
+        )
+    }
     return (
 
         <div>

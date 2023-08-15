@@ -361,6 +361,7 @@ export const resolvers = {
 
 
         const sales = await FindSales(product)
+        console.log('sii:', sales)
 
 
         return sales
