@@ -29,7 +29,6 @@ import { userToStore } from "../Redux/userSlice"
 
 // components
 import SaleSearch from "./SaleSearch"
-import e from "express"
 
 // interface
 interface dataInterface {
@@ -117,7 +116,7 @@ const Frontpage = () => {
                     onChange={(e) => setSearchWord(e.target.value)}                    
 
                     />
-                    <Button type="submit" >Search</Button>
+                    <Button variant="dark" type="submit" >Seach</Button>
                 
                 </form>
                 </div>
@@ -161,7 +160,7 @@ const Frontpage = () => {
                 </ul>
 
                 <div>
-                    <button onClick={logout} >Logout</button>
+                    <Button variant="dark" onClick={logout} >Logout</Button>
                 </div>
 
             </div>
