@@ -10,6 +10,8 @@ import { CardGroup } from 'react-bootstrap';
 // importing scrapers
 import { TORI_SCRAPER, HUUTONET_SEARCH, HUUTOKAUPAT_SEARCH } from "../graphql/queries"
 
+// components
+import LoadingForVertaaPage from './LoadingForVertaaPage';
 
 // useMutation 
 import { useMutation } from "@apollo/client"
@@ -70,6 +72,9 @@ interface ascendingSaleObjects {
 // components
 const Vertaa = () => {
 
+  //@ts-ignore
+  const [loadingData, setLoadingData] = useState('')
+
     // sales
     const [toriSales, setToriSales] = useState<ascendingSaleObjects[]>([])
     const [toriSalesResults, setToriSalesResults] = useState()
@@ -81,7 +86,7 @@ const Vertaa = () => {
     const [huutokaupatSales, setHuutokaupatSales] = useState([])
 
 
-    const [searchWord, setSearchWord] = useState('gameboy')
+    const [searchWord, setSearchWord] = useState('')
     // using useMutation
     const [tori_scraper, { data, loading, error }] = useMutation(TORI_SCRAPER)
 
@@ -95,6 +100,9 @@ const Vertaa = () => {
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+
+        // setting loading
+        await setLoadingData('loading')
 
         // calling create_user mutation
         const toriResult = await tori_scraper({ variables: { product: searchWord } })
@@ -141,6 +149,8 @@ const Vertaa = () => {
 
         // to huutokaupat states
         await setHuutokaupatSales(huutokaupatSalesArray)
+
+        
     }
 
 
@@ -149,7 +159,7 @@ const Vertaa = () => {
     useEffect(() => {
 
 
-
+        setLoadingData('')
     },[setToriSales])
 
 
@@ -169,6 +179,10 @@ const Vertaa = () => {
             </form>
 
         <div>
+
+          <div>
+            <LoadingForVertaaPage loadingProp={loadingData} />
+          </div>
 
 
     <CardGroup className='vertaaSalesCardGroup' >
