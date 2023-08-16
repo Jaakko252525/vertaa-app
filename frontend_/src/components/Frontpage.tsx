@@ -29,12 +29,26 @@ import { userToStore } from "../Redux/userSlice"
 
 // components
 import SaleSearch from "./SaleSearch"
+import e from "express"
 
 // interface
 interface dataInterface {
     product: string
     price: string
     _id: string
+}
+
+// redux state interface
+interface reduxState {
+    user: Object
+}
+
+interface interfaceForUser {
+    _id: string,
+    username: string,
+    password: string,
+    forSale: Object
+
 }
 
 // Frontpage component
@@ -45,6 +59,8 @@ const Frontpage = () => {
     // state for searchWord
     const [searchWord, setSearchWord] = useState('')
     const [renderSearch, setRenderSearch] = useState(false)
+
+
 
     // redux store
     const dispatch = useDispatch()
@@ -80,9 +96,12 @@ const Frontpage = () => {
 
 
     // submit function. changes render state to true
-    const submit = async () => {
+    const submit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        console.log('submitted')
+        console.log('search word', searchWord)
         
-        console.log('here')
         setRenderSearch(true)
     }
 
@@ -95,7 +114,7 @@ const Frontpage = () => {
                 <form className="form" onSubmit={submit} >
                     Search sales <input
                     value={searchWord}
-                    onChange={e => setSearchWord(e.target.value)}                    
+                    onChange={(e) => setSearchWord(e.target.value)}                    
 
                     />
                     <Button type="submit" >Search</Button>

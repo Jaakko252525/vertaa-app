@@ -45,11 +45,12 @@ const SaleSearch = (props: SaleSearchProps) => {
     const [search_sale, {data, loading, error}] = useMutation(SEARCH_SALE)
 
 
-    const fetchSales = async (word: string) => {
+    const fetchSales = async () => {
+      
 
 
         // making the mutation and getting data
-        const result = await search_sale({ variables: { product: word } })
+        const result = await search_sale({ variables: { product: searchWordProp } })
 
 
         const array = result.data.SearchSale
@@ -68,9 +69,9 @@ const SaleSearch = (props: SaleSearchProps) => {
 
     useEffect(() => {
 
-        fetchSales(searchWordProp)
+        fetchSales()
     
-    },[])
+    },[searchWordProp])
 
 
     if (sales !== undefined ) {
