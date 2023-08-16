@@ -5,7 +5,8 @@
 import { getUserSales, deleteUserFunction, newSale, updateSale, FindSales } from './functionsForResolvers'
 // importing scrapers
 import { browsing } from '../scrapers/ToriScraper_3'; 
-import { getHuutoNetSales } from '../scrapers/HuutokaupatcomScraper';
+import { getHuutoNetSales } from '../scrapers/HuutoNetScraper';
+import { callingScraper } from '../scrapers/HuutokaupatcomScraper';
 
 // importing jwt generating function
 import { generateAccessToken } from "../JWT/jwt";
@@ -342,7 +343,7 @@ export const resolvers = {
     huutoNetSearch: async (root: string, args: toriSale, _context: string) => {
         const { product } = args
 
-        // call browsing function that fetches products from tori
+        // call browsing function that fetches products from huutonet
         const huutoNetSales = await getHuutoNetSales(product)
 
         console.log('huutoNet sales', huutoNetSales)
@@ -367,9 +368,18 @@ export const resolvers = {
         return sales
 
 
+    },
+    huutokaupatSearch: async (root: string, args: toriSale, _context: string) => {
+        const { product } = args
+
+        // call browsing function that fetches products from huutokaupatcom
+        const sales = await callingScraper(product)
+
+
+        return sales
+
+
     }
-
-
 }
 }
 

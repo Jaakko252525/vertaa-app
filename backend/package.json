@@ -23,6 +23,7 @@
     "jsonwebtoken": "^9.0.1",
     "mocha": "^10.2.0",
     "mongoose": "^7.4.2",
+    "playwright": "^1.37.0",
     "puppeteer": "^21.0.3",
     "selenium-webdriver": "^4.11.1",
     "uuid": "^9.0.0"

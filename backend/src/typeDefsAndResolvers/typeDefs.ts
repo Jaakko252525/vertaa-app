@@ -44,6 +44,7 @@ export const typeDefs = `
     SearchSale(product: String!): [Sale]
     toriSearch(product: String!): [String]
     huutoNetSearch(product: String!): [String]
+    huutokaupatSearch(product: String!): [String]
 
   }
 

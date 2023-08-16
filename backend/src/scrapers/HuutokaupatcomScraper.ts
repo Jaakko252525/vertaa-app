@@ -1,58 +1,71 @@
+import { type } from "os";
+import { selectors } from "playwright";
 
 
-// cheerio
-import * as cheerio from 'cheerio';
-
-const axios = require('axios');
-
-// baseURL
-const baseUrl = 'https://www.huuto.net/haku?words='
 
 
-// function that fetches sales
-export const getHuutoNetSales = async (item: string) => {
-
-    // get req to baseURL + item searched
-    const loadedPage = await axios.get(baseUrl + item)
 
 
-    const html = loadedPage.data
 
-    // use cheerio 
-    const $ = cheerio.load(html)
-
-    // className that we want to fetch
-    const sales = $(".grid-element-container.item-card-container")
-
+import playwright from "playwright"; 
  
-    // empty array
-    let arrayOfSales = []
+const huutokaupatScraper = async (searchWord: string) =>  { 
+	// Launch the headless browser 
+	const browser = await playwright.chromium.launch({ 
+		headless: true, 
+	}); 
+ 
+	// Go to the dev.to/tags page 
+	const page = await browser.newPage(); 
+	await page.goto("https://huutokaupat.com/haku?term=" + searchWord); 
+    console.log('went to page')
+    
+    try {// locate className
 
-    // loop elements and put them to array
-    // Loop through the selected elements
-    for (const sale of sales) {
-        const text = $(sale).text().replace(/\s+/g, " ");
+
+    // Recursive function to extract text content from an element and its children
+
+    let arrayOfSales: string[] = []
+    //@ts-ignore
+    const extractTextRecursively = async (element) => {
+        const text = await element.textContent();
+        
         arrayOfSales.push(text)
-}
+        
+        const children = await element.$$(".list-entry.visible *");
+        for (const child of children) {
+          await extractTextRecursively(child);
+        }
+
+      };
+  
+      // Locate and extract text from elements with the specified class name
+      const elements = await page.$$(".list-entry.visible");
+      for (const element of elements) {
+        await extractTextRecursively(element);
+      }
+
+
+    await browser.close(); 
 
     return arrayOfSales
+
+    } catch (error) {
+        console.log('somethings wrong', error)
+    } finally {
+        await browser.close();
+    }
+} 
+ 
+
+
+
+
+export const callingScraper = async (searchWord: string) => {
+
+    const sales = await huutokaupatScraper(searchWord)
+
+    return sales
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

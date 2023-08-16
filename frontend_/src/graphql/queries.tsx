@@ -181,3 +181,18 @@ mutation Search_sale($product: String!) {
 `
 
 
+
+
+
+
+// huutokaupat com mutation
+export const HUUTOKAUPAT_SEARCH = gql`
+
+    mutation Huutokaupat_search($product: String!) {
+      huutokaupatSearch(product: $product)
+    }
+
+
+`
+
+

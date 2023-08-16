@@ -78,7 +78,7 @@ const UserProfile = () => {
             <Button variant="dark" onClick={deleteUserRoute} >Info for deleting user</Button>
         <div>
 
-     <CardGroup className="YourSalesAndCreateSaleCardGroupSize" >
+              <CardGroup className="YourSalesAndCreateSaleCardGroupSize" >
       <Card className="YourSalesAndCreateSale" >
         <Card.Body>
           <Card.Title>Your sales</Card.Title>
@@ -96,12 +96,12 @@ const UserProfile = () => {
 
 
           <div>
-                    <AddSaleForm userIdProp={user.id} />
+                <AddSaleForm userIdProp={user.id} />
             </div>
           </Card.Text>
         </Card.Body>
       </Card>
-    </CardGroup>
+             </CardGroup>
 
                 </div>
 
