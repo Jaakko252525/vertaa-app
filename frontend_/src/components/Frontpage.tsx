@@ -6,10 +6,11 @@
 
 
 
-
+// useNavigation
+import { useNavigate } from "react-router-dom"
 
 // bootstrap
-import { Button } from "react-bootstrap"
+import { Button, Card } from "react-bootstrap"
 
 // importing useState
 import { useEffect, useState } from "react"
@@ -60,6 +61,7 @@ const Frontpage = () => {
     const [renderSearch, setRenderSearch] = useState(false)
 
 
+    const navigate = useNavigate()
 
     // redux store
     const dispatch = useDispatch()
@@ -84,6 +86,12 @@ const Frontpage = () => {
         dispatch(userToStore(userObject))
     }
 
+
+    // vertaa page route
+    const vertaaRoute = () => {
+        const path = "/vertaaPage"
+        navigate(path)
+    }
 
     useEffect(() => {
 
@@ -122,7 +130,27 @@ const Frontpage = () => {
                 </div>
                 
                 <SaleSearch searchWordProp={searchWord} />
+
+                <div>
+                    <br/>
+                    <Card style={{
+                            height: '150px',
+                            width: '300px',
+                            position: 'relative',
+                            right: '0px',
+                            borderStyle: 'solid',
+                            borderColor: 'black'
+                        }
+                    } >
+                        <p>Search from tori, huutonet and huutokaupat </p>
+                        
+
+                        <Button variant="dark" onClick={vertaaRoute} >Vertaa page</Button>
+                    </Card>
+                </div>
             </div>
+
+            
         )
     }else if (sales !== undefined) {
         return (
@@ -148,6 +176,7 @@ const Frontpage = () => {
                 </form>
                 </div>
                 <ul>
+                    <p>Sales</p>
                     {sales.map(s => 
                         <li key={s._id} >
                             Product name: {s.product} <br/>
