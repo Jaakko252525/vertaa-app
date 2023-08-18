@@ -16,8 +16,9 @@ import { useSelector } from "react-redux"
 // useState
 import { useState } from "react"
 
-// components
+// componentscd frontend
 import EditSale from "./EditSale"
+import EditUsersChatroomReqStatus from "./EditUsersChatroomReqStatus"
 
 // interface for user
 interface interfaceForUser {
@@ -72,6 +73,7 @@ const UsersSales =() => {
                             <li key={sale._id} >
                                 Product: {sale.product} Price: {sale.price}
                                 <EditSale modifiedSaleIdProp={sale._id} userIdProp={user.id} />
+                                <EditUsersChatroomReqStatus chatReqIdProp="" />
                             </li>                    
                             )}
                     </ul>
