@@ -244,11 +244,16 @@ export const newChatRoomRequestFunction = async (seller: string, buyer: string, 
         const newChatRoomRequest = await new ChatRoomRequest({
             seller,
             buyer,
-            forSale: sale,
+            forSale: {
+                product: sale.product,
+                price: sale.price,
+                userId: sale.userId
+
+            },
             status
         })
 
-        console.log('new user made!')
+        console.log('new cahtroom req made!', newChatRoomRequest)
 
 
         // saving new data

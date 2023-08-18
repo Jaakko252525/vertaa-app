@@ -16,7 +16,6 @@ import UserProfile from './components/UserProfile';
 import CreateNewUser from './components/CreateNewUser';
 import DeleteUser from './components/DeleteUser';
 import Vertaa from './components/Vertaa';
-import MessageRoom from './components/dmChat';
 
 
 // enabling bootstrap
@@ -38,7 +37,6 @@ const App = () => {
             <Route path="/deleteUser" element={<PrivateRoute childrenProp={<DeleteUser/>} />}></Route>
 
             <Route path="/vertaapage" element={<Vertaa  />}  />
-            <Route path="/messageRoom" element={<MessageRoom/>} />
           </Routes>
       </Router>
 

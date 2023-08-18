@@ -30,12 +30,14 @@ import { userToStore } from "../Redux/userSlice"
 
 // components
 import SaleSearch from "./SaleSearch"
+import ChatRequestButton from "./ChatRequestButton"
 
 // interface
 interface dataInterface {
     product: string
     price: string
     _id: string
+    userId: string
 }
 
 // redux state interface
@@ -182,6 +184,7 @@ const Frontpage = () => {
                             Product name: {s.product} <br/>
                             Price: {s.price} <br/>
                             ID: {s._id}
+                            <ChatRequestButton sellerProp={s.userId} saleIdProp={s._id} />
                             <br/>
                             <br/>
                         </li>)}

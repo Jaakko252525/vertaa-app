@@ -35,6 +35,7 @@ export const getAllSales = async () => {
             _id  
             price
             product
+            userId
             
         }
     }
@@ -199,7 +200,7 @@ export const HUUTOKAUPAT_SEARCH = gql`
 
 export const CREATECHATROOMREQUEST = gql`
 
-mutation CreateCHatRoomRequest($seller: String!, $buyer: String!, $saleId: String!, $status: String!) {
+mutation CreateChatRoomRequest($seller: String!, $buyer: String!, $saleId: String!, $status: String!) {
   createChatRoomRequest(seller: $seller, buyer: $buyer, saleId: $saleId, status: $status) {
     seller
     buyer
