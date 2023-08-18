@@ -10,12 +10,23 @@ import { EDIT_SALE } from "../graphql/queries"
 import { useMutation } from "@apollo/client"
 
 // useState
-import { useEffect, useState } from "react"
+import { useState } from "react"
+
+// redux store 
+import { useSelector } from "react-redux"
 
 
 interface propsInterface {
     modifiedSaleIdProp: string,
     userIdProp: string
+}
+
+interface reduxStore {
+    user: {
+        id: string,
+        username: string,
+        password: string
+    }
 }
 
 const EditSale = ({ modifiedSaleIdProp, userIdProp }: propsInterface) => {
@@ -26,6 +37,9 @@ const EditSale = ({ modifiedSaleIdProp, userIdProp }: propsInterface) => {
     const [price, setPrice] = useState('')
 
     const [showForm, setShowForm] = useState(false)
+
+    // user from redux store
+    const user = useSelector((state: reduxStore) => state.user)
 
 
 
@@ -42,7 +56,7 @@ const EditSale = ({ modifiedSaleIdProp, userIdProp }: propsInterface) => {
 
 
         // using the gql 
-        await EditSale({ variables: { product: product, price: price, userId: userIdProp, modifySaleId: modifiedSaleIdProp } })
+        await EditSale({ variables: { product: product, price: price, userId: userIdProp, modifySaleId: modifiedSaleIdProp, token: user.password } })
         // closing editing form
         setShowForm(false)
 

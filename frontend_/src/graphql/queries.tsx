@@ -134,14 +134,14 @@ export const TORI_SCRAPER = gql `
 
 // edit sale
 export const EDIT_SALE = gql`
-    mutation EditSale($product: String!, $price: String!, $userId: String!, $modifySaleId: String!) {
-      modifySale(product: $product, price: $price, userId: $userId, id: $modifySaleId) {
-        price
-        product
-        userId
-        
-      }
-}
+mutation EditSale($product: String!, $price: String!, $userId: String!, $modifySaleId: String!, $token: String!) {
+  modifySale(product: $product, price: $price, userId: $userId, id: $modifySaleId, token: $token) {
+    token
+    product
+    price
+    userId
+    
+  }
 `
 
 

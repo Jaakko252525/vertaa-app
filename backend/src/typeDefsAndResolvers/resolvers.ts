@@ -2,7 +2,18 @@
 
 
 // importing functionsForResolvers
-import { getUserSales, deleteUserFunction, newSale, updateSale, FindSales, newChatRoomRequestFunction, getForSale } from './functionsForResolvers'
+import { 
+     getUserSales,
+     deleteUserFunction,
+     newSale,
+     updateSale, 
+     FindSales, 
+     newChatRoomRequestFunction, 
+     getForSale,
+     changeChatRoomReqStatus } from './functionsForResolvers'
+
+
+
 // importing scrapers
 import { browsing } from '../scrapers/ToriScraper_3'; 
 import { getHuutoNetSales } from '../scrapers/HuutoNetScraper';
@@ -100,6 +111,15 @@ interface forSaleInterface {
     userId: string
 }
 
+// sale interface with token
+interface forSaleInterfaceWithToken {
+    id: string
+    product: string,
+    price: string,
+    userId: string,
+    token: string
+}
+
 // user interface
 interface interfaceForUser {
     username: string
@@ -126,6 +146,12 @@ interface chatRoomRequest {
     seller: string,
     buyer: string,
     saleId: string,
+    status: string
+}
+
+// hmm need to refactor
+interface interfaceForString {
+    chatReqId: string,
     status: string
 }
 
@@ -187,6 +213,8 @@ export const resolvers = {
         // generating acces token
         const token = await generateAccessToken(password)
 
+
+
         // saving args to db
         //connecting to db
         await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
@@ -245,11 +273,15 @@ export const resolvers = {
                 username: user.username
             }
 
-            // token expires in 60*60 seconds, that is, in one hour
+            // token 
             const token = await jwt.sign(
                 username,
-                process.env.TOKEN_SECRET              
+                process.env.TOKEN_SECRET            
                 )
+            
+
+            // save user token
+            user.token = token; 
                 
             return {
                 username: username,
@@ -284,11 +316,14 @@ export const resolvers = {
 
 
     },
-    modifySale: async (root: string, args: forSaleInterface, _context: string) => {
+    modifySale: async (root: string, args: forSaleInterfaceWithToken, _context: string) => {
 
         
         // destructing variables
-        const { id, product, price, userId } = args
+        const { id, product, price, userId, token } = args
+
+
+
 
         // making sale object
         const sale = {
@@ -309,6 +344,9 @@ export const resolvers = {
 
 
         return sale
+
+
+
 
 
 
@@ -375,6 +413,30 @@ export const resolvers = {
         
         return args
 
+
+    },
+    acceptChatRoomRequest: async (root: string, args: interfaceForString, _context: string) => {
+
+
+        
+        const { chatReqId, status } = args
+
+        try {
+
+        const obj = {
+            chatReqId,
+            status
+        }
+        // calling function that 
+        const callingFunction = await changeChatRoomReqStatus(obj)
+
+
+
+        return callingFunction
+
+        } catch (err) {
+            console.log(err)
+        }
 
     }
 }

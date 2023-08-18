@@ -13,6 +13,14 @@ export const typeDefs = `
     userId: String,
   }
 
+  type SaleWithToken {
+    _id: String
+    product: String,
+    price: String,
+    userId: String,
+    token: String!
+  }
+
   type User {
     id: String
     username: String,
@@ -48,13 +56,15 @@ export const typeDefs = `
     createNewUser(username:String!, password: String!): User
     login(username: String!, password:String!): User
     deleteUser(username: String!, password: String!): User
-    modifySale(product: String!, price: String!, userId: String!, id: String!): Sale
+    modifySale(product: String!, price: String!, userId: String!, id: String!, token: String): SaleWithToken
     SearchSale(product: String!): [Sale]
     toriSearch(product: String!): [String]
     huutoNetSearch(product: String!): [String]
     huutokaupatSearch(product: String!): [String]
 
     createChatRoomRequest(seller: String!, buyer: String!,saleId: String!, status: String!): ChatRoomRequest
+
+    acceptChatRoomRequest(chatReqId: String!, status: String!): ChatRoomRequest
 
   }
 

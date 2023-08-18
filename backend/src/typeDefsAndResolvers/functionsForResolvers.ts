@@ -302,3 +302,84 @@ export const getForSale = async () => {
 }
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
+
+
+interface chatRoom {
+    chatReqId: string,
+    status: string
+}
+
+// chatRoomRequest function
+export const changeChatRoomReqStatus = async (args: chatRoom) => {
+
+    // variables
+    const { chatReqId, status } = args
+
+
+    try {
+
+
+        // if accepted if 
+        if ( status === 'accepted') {
+
+            //connecting to db
+            await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+            console.log('connected')
+        
+            // finding sales and making variable
+            const chatRoomreqFindUpdated = await ChatRoomRequest.findByIdAndUpdate(chatReqId, {status: 'accepted'})
+
+
+            console.log('updated statues☺', chatRoomreqFindUpdated)
+
+            return chatRoomreqFindUpdated
+
+        } else if ( status === 'rejected') {
+            //connecting to db
+            await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+        
+            // finding sales and making variable
+            const chatRoomreqFindUpdated = await ChatRoomRequest.findByIdAndUpdate(chatReqId, {status: 'rejected'})
+
+            console.log(chatRoomreqFindUpdated)
+
+            return chatRoomreqFindUpdated
+
+        }
+        
+        // not accepted
+
+    } catch (err) {
+        console.log(err)
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

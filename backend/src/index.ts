@@ -18,7 +18,9 @@ import { typeDefs } from './typeDefsAndResolvers/typeDefs'
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-})
+}
+
+)
 
 startStandaloneServer(server, {
   listen: { port: 4000 },
