@@ -2,7 +2,7 @@
 
 
 // importing functionsForResolvers
-import { getUserSales, deleteUserFunction, newSale, updateSale, FindSales } from './functionsForResolvers'
+import { getUserSales, deleteUserFunction, newSale, updateSale, FindSales, newChatRoomRequestFunction } from './functionsForResolvers'
 // importing scrapers
 import { browsing } from '../scrapers/ToriScraper_3'; 
 import { getHuutoNetSales } from '../scrapers/HuutoNetScraper';
@@ -26,6 +26,7 @@ import { User } from "../models/User";
 
 import mongoose from 'mongoose';
 import { type } from 'os';
+import { stat } from 'fs';
 
 // getForSale DB connection
 async function getForSale() {
@@ -146,6 +147,16 @@ interface toriSale {
     date: string
     location: string
 }
+
+// interface for chatRoomRequest
+interface chatRoomRequest {
+    id: string,
+    seller: string,
+    buyer: string,
+    saleId: string,
+    status: string
+}
+
 
 export const resolvers = {
   Query: {
@@ -377,6 +388,20 @@ export const resolvers = {
 
 
         return sales
+
+
+    },
+    createChatRoomRequest: async (root: string, args: chatRoomRequest, _context: string) => {
+
+        // making variables
+        const { seller, buyer, saleId, status } = args
+
+        // using function to crate new Chatroom request
+        const request = await newChatRoomRequestFunction(seller, buyer, saleId, status)
+
+
+        
+        return args
 
 
     }

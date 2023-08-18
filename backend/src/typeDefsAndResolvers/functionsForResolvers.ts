@@ -5,9 +5,10 @@
 // mongoose import
 const mongoose = require('mongoose');
 
-// importing user model
+// importing models
 import { User } from "../models/User";
 import { ForSale } from "../models/ForSale";
+import { ChatRoomRequest } from "../models/ChatRoomRequest";
 
 
 interface ForSaleInterface {
@@ -206,7 +207,7 @@ export const FindSales = async (product: string) => {
         //connecting to db
         await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
     
-        // finding user and making variable
+        // finding sales and making variable
         const sales = await ForSale.find({ product: product })
 
         console.log(sales)
@@ -219,6 +220,50 @@ export const FindSales = async (product: string) => {
     } catch (error) {
         console.log(error)
     }
+}
+
+
+
+// create ChatRoomRequest 
+export const newChatRoomRequestFunction = async (seller: string, buyer: string, saleId: string, status: string) => {
+
+
+    try {
+        //connecting to db
+        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+        console.log('connected to mongo DB!')
+
+        console.log('saleId:', saleId)
+        
+        // find ForSale with id
+        const sale = await ForSale.findById(saleId).exec();
+
+        console.log('found the sale', sale)
+
+        // creating new ChatRoomRequest
+        const newChatRoomRequest = await new ChatRoomRequest({
+            seller,
+            buyer,
+            forSale: sale,
+            status
+        })
+
+        console.log('new user made!')
+
+
+        // saving new data
+        await newChatRoomRequest.save()
+
+        console.log('new request made and saved to DB succesfully ☺')
+
+        return newChatRoomRequest
+
+        
+       } catch (error) {
+        console.log(error)
+       }
+
+
 }
 
 

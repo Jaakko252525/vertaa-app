@@ -26,6 +26,7 @@
     "playwright": "^1.37.0",
     "puppeteer": "^21.0.3",
     "selenium-webdriver": "^4.11.1",
+    "socket.io": "^4.7.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

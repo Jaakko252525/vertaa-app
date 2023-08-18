@@ -28,6 +28,14 @@ export const typeDefs = `
     location: String
   }
 
+  type ChatRoomRequest {
+    id: String
+    seller: String
+    buyer: String
+    ForSale: Sale
+    status: String
+  }
+
 
 
   type Query {
@@ -45,6 +53,8 @@ export const typeDefs = `
     toriSearch(product: String!): [String]
     huutoNetSearch(product: String!): [String]
     huutokaupatSearch(product: String!): [String]
+
+    createChatRoomRequest(seller: String!, buyer: String!,saleId: String!, status: String!): ChatRoomRequest
 
   }
 
