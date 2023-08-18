@@ -415,7 +415,7 @@ export const resolvers = {
 
 
     },
-    acceptChatRoomRequest: async (root: string, args: interfaceForString, _context: string) => {
+    editChatRoomRequestStatus: async (root: string, args: interfaceForString, _context: string) => {
 
 
         

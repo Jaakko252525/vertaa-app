@@ -64,7 +64,7 @@ export const typeDefs = `
 
     createChatRoomRequest(seller: String!, buyer: String!,saleId: String!, status: String!): ChatRoomRequest
 
-    acceptChatRoomRequest(chatReqId: String!, status: String!): ChatRoomRequest
+    editChatRoomRequestStatus(chatReqId: String!, status: String!): ChatRoomRequest
 
   }
 
