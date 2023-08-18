@@ -12,8 +12,13 @@ import { useMutation } from "@apollo/client"
 // useState
 import { useEffect, useState } from "react"
 
-// @ts-ignore
-const EditSale = ({ modifiedSaleIdProp, userIdProp }) => {
+
+interface propsInterface {
+    modifiedSaleIdProp: string,
+    userIdProp: string
+}
+
+const EditSale = ({ modifiedSaleIdProp, userIdProp }: propsInterface) => {
     
 
     // product and price state

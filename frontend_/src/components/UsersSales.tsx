@@ -66,7 +66,7 @@ const UsersSales =() => {
 
                 <div>
                     <Button variant="dark" onClick={fetchSales} >Your sales</Button>
-
+                    <div>
                     <ul>
                         {sales?.map(sale => 
                             <li key={sale._id} >
@@ -75,6 +75,7 @@ const UsersSales =() => {
                             </li>                    
                             )}
                     </ul>
+                    </div>
                     <Button variant="dark" onClick={() => setSales([])} >Close</Button>
                 </div>
 

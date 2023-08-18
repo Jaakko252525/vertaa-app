@@ -2,7 +2,7 @@
 
 
 // importing functionsForResolvers
-import { getUserSales, deleteUserFunction, newSale, updateSale, FindSales, newChatRoomRequestFunction } from './functionsForResolvers'
+import { getUserSales, deleteUserFunction, newSale, updateSale, FindSales, newChatRoomRequestFunction, getForSale } from './functionsForResolvers'
 // importing scrapers
 import { browsing } from '../scrapers/ToriScraper_3'; 
 import { getHuutoNetSales } from '../scrapers/HuutoNetScraper';
@@ -28,35 +28,7 @@ import mongoose from 'mongoose';
 import { type } from 'os';
 import { stat } from 'fs';
 
-// getForSale DB connection
-async function getForSale() {
 
-    try {
-        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
-        console.log('connected to database')
-
-        let data = ''        
-
-        // getting data from db
-        // @ts-ignore
-        await ForSale.find().then(result => {
-            data = result
-            
-        })
-        if (!data) {
-            console.log('find dont work', data)
-        }
-        return data
-
-
-
-} catch(error) {
-    console.log('error connecting to database!')
-    console.log()
-    console.log(error)
-}
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-}
 
 // Users DB connection
 async function getAllUsersFromDB() {

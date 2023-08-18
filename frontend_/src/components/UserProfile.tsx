@@ -18,12 +18,19 @@ import AddSaleForm from "./AddSaleForm"
 import UsersSales from "./UsersSales"
 
 
+interface reduxStore {
+    user: {
+        id: string,
+        username: string,
+        password: string
+    }
+}
 
 // component
 const UserProfile = () => {
 
-    // @ts-ignore
-    const user = useSelector(state => state.user)
+
+    const user = useSelector((state: reduxStore) => state.user)
 
     // useDispatch
     const dispatch = useDispatch()
