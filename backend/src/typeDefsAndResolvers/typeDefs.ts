@@ -26,6 +26,7 @@ export const typeDefs = `
     username: String,
     password: String,
     forSale: [Sale]
+    token: String
   }
 
   type ToriSale {
@@ -55,7 +56,7 @@ export const typeDefs = `
     addSale(product:String!, price: String!, userId: String!): Sale
     createNewUser(username:String!, password: String!): User
     login(username: String!, password:String!): User
-    deleteUser(username: String!, password: String!): User
+    deleteUser(username: String!, password: String!, token: String!): User
     modifySale(product: String!, price: String!, userId: String!, id: String!, token: String): SaleWithToken
     SearchSale(product: String!): [Sale]
     toriSearch(product: String!): [String]

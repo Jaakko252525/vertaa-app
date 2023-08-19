@@ -1,5 +1,8 @@
 
 
+// .env file
+require('dotenv').config();
+
 
 // importing functionsForResolvers
 import { 
@@ -21,6 +24,11 @@ import { callingScraper } from '../scrapers/HuutokaupatcomScraper';
 
 // importing jwt generating function
 import { generateAccessToken } from "../JWT/jwt";
+
+
+
+// authUser that verifys jwt token
+import { authUser } from './authMiddleware';
 
 // jwt import
 const jwt = require('jsonwebtoken')
@@ -124,6 +132,7 @@ interface forSaleInterfaceWithToken {
 interface interfaceForUser {
     username: string
     password: string
+    token: string
 }
 
 // userId interface
@@ -210,12 +219,7 @@ export const resolvers = {
         console.log('inside create user')
         const { username, password } = args;
 
-        // generating acces token
-        const token = await generateAccessToken(password)
 
-
-
-        // saving args to db
         //connecting to db
         await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
         
@@ -229,27 +233,40 @@ export const resolvers = {
             
         })
         
-        // if user not used. Make user in db
+        // if username not used. Make user in db
         if (data.length === 0) {
 
-        
-        
-        // making new user
-        const newUser =  await new User({
-            username: username,
-            password: password,
-            forSale: []
-            })
-        // saving user
-        await newUser.save()
 
-        // returning JWT token
-        return {
-            username: username,
-            password: token,
-            forSale: []
-        }
-    } else return {
+            //Encrypt user password
+            const encryptedPassword = await bcrypt.hash(password, 10);
+
+            // making new user
+            const newUser =  await new User({
+                username: username,
+                password: encryptedPassword,
+                forSale: []
+                })
+            // saving user
+            await newUser.save()
+
+
+            // Create token. username is the payload and TOKEN_SECRET is the secret. Header.Payload.Secret
+            const token = jwt.sign(
+                {username: newUser.username},
+                process.env.TOKEN_SECRET,
+            );
+
+
+            // save user token
+            newUser.token = token;
+
+            // Save the updated newUser object to the database
+            await newUser.save();
+
+            // returning JWT token
+            return newUser
+
+        } else return {
         username: "already in",
         password: "database"
     }
@@ -267,52 +284,61 @@ export const resolvers = {
         // check if password correct
 
         try {
-        if (user.password === password) {
-            // user for token
-            const userForToken = {
-                username: user.username
-            }
+            // checking if password correct
+            if (await bcrypt.compare(password, user.password)) {
 
-            // token 
-            const token = await jwt.sign(
-                username,
-                process.env.TOKEN_SECRET            
-                )
-            
+                // user for token
+                const userForToken = {
+                    username: user.username
+                }
 
-            // save user token
-            user.token = token; 
+                // creating jwt token. username is payload and TOKEN_SECRET is secret 
+                const token = await jwt.sign(
+                    username,
+                    process.env.TOKEN_SECRET            
+                    )
                 
-            return {
-                username: username,
-                id: user.id,
-                password: token
-            } }
-        else return 'wrong credentials'
-        
-        }
 
-        catch (error) {
+                // save user token
+                user.token = token; 
+                    
+                return {
+                    username: username,
+                    id: user.id
+                } }
+            
+            } catch (error) {
                 // Handle any errors that occur during the process
                 console.error('Error during login:', error);
                 throw new Error('An error occurred during login.');
               }
             },
     
-    deleteUser: async (root: string, args: interfaceForUser, _context: string) => {
+    // @ts-ignore
+    deleteUser: async (_, {args }, { user }) => {
 
         const { username, password } = args
 
-        const userObject = {
-            username: username,
-            password: password
-        }
+        if (!user) {
+            return {
+                username: 'no user and token'
+            }
+          }
 
-        await deleteUserFunction(username, password)
+            // check jwt
+            await authUser()
 
 
-        return userObject
+            const userObject = {
+                username: username,
+                password: password
+            }
 
+            await deleteUserFunction(username, password)
+
+
+            return userObject
+            
 
 
     },
