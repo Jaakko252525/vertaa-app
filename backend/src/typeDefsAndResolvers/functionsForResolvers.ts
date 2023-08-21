@@ -263,6 +263,9 @@ export const newChatRoomRequestFunction = async (seller: string, buyer: string, 
 
         await fundSaleAndUpdate.save()
 
+
+ 
+
         console.log('new cahtroom req made!', newChatRoomRequest)
 
 
@@ -280,7 +283,6 @@ export const newChatRoomRequestFunction = async (seller: string, buyer: string, 
 
 
 }
-
 
 
 // getForSale DB connection
@@ -369,7 +371,37 @@ export const changeChatRoomReqStatus = async (args: chatRoom) => {
 
 
 
+// getting all chatReqs for specific sale
+export const getChatReqsForSale = async (saleId: string) => {
 
+
+
+    try {
+
+        //connecting to db
+        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+        console.log('connected')
+
+
+        // finding forsale
+        const sale = await ForSale.findOne({ _id: saleId })
+
+        console.log('found sale')
+
+
+        // returning forSale chatRequests
+        const requests = await sale.chatRoomRequests
+
+        return requests
+
+
+    } catch (err) {
+        console.log(err)
+    }
+
+
+
+}
 
 
 

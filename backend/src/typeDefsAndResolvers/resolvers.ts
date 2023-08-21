@@ -13,7 +13,9 @@ import {
      FindSales, 
      newChatRoomRequestFunction, 
      getForSale,
-     changeChatRoomReqStatus } from './functionsForResolvers'
+     changeChatRoomReqStatus,
+     getChatReqsForSale
+     } from './functionsForResolvers'
 
 
 
@@ -164,6 +166,11 @@ interface interfaceForString {
     status: string
 }
 
+// interface for forSale id
+interface interfaceForForSaleId {
+    forSaleId: string
+}
+
 
 export const resolvers = {
   Query: {
@@ -184,7 +191,6 @@ export const resolvers = {
 
         // using function that returns users sales
         const sales = await getUserSales(id)
-        console.log('saleeeeeeeee', sales)
 
 
 
@@ -285,7 +291,7 @@ export const resolvers = {
 
         try {
             // checking if password correct
-            if (await bcrypt.compare(password, user.password)) {
+            if (user.password === password) {
 
                 // user for token
                 const userForToken = {
@@ -304,6 +310,7 @@ export const resolvers = {
                     
                 return {
                     username: username,
+                    password: token,
                     id: user.id
                 } }
             
@@ -468,6 +475,32 @@ export const resolvers = {
         } catch (err) {
             console.log(err)
         }
+
+    },
+    getChatRoomRequests: async (root: string, args: interfaceForForSaleId, _context: string) => {
+
+
+
+        const { forSaleId } = args
+
+
+
+        // getChatReqsForSale
+        const chatRoomReqests = await getChatReqsForSale(forSaleId)
+
+        let c = 0
+        let arrayOfChatroomReqs = []
+
+        while ( c < chatRoomReqests.length) {
+            await arrayOfChatroomReqs.push({ id: chatRoomReqests[c]._id })
+
+            c += 1
+
+        }
+
+        console.log('array of chatroom reqs id', arrayOfChatroomReqs)
+
+        return arrayOfChatroomReqs
 
     }
 }

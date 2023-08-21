@@ -2,6 +2,7 @@
 // bootstrap
 import { Button } from "react-bootstrap"
 
+
 // gql 
 import { EDIT_CHAT_ROOM_REQUEST_STATUS } from "../graphql/queries"
 
@@ -12,7 +13,7 @@ import { useMutation } from "@apollo/client"
 
 // interface 
 interface props {
-    chatReqIdProp: string
+    chatReqIdProp: number
 }
 
 
@@ -28,8 +29,9 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
     // accept chatroomReq
     const acceptChatRoomReq = async () => {
 
-
-        await EditReq({ variables: { chatReqId: chatReqIdProp, status: 'accepted' } })
+        
+        await EditReq({ variables: { chatReqId: chatReqIdProp.toString(), status: 'accepted' } })
+        
         console.log('accpeted chat req')
 
 
@@ -38,18 +40,24 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
 
     // decline chatroomReq
     const declineChatRoomReq = async () => {
-
+        
         await EditReq({ variables: { chatReqId: chatReqIdProp, status: 'rejected' } })
+        
         console.log('declined chat req')
 
 
     }
 
     return (
-          <div>            
+          <div>
+            ChatroomRequest 
+            <br/>            
             <Button onClick={acceptChatRoomReq} >Accept</Button>
+            <br/>
             <Button onClick={declineChatRoomReq} >Decline</Button>
-          </div>
+            <br/>
+            <br/>
+            </div>
     )
 }
 

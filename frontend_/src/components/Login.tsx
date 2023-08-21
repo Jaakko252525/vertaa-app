@@ -33,7 +33,6 @@ import { useSelector, useDispatch } from "react-redux"
 
 
 import { userToStore } from "../Redux/userSlice"
-import { sign } from 'crypto';
 
 interface userObjetInterface {
     username: string,
@@ -65,8 +64,6 @@ const Login = () => {
     // submit function
     const submit = async (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-
-
         // using mutation
         const login = await Login({ variables: {username: username, password: password} })
         
@@ -85,6 +82,8 @@ const Login = () => {
                 //@ts-ignore
                 password: login.data.login.password
             }
+
+            console.log('user', userObject)
 
 
             // using slicer

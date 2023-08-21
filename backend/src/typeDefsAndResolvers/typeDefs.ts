@@ -11,6 +11,8 @@ export const typeDefs = `
     product: String,
     price: String,
     userId: String,
+    chatRoomRequests: [ChatRoomRequest]
+
 
   }
 
@@ -47,6 +49,9 @@ export const typeDefs = `
     status: String
   }
 
+  type chatRoomRequestId {
+    id: String
+  }
 
 
   type Query {
@@ -68,6 +73,8 @@ export const typeDefs = `
     createChatRoomRequest(seller: String!, buyer: String!,saleId: String!, status: String!): ChatRoomRequest
 
     editChatRoomRequestStatus(chatReqId: String!, status: String!): ChatRoomRequest
+
+    getChatRoomRequests(forSaleId: String!): [chatRoomRequestId]
 
   }
 

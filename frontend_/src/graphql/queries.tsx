@@ -97,9 +97,13 @@ export const USER_SALES = gql`
     query($userSalesId: String!) {
       userSales(id: $userSalesId) {
         _id
-        price
         product
-        userId
+        price
+        chatRoomRequests {
+          buyer
+          seller
+          id
+        }
       }
 }
 `
@@ -120,6 +124,7 @@ mutation EditSale($product: String!, $price: String!, $userId: String!, $modifyS
     product
     price
     userId
+  }
     
   }
 `
@@ -220,7 +225,16 @@ export const EDIT_CHAT_ROOM_REQUEST_STATUS = gql`
 
 
 
+// get all chatroomRequests
+export const GET_CHATROOM_REQUESTS = gql`
 
+    mutation($forSaleId: String!) {
+      getChatRoomRequests(forSaleId: $forSaleId) {
+        id
+      }
+    }
+
+`
 
 
 

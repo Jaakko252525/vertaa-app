@@ -16,9 +16,9 @@ import { useSelector } from "react-redux"
 // useState
 import { useState } from "react"
 
-// componentscd frontend
+// components
 import EditSale from "./EditSale"
-import EditUsersChatroomReqStatus from "./EditUsersChatroomReqStatus"
+import GetChatroomReqs from "./GetChatroomReqs"
 
 // interface for user
 interface interfaceForUser {
@@ -48,14 +48,21 @@ const UsersSales =() => {
     // @ts-ignore
     const user: interfaceForUser = useSelector(state => state.user)
 
+    console.log('making query with user:', user)
     // useQuery and useMutation
     const query = useQuery(USER_SALES, {variables: { userSalesId: user.id }})
 
+
+    // function to use query
     const fetchSales = async () => {
+
+        console.log('here and user:', user.id)
 
 
         // making gql query
         const { loading, error, data } = await query
+
+        console.log(data)
 
 
         setSales(data.userSales)
@@ -73,7 +80,7 @@ const UsersSales =() => {
                             <li key={sale._id} >
                                 Product: {sale.product} Price: {sale.price}
                                 <EditSale modifiedSaleIdProp={sale._id} userIdProp={user.id} />
-                                <EditUsersChatroomReqStatus chatReqIdProp="" />
+                                <GetChatroomReqs forSaleIdProp={sale._id} />
                             </li>                    
                             )}
                     </ul>
