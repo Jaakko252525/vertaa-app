@@ -11,6 +11,7 @@ export const typeDefs = `
     product: String,
     price: String,
     userId: String,
+
   }
 
   type SaleWithToken {
@@ -18,7 +19,8 @@ export const typeDefs = `
     product: String,
     price: String,
     userId: String,
-    token: String!
+    token: String!,
+    chatRoomRequests: [ChatRoomRequest]
   }
 
   type User {

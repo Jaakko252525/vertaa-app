@@ -26,7 +26,8 @@ const mongoose = require('mongoose');
 export const forSaleSchema = new mongoose.Schema({
   "product": String,
   "price": String,
-  "userId": String
+  "userId": String,
+  "chatRoomRequests": []
   });
 
 

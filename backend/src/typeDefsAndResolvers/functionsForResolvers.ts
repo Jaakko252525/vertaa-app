@@ -238,6 +238,7 @@ export const newChatRoomRequestFunction = async (seller: string, buyer: string, 
         // find ForSale with id
         const sale = await ForSale.findById(saleId).exec();
 
+
         console.log('found the sale', sale)
 
         // creating new ChatRoomRequest
@@ -252,6 +253,15 @@ export const newChatRoomRequestFunction = async (seller: string, buyer: string, 
             },
             status
         })
+
+
+        // udating sale with the new chatRoomRequest
+        const fundSaleAndUpdate = await ForSale.findOneAndUpdate(
+            { _id: saleId },
+            { $addToSet: { chatRoomRequests: newChatRoomRequest } },
+            { new: true })
+
+        await fundSaleAndUpdate.save()
 
         console.log('new cahtroom req made!', newChatRoomRequest)
 

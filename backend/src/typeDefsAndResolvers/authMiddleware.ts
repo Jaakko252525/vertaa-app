@@ -20,9 +20,6 @@ export const authUser = async (user, req) => {
           req.headers.authorization.startsWith('Bearer')
         ) {
           access_token = req.headers.authorization.split(' ')[1];
-        } else if (req.cookies.access_token) {
-          const { access_token: token } = req.cookies;
-          access_token = token;
         }
     
         if (!access_token) return false;

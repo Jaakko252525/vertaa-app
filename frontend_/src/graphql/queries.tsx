@@ -51,27 +51,7 @@ export const getAllSales = async () => {
 }
 
 
-/*
-// apollo client userSales gql
-export const userSales = async () => {
-  // calling client
-  const data = await client
-  .query({
-    query: gql`
-      query($userSalesId: String) {
-        userSales(id: $userSalesId)
-  }
-      
-  `,
-  })
 
-  return data.data
-
-
-
-
-}
-*/
 
 
 

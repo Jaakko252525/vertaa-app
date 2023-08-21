@@ -325,14 +325,19 @@ export const resolvers = {
             }
           }
 
-            // check jwt
-            await authUser()
-
 
             const userObject = {
                 username: username,
                 password: password
             }
+
+            console.log('userObjectt')
+            // check jwt
+            await authUser(userObject, user )
+
+
+
+
 
             await deleteUserFunction(username, password)
 
