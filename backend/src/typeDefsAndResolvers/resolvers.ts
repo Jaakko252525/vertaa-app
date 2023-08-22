@@ -14,7 +14,8 @@ import {
      newChatRoomRequestFunction, 
      getForSale,
      changeChatRoomReqStatus,
-     getChatReqsForSale
+     getChatReqsForSale,
+     getBuyersChatReqs
      } from './functionsForResolvers'
 
 
@@ -169,6 +170,10 @@ interface interfaceForString {
 // interface for forSale id
 interface interfaceForForSaleId {
     forSaleId: string
+}
+
+interface buyerInterface {
+    buyerId: string
 }
 
 
@@ -501,6 +506,31 @@ export const resolvers = {
         console.log('array of chatroom reqs id', arrayOfChatroomReqs)
 
         return arrayOfChatroomReqs
+
+    },
+
+    getBuyersChatroomRequests: async (root: string, args: buyerInterface, _context: string) => {
+
+
+        // buyers id
+        const { buyerId } = args
+
+        console.log('id here', buyerId)
+
+        const obj = {
+            buyerId
+        }
+
+
+
+        // 
+        const reqs =  await getBuyersChatReqs(obj)
+
+
+
+        return reqs
+
+
 
     }
 }

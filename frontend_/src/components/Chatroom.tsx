@@ -11,50 +11,55 @@ import { useEffect, useState } from "react"
 // socket io connection
 import { socket } from "../socketIoConnection";
 
+// interface
+interface chatReqID {
+    chatRequestIDProp: string
+}
+
+
 // Chatroom component
-const Chatroom = () => {
+const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
 
     const [messages, setMessages] = useState('')
-    const [socketId, setSocketId] = useState('')
 
-    // socket io room
-    const [room, setRoom] = useState('')
+    const [receivedMessage, setReceivedMessage] = useState('')
 
-    const [messageFromBE, setMessageFromBE] = useState('')
+    const [currentRoom, setCurrentRoom] = useState('')
 
- 
-    useEffect(() => {
-
-        console.log('here')
-        socket.on('connect', () => {
-            console.log(socket.id)
-            setSocketId(socket.id)
-        } )
-    })
-
-    useEffect(() => {
-
- 
-
-        console.log('getting backe the message')
-        // getting message from backend
-        socket.on('message back to client', (msg: string) => {
-
-            setMessageFromBE(msg)
-
-
-        })
-    })
 
     
+
+    useEffect(() => {
+
+
+        // joining socket io room
+        socket.emit('joining-room', chatRequestIDProp )
+        console.log('joined room', chatRequestIDProp)
+
+        setCurrentRoom(chatRequestIDProp)
+
+
+    }, [])
+
+
+
+
     // function to send messages
     const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         
-        console.log('sending message')
+        console.log('sending message', messages)
+
+
 
         // sending message to backend
-        await socket.emit('send-message', messages, room)
+        await socket.emit('message', messages)
+
+        socket.on("message-back-to-client", (message: string) => {
+
+            console.log('received message:', message)
+            setReceivedMessage(message)
+        })
 
 
 
@@ -67,24 +72,21 @@ const Chatroom = () => {
 
     return (
         <div>
-            <h1>ID: {socketId} </h1>
-            <h1>Huone {room}</h1>
+            <h1>Current room {currentRoom}</h1>
             <form onSubmit={sendMessage} >
 
                 Message: <input 
                   value={messages}
                   onChange={(e) => setMessages(e.target.value)}
                 />
-                Room: <input  
-                  value={room}
-                  onChange={ e => setRoom(e.target.value)}
-                />
                 
                 <Button type="submit" >Send message</Button>
 
             </form>
 
-            <p>{messageFromBE}</p>
+            <div>
+                Received message: {receivedMessage}
+            </div>
         </div>
     )
 }

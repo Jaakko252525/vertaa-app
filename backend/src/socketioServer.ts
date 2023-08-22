@@ -15,16 +15,25 @@ const io = require('socket.io')(3005, {
 //@ts-ignore
 io.on('connect', socket => {
 
-    console.log('connected', socket.id)
-
-    // event to get messages from client
-    socket.on('send-message', (msg: string, room: string) => {
-
-        // message only to specific room
-        socket.to(room).emit('message back to client', msg)
+    socket.on('joining-room', (room: string) => {
         
+        
+        // joining room
+        socket.join(room);
 
+        socket.on('message', (msg: string) => {
+
+            console.log('message from client:', msg)
+    
+            // sending message to room
+            io.to(room).emit("message-back-to-client", msg);
+        })
     })
+
+
+
+
+
 
 
 

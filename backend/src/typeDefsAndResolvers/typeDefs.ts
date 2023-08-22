@@ -76,6 +76,8 @@ export const typeDefs = `
 
     getChatRoomRequests(forSaleId: String!): [chatRoomRequestId]
 
+    getBuyersChatroomRequests(buyerId: String!): [ChatRoomRequest]
+
   }
 
 

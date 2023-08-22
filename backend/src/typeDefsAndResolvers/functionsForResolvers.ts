@@ -404,7 +404,38 @@ export const getChatReqsForSale = async (saleId: string) => {
 }
 
 
+interface buyerInterface {
+    buyerId: string
+}
 
+// get buyers chatROomReqs
+export const getBuyersChatReqs = async (args: buyerInterface) => {
+
+    const { buyerId } = args
+
+    try {
+
+        //connecting to db
+        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+        console.log('connected')
+
+        console.log('id: ', buyerId)
+        
+
+        // finding chatroom reqs 
+        const reqs = await ChatRoomRequest.find({ buyer: buyerId })
+
+        console.log('reqs are:', reqs)
+
+        return reqs
+
+
+
+
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 
 
