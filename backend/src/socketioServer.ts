@@ -1,34 +1,33 @@
 
 
-const io = require('socket.io')(3003, {
+
+
+
+
+
+const io = require('socket.io')(3005, {
     cors: {
         origin: '*'
     }
 })
 
 
-
 //@ts-ignore
-io.on('connection', (socket) => {
+io.on('connect', socket => {
 
-    console.log(`User connected: ${socket.id}`)
+    console.log('connected', socket.id)
 
-    // emit to sending message to backend
-    socket.on('message-event', (message: string) => {
+    // event to get messages from client
+    socket.on('send-message', (msg: string, room: string) => {
 
-        console.log(message)
-
-        // sending message back to frontend
-        socket.broadcast.emit('receive-message', message)
+        // message only to specific room
+        socket.to(room).emit('message back to client', msg)
+        
 
     })
 
+
+
 })
-
-
-
-
-
-
 
 
