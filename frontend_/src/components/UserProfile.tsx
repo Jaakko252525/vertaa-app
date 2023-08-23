@@ -16,6 +16,7 @@ import { userToStore } from "../Redux/userSlice"
 // components
 import AddSaleForm from "./AddSaleForm"
 import UsersSales from "./UsersSales"
+import BuyerChatReqs from "./BuyersChatReqs"
 
 
 interface reduxStore {
@@ -117,6 +118,9 @@ const UserProfile = () => {
 
             <div>
                 <Button variant="dark" onClick={vertaaRoute} >Vertaa page</Button>
+            </div>
+            <div>
+                <BuyerChatReqs buyerIdProp={user.id} />
             </div>
         </div>
     )

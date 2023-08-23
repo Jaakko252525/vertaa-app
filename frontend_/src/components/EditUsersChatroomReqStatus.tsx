@@ -21,7 +21,7 @@ import Chatroom from "./Chatroom"
 
 // interface 
 interface props {
-    chatReqIdProp: number
+    chatReqIdProp: string
 }
 
 
@@ -40,6 +40,8 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
     // accept chatroomReq
     const acceptChatRoomReq = async () => {
 
+        console.log('id', chatReqIdProp)
+
         
         await EditReq({ variables: { chatReqId: chatReqIdProp.toString(), status: 'accepted' } })
         
@@ -57,12 +59,12 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
         
         await EditReq({ variables: { chatReqId: chatReqIdProp, status: 'rejected' } })
         
-        console.log('declined chat req')
 
 
     }
 
     if (goToChatroom === true) {
+
 
 
         return (

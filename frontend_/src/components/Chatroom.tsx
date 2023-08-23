@@ -48,7 +48,7 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
     const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         
-        console.log('sending message', messages)
+        console.log('sending message', messages, 'in room:', chatRequestIDProp)
 
 
 
@@ -72,7 +72,7 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
 
     return (
         <div>
-            <h1>Current room {currentRoom}</h1>
+            <p>Current room {currentRoom}</p>
             <form onSubmit={sendMessage} >
 
                 Message: <input 

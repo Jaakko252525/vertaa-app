@@ -237,6 +237,22 @@ export const GET_CHATROOM_REQUESTS = gql`
 `
 
 
+// get buyer chat reqs
+
+export const GET_BUYERS_CHAT_REQS = gql`
+    mutation($buyerId: String!) {
+      getBuyersChatroomRequests(buyerId: $buyerId) {
+        id
+        buyer
+        seller
+        ForSale {
+          _id
+          price
+          product
+        }
+      }
+    }
+`
 
 
 

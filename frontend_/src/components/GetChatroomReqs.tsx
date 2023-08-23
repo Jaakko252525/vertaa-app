@@ -26,6 +26,9 @@ const GetChatroomReqs = ({ forSaleIdProp }: (propsInterface)) => {
     // chats state
     const [chatReqs, setChatReqs] = useState([])
 
+    // array of id in chatreq
+    const [chatReqIdArray, setChatReqIdArray] = useState([])
+
 
     // making the mutation variable
     const [get_chatroom_reqs, {data, error, loading}] = useMutation(GET_CHATROOM_REQUESTS)
@@ -33,13 +36,26 @@ const GetChatroomReqs = ({ forSaleIdProp }: (propsInterface)) => {
 
     const getAllChatReqs = async () => {
 
+        console.log('propppp', forSaleIdProp)
+        if (forSaleIdProp !== null){
         const result = await get_chatroom_reqs({ variables: { forSaleId: forSaleIdProp } })
-        const reqsInArray = result.data.getChatRoomRequests
+        const reqsInArray = await result.data.getChatRoomRequests
 
+
+
+        //@ts-ignore
+        let idArray = []
+
+        //@ts-ignore
+        await reqsInArray.forEach(r => {
+            idArray.push(r.id)
+        })
       
 
-        setChatReqs(reqsInArray)
-    
+        //@ts-ignore
+        await setChatReqIdArray(idArray)
+        await setChatReqs(reqsInArray)
+        }
 
 
 
@@ -54,6 +70,7 @@ const GetChatroomReqs = ({ forSaleIdProp }: (propsInterface)) => {
     useEffect(() => {
 
         getAllChatReqs()
+
     
 
     }, [])
@@ -61,14 +78,13 @@ const GetChatroomReqs = ({ forSaleIdProp }: (propsInterface)) => {
     if (chatReqs.length > 0) {
 
 
-
         return (
             <div>
                 <ul>
-                    {chatReqs.map((chatReq: { id: number }) => 
-                        <li key={chatReq.id} >
+                    {chatReqIdArray.map((id: string, index: number) => 
+                        <li key={index} >
                             
-                            <EditUsersChatroomReqStatus chatReqIdProp={chatReq.id} />
+                            <EditUsersChatroomReqStatus chatReqIdProp={id} />
                         </li>)}
                 </ul>
             </div>
