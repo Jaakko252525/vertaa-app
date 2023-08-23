@@ -24,7 +24,12 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
 
     const [receivedMessage, setReceivedMessage] = useState('')
 
+
+    const [messageStorage, setMessageStorage] = useState<string[]>([])
+
     const [currentRoom, setCurrentRoom] = useState('')
+
+
 
 
 
@@ -32,10 +37,6 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
     
 
     useEffect(() => {
-
-
-        console.log('ran chatroom!')
-        console.log('id::::', chatRequestIDProp)
 
 
         // joining socket io room
@@ -58,8 +59,11 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
         // sending message to backend
         await socket.emit('message', messages)
 
-        socket.on("message-back-to-client", (message: string) => {
+        await socket.on("message-back-to-client", (message: string) => {
             setReceivedMessage(message)
+
+            // message to storage
+            setMessageStorage(messageStorage.concat(message))
         })
 
 
@@ -87,6 +91,16 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
 
             <div>
                 Received message: {receivedMessage}
+            </div>
+
+            <div>
+                messages: <ul>
+                    {messageStorage.map(m => 
+                        <li>
+                            {m}
+                        </li>
+                        )}
+                </ul>
             </div>
         </div>
     )
