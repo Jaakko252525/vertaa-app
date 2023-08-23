@@ -189,7 +189,7 @@ mutation CreateChatRoomRequest($seller: String!, $buyer: String!, $saleId: Strin
   createChatRoomRequest(seller: $seller, buyer: $buyer, saleId: $saleId, status: $status) {
     seller
     buyer
-    ForSale {
+    forSale {
       product
       price
     }
@@ -210,7 +210,7 @@ export const EDIT_CHAT_ROOM_REQUEST_STATUS = gql`
         id
         buyer
         seller
-        ForSale {
+        forSale {
           _id
           product
           price
@@ -245,7 +245,7 @@ export const GET_BUYERS_CHAT_REQS = gql`
         id
         buyer
         seller
-        ForSale {
+        forSale {
           _id
           price
           product

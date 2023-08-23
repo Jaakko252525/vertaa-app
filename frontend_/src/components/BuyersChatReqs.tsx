@@ -14,6 +14,7 @@ import { useState, useEffect } from "react"
 
 // components
 import Chatroom from "./Chatroom"
+import { Button } from "react-bootstrap"
 
 
 interface propss {
@@ -26,7 +27,7 @@ interface chatReqInterface {
     seller: string,
     buyer: string,
     forSale: {
-        id: string,
+        _id: string,
         product: string,
         price: string,
         userId: string
@@ -42,6 +43,8 @@ const BuyerChatReqs = ({ buyerIdProp }: propss) => {
 
     // chats state
     const [chatReqs, setChatReqs] = useState<chatReqInterface[]>([])
+
+    const [arrayOfChatReqObjectsState, setArrayOfChatReqObjectsState] = useState<chatReqInterface[]>()
 
     // chat req id array
     //@ts-ignore
@@ -62,21 +65,39 @@ const BuyerChatReqs = ({ buyerIdProp }: propss) => {
         // making variable 
         const resultInArray = result.data.getBuyersChatroomRequests
 
-        console.log('fetched buyer reqs', resultInArray)
-
         //@ts-ignore
         let arrayOfIDs = []
 
-        // Loop through the array and log the IDs
-        await chatReqs.forEach(request => {
-
-            arrayOfIDs.push(request.id)
-        });
         
+        //@ts-ignore
+        let arrayOfChatReqObjects = []
+
+        // Loop through the array and log the IDs
+        await chatReqs.forEach(r => {
+
+            arrayOfIDs.push(r.id)
+            arrayOfChatReqObjects.push({
+                id: r.id,
+                buyer: r.buyer,
+                seller: r.seller,
+                forSale: r.forSale,
+            })
+        });
+
+
+
+
+        // @ts-ignore
+        await setArrayOfChatReqObjectsState(arrayOfChatReqObjects)
+
+
         //@ts-ignore
         await setChatReqIds(arrayOfIDs)
 
         await setChatReqs(resultInArray)
+
+
+        console.log('function succesful')
     }
 
 
@@ -86,21 +107,31 @@ const BuyerChatReqs = ({ buyerIdProp }: propss) => {
 
     
 
-    }, [chatReqs])
+    }, [])
+
+
+
 
     if (chatReqs.length > 0) {
 
 
 
-
         return (
             <div>
-                Chatroom req ID:
+                <h1>Your chatroom requests:</h1>
+                <br/>
+                <Button variant="dark" onClick={() => functionToGetReqs()} >Show your chatRequests</Button>
+                <br/>
+                <br/>
                 <ul>
-                    {chatReqIds.map((id: string, index: number) => (
-                        <li key={index}>
-                            {id}
-                            <Chatroom chatRequestIDProp={id} />
+
+                    {arrayOfChatReqObjectsState && arrayOfChatReqObjectsState.map((r: chatReqInterface ) => (
+                        <li key={r.id}>
+                            Buyer ID: {r.buyer} <br/>
+                            Seller ID: {r.seller} <br/>
+                            Product: {r.forSale.product} <br/>
+                            Price: {r.forSale.price} <br/>
+                            <Chatroom chatRequestIDProp={r.id} />
                             <br/>
                             <br/>
                         </li>
@@ -113,7 +144,7 @@ const BuyerChatReqs = ({ buyerIdProp }: propss) => {
 
     return (
         <div>
-            ssss
+
         </div>
 
     )

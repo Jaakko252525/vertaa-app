@@ -33,9 +33,6 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
     // mutation
     const [EditReq, { data, loading, error }] = useMutation(EDIT_CHAT_ROOM_REQUEST_STATUS)
 
-    // navigation
-    const navigate = useNavigate()
-
 
     // accept chatroomReq
     const acceptChatRoomReq = async () => {
@@ -43,9 +40,9 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
         console.log('id', chatReqIdProp)
 
         
-        await EditReq({ variables: { chatReqId: chatReqIdProp.toString(), status: 'accepted' } })
-        
-        console.log('accpeted chat req')
+        await EditReq({ variables: { chatReqId: chatReqIdProp, status: 'accepted' } })
+
+        console.log('here??')
 
         await setGoToChatroom(true)
 

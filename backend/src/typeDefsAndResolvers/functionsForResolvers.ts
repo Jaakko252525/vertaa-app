@@ -347,13 +347,16 @@ export const changeChatRoomReqStatus = async (args: chatRoom) => {
             return chatRoomreqFindUpdated
 
         } else if ( status === 'rejected') {
+
+
+             
             //connecting to db
             await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
         
             // finding sales and making variable
-            const chatRoomreqFindUpdated = await ChatRoomRequest.findByIdAndUpdate(chatReqId, {status: 'rejected'})
+            const chatRoomreqFindUpdated = await ChatRoomRequest.findByIdAndDelete({ _id: chatReqId })
 
-            console.log(chatRoomreqFindUpdated)
+            
 
             return chatRoomreqFindUpdated
 

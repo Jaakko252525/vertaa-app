@@ -45,7 +45,7 @@ export const typeDefs = `
     id: String
     seller: String
     buyer: String
-    ForSale: Sale
+    forSale: Sale
     status: String
   }
 

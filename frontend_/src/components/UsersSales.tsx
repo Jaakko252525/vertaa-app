@@ -47,16 +47,12 @@ const UsersSales =() => {
     // fetch data from redux user
     // @ts-ignore
     const user: interfaceForUser = useSelector(state => state.user)
-
-    console.log('making query with user:', user)
     // useQuery and useMutation
     const query = useQuery(USER_SALES, {variables: { userSalesId: user.id }})
 
 
     // function to use query
     const fetchSales = async () => {
-
-        console.log('here and user:', user.id)
 
 
         // making gql query

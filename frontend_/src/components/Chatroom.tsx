@@ -31,10 +31,11 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
 
     useEffect(() => {
 
+        console.log('ran chatroom!')
+
 
         // joining socket io room
         socket.emit('joining-room', chatRequestIDProp )
-        console.log('joined room', chatRequestIDProp)
 
         setCurrentRoom(chatRequestIDProp)
 
@@ -47,8 +48,6 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
     // function to send messages
     const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        
-        console.log('sending message', messages, 'in room:', chatRequestIDProp)
 
 
 
@@ -56,8 +55,6 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
         await socket.emit('message', messages)
 
         socket.on("message-back-to-client", (message: string) => {
-
-            console.log('received message:', message)
             setReceivedMessage(message)
         })
 
@@ -80,7 +77,7 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
                   onChange={(e) => setMessages(e.target.value)}
                 />
                 
-                <Button type="submit" >Send message</Button>
+                <Button variant="dark" type="submit" >Send message to seller</Button>
 
             </form>
 
