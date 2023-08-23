@@ -27,11 +27,15 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
     const [currentRoom, setCurrentRoom] = useState('')
 
 
+
+
     
 
     useEffect(() => {
 
+
         console.log('ran chatroom!')
+        console.log('id::::', chatRequestIDProp)
 
 
         // joining socket io room

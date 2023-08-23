@@ -41,9 +41,10 @@ const chatReqIdSlice = createSlice({
 
   reducers: {
     chatReqIDToStore: (state, action) => {
-      const payload = action.payload
+      const data = action.payload
 
-      state.chatReqID = payload.chatReqID
+      //@ts-ignore
+      state.chatReqID = data
 
 
 

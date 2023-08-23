@@ -19,6 +19,12 @@ import { useMutation } from "@apollo/client"
 import Chatroom from "./Chatroom"
 
 
+// dispatch
+import { useDispatch } from "react-redux"
+
+// redux slicer
+import { chatReqIDToStore } from "../Redux/chatReqIdSlice"
+
 // interface 
 interface props {
     chatReqIdProp: string
@@ -33,6 +39,11 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
     // mutation
     const [EditReq, { data, loading, error }] = useMutation(EDIT_CHAT_ROOM_REQUEST_STATUS)
 
+    // dispatch
+    const dispatch = useDispatch()
+
+    // navigate
+    const navigate = useNavigate()
 
     // accept chatroomReq
     const acceptChatRoomReq = async () => {
@@ -46,8 +57,16 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
 
         await setGoToChatroom(true)
 
+        console.log('here 1')
+        // chatrequest id to redux store
+        await dispatch(chatReqIDToStore(chatReqIdProp))
+        console.log('here 2')
+
 
         // navigagte to path
+        const path = '/chatRoom'
+        await navigate(path)
+        console.log('here 3')
 
 
 

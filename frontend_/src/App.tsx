@@ -18,6 +18,8 @@ import CreateNewUser from './components/CreateNewUser';
 import DeleteUser from './components/DeleteUser';
 import Vertaa from './components/Vertaa';
 import AddSaleForm from './components/AddSaleForm';
+import Chatroom from './components/Chatroom';
+
 
 // enabling bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -28,16 +30,22 @@ interface reduxStore {
     id: string,
     username: string,
     password: string
-
-
+  },
+  chatReqId: {
+    chatReqID: string
   }
 }
 
+
+
+
 const App = () => {
 
-
+  // user from redux store
   const user = useSelector( (state: reduxStore) => state.user)
 
+  // chatreqid fro redux store
+  const chatReqId = useSelector( (state: reduxStore) => state.chatReqId)
 
   return (
     <div>
@@ -54,7 +62,7 @@ const App = () => {
             <Route path="/addSale" element={<PrivateRoute childrenProp={<AddSaleForm userIdProp={user.id} />} />}></Route>
 
 
-            
+            <Route path="/chatRoom" element={<PrivateRoute childrenProp={<Chatroom  chatRequestIDProp={chatReqId.chatReqID}/>} />}></Route>
 
             <Route path="/vertaapage" element={<Vertaa  />}  />
           </Routes>
