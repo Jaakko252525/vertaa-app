@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 
+// css
+import './App.css'
 
 // importing components
 import App from './App';
@@ -37,11 +39,11 @@ const root = ReactDOM.createRoot(
 
 // render
 root.render(
-
   <React.StrictMode>
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <App  />  
+
+        <App  />
       </Provider>
     </ApolloProvider>
   </React.StrictMode>

@@ -9,11 +9,13 @@
 
 // bootstrap
 import Button from 'react-bootstrap/Button';
+import { CardGroup, Card } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 // css
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import '../Login.css'
 
 
 import { useMutation } from "@apollo/client"
@@ -125,61 +127,96 @@ const Login = () => {
         navigate(path)
     }
 
+    // vertaaRoute 
+    const vertaaRoute = () => {
+        const path = "/vertaapage"
+        navigate(path)
+    }
+
 
 
 
     // if logged in then render other pages
    if (userVar.username !== '') {
     return (
-        <div style={{
-            textAlign: 'center'
+        <div>
 
-        }} >
-            <p className='pageText' > Welcome: {userVar.username}</p> <br/>
-            <br/>
+            <Card className='topBarLogin' >
 
-            <ButtonGroup size="lg" className="mb-2">
-                <Button variant='dark' onClick={() => logout()} >Logout</Button>
-                <Button variant='dark' onClick={frontpageRoute} >Frontpage</Button>
-                <Button variant='dark' onClick={userProfileRoute}>Profile</Button>
-            </ButtonGroup>           
+                <Card.Body className='cardBodyTopBar' >
+                <div className='button-container' >
+                    <button className='text-button' onClick={frontpageRoute} >Frontpage</button>
+                    <button className='text-button' onClick={userProfileRoute} >Profile</button>
+                    <button className='text-button' onClick={vertaaRoute} >Vertaa</button>
+                    <button className='text-button'>Create sale</button>
+                    <button className='text-button' onClick={() => logout()} >Logout</button>
+
+
+                </div>
+                </Card.Body>
+
+            </Card>
+
+            <div>
+                <p className='pageTextLogin' > Welcome: {userVar.username}</p>
+            </div>
 
         </div>
     )
    }
 
     return (
-        <div style={{
-            textAlign: "center"
-        }} >
+        <div className='loginBackground' >
 
-            <p className='pageText' >Login page</p>
-            <br/>
 
-            <form className='form'  onSubmit={submit}>
-                
-                Username: <input 
-                value={username}
-                onChange={event => setUsername(event.target.value)}
-                />
-
-                Password: <input
-                value={password}
-                onChange={event => setPassword(event.target.value)}
-                  />
             
-                
-              <Button variant='dark' size='sm'  type="submit">Submit</Button>
+
+            <p className='pageTextLogin' >Login page</p>
+            <br/>
+
+            <Card  className='LoginCard' >
+            <Card.Body className='LoginCardBody' >
+                        <form className='form-container'  onSubmit={submit}>
+                        <div className="input-group">
+                            <label>Username:</label> 
+                            <input 
+                                className='inputStyling' 
+                                value={username}
+                                onChange={event => setUsername(event.target.value)}
+                            />
+                            <br/>
+                            </div>
+                            <div className="input-group">
+                            <label>Password:   </label>
+                            <input 
+                                className='inputStyling'
+                                value={password}
+                                onChange={event => setPassword(event.target.value)}
+                            />
+                            </div> 
+                        
+                            
+                        <button className='submitButton'  type="submit">Submit</button>
 
 
-            </form>
+                        </form>
+            </Card.Body>
+            </Card>
 
             <br/>
-            <br/>
-            <div className='form' >
-                <Button onClick={createNewUserRoute} variant='dark'  >Create user</Button>
+            <div style={
+                {
+                    textAlign: "center"
+                }
+            } >
+                <p>or</p>
+                <button className='createUserButtonnn' onClick={createNewUserRoute}  >Create user</button>
             </div>
+            <br/>
+            <br/>
 
+
+ 
         </div>
     )
 }

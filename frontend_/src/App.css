@@ -1,6 +1,11 @@
 
 
 
+
+.app-background {
+    background: #3b3a3a;;
+}
+
 /* login form style */
 .form {
     text-align: center;

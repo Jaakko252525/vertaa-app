@@ -1,0 +1,158 @@
+
+
+
+.loginBackground {
+  background-color: #aaa2a2;
+
+}
+
+.createUserButtonnn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 10px;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.3s ease; /* Add a smooth color transition */
+  
+}
+
+.createUserButtonnn:hover {
+  color: rgb(104, 104, 108); /* Change the color on hover */
+}
+
+
+.submitButton {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 10px;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.3s ease; /* Add a smooth color transition */
+  
+}
+
+.submitButton:hover {
+  color: rgb(104, 104, 108); /* Change the color on hover */
+}
+
+
+.inputStyling {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #aaa2a2;
+    color: white;
+  
+}
+
+.pageTextLogin {
+
+  text-align: center;
+  margin-top: 30px;
+
+}
+
+
+.LoginCard {
+    border: 10px solid black;
+    position: relative;
+    top: 15px;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 10%;
+}
+
+
+.LoginCardBody {
+  background: #d9d2d2;
+  text-align: center;
+    
+}
+
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+
+  
+  .input-group label {
+    margin-right: 10px;
+  }
+
+.formButton {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+
+.createUserButton {
+    
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+
+}
+
+
+/* TextButton.css */
+.text-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 10px;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.3s ease; /* Add a smooth color transition */
+  
+}
+
+.text-button:hover {
+  color: blue; /* Change the color on hover */
+}
+
+.button-container {
+  display: flex; /* To make the buttons flex horizontally */
+  gap: 10px; /* Adjust the value to control the space between buttons */
+  height: 50px;
+  margin-left: 400px;
+  background: #d9d2d2;
+}
+
+.cardBodyTopBar {
+  background: #d9d2d2;
+}
+
+
+.topBarLogin {
+  
+}
+
+
+
+
+
+
+
+
