@@ -47,6 +47,9 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
         await setGoToChatroom(true)
 
 
+        // navigagte to path
+
+
 
     }
 

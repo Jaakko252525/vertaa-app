@@ -51,6 +51,9 @@ const App = () => {
             <Route path="/deleteUser" element={<PrivateRoute childrenProp={<DeleteUser/>} />}></Route>
             <Route path="/addSale" element={<PrivateRoute childrenProp={<AddSaleForm userIdProp={user.id} />} />}></Route>
 
+            <Route path="/addSale" element={<PrivateRoute childrenProp={<AddSaleForm userIdProp={user.id} />} />}></Route>
+
+
             
 
             <Route path="/vertaapage" element={<Vertaa  />}  />

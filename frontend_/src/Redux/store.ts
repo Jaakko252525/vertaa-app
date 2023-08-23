@@ -10,7 +10,7 @@
 
 // imorting slicers
 import userSlice from './userSlice'
-
+import chatReqIdSlice from './chatReqIdSlice'
 
 import { configureStore } from '@reduxjs/toolkit'
 
@@ -19,7 +19,8 @@ import { configureStore } from '@reduxjs/toolkit'
 
 export default configureStore({
   reducer: {
-    user: userSlice
+    user: userSlice,
+    chatReqId: chatReqIdSlice
   }
 })
 
