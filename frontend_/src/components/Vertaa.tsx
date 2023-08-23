@@ -1,6 +1,9 @@
 
 
 
+// import css
+import '../cssFiles/Vertaa.css'
+
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
@@ -12,6 +15,7 @@ import { TORI_SCRAPER, HUUTONET_SEARCH, HUUTOKAUPAT_SEARCH } from "../graphql/qu
 
 // components
 import LoadingForVertaaPage from './LoadingForVertaaPage';
+import TopBar from './TopBar';
 
 // useMutation 
 import { useMutation } from "@apollo/client"
@@ -165,18 +169,27 @@ const Vertaa = () => {
 
     return (
         <div>
+          <div>
+            <TopBar/>
+          </div>
+
+            <Card className='vertaaFormCard' >
+
+              <Card.Body className='VertaaCardBody' >
+                  <form className='form-container' onSubmit={submit}>
 
 
-            <form className='form' onSubmit={submit}>
+                      <input
+                      type='text'
+                      className='inputVertaa'
+                      value={searchWord}
+                      onChange={word => setSearchWord(word.target.value)}
+                      />
+                      <button className='vertaaButton' type="submit" >Search</button>
 
-
-                <input 
-                value={searchWord}
-                onChange={word => setSearchWord(word.target.value)}
-                />
-                <button type="submit" >Search</button>
-
-            </form>
+                  </form>
+                </Card.Body>
+            </Card>
 
         <div>
 
@@ -187,7 +200,7 @@ const Vertaa = () => {
 
     <CardGroup className='vertaaSalesCardGroup' >
       <Card border='Danger' style={{ width: '18rem' }} >
-        <Card.Body>
+        <Card.Body className='dataCard' >
           <Card.Title>Tori</Card.Title>
           <Card.Text>  
             <div>
@@ -210,7 +223,7 @@ const Vertaa = () => {
 
       <br/>
       <Card border='Primary' style={{ width: '18rem' }} >
-        <Card.Body>
+        <Card.Body className='dataCard' >
           <Card.Title>Huutonet</Card.Title>
           <Card.Text>
             <div>
@@ -231,7 +244,7 @@ const Vertaa = () => {
 
       </Card>
       <Card>
-        <Card.Body>
+        <Card.Body className='dataCard' >
           <Card.Title>Huutokaupat.com</Card.Title>
           <Card.Text>
             

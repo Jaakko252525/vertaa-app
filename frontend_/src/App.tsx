@@ -4,7 +4,8 @@ import './App.css';
 // router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
+// useSelector
+import { useSelector } from 'react-redux';
 
 // importing PrivateRoute
 import PrivateRoute from './components/PrivateRoute';
@@ -16,12 +17,26 @@ import UserProfile from './components/UserProfile';
 import CreateNewUser from './components/CreateNewUser';
 import DeleteUser from './components/DeleteUser';
 import Vertaa from './components/Vertaa';
+import AddSaleForm from './components/AddSaleForm';
 
 // enabling bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+interface reduxStore {
+  user: {
+    id: string,
+    username: string,
+    password: string
+
+
+  }
+}
+
 const App = () => {
 
+
+  const user = useSelector( (state: reduxStore) => state.user)
 
 
   return (
@@ -34,6 +49,9 @@ const App = () => {
             <Route path="/userProfile" element={<PrivateRoute childrenProp={<UserProfile/>}/> }></Route>
             <Route path="/createNewUser" element={<CreateNewUser/>}  ></Route>
             <Route path="/deleteUser" element={<PrivateRoute childrenProp={<DeleteUser/>} />}></Route>
+            <Route path="/addSale" element={<PrivateRoute childrenProp={<AddSaleForm userIdProp={user.id} />} />}></Route>
+
+            
 
             <Route path="/vertaapage" element={<Vertaa  />}  />
           </Routes>

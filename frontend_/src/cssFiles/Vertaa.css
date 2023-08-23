@@ -1,0 +1,76 @@
+
+
+
+
+.vertaaSearchInput {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+
+.vertaaFormCard {
+    border: 10px solid black;
+    position: relative;
+    top: 20px;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 10%;
+}
+
+
+.VertaaCardBody {
+    background: #d9d2d2;
+    text-align: center;
+      
+  }
+  
+  
+  
+.form-container {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    width: 50%;
+  }
+
+.vertaaButton {
+    text-align: center;
+    margin-top: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Add a smooth color transition */
+    margin-left: 50%;
+    width: 300px;    
+  }
+  
+  .submitButton:hover {
+    color: rgb(5, 5, 106); /* Change the color on hover */
+  }
+
+
+.inputVertaa {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #aaa2a2;
+    margin-left: 50%;
+    width: 300px;
+}
+
+
+
+.dataCard {
+    background-color: #aaa2a2;
+}
+
+
+
+
+
+

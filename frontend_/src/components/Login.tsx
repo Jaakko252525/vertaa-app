@@ -133,6 +133,13 @@ const Login = () => {
         navigate(path)
     }
 
+    // addSaleROute 
+    const addSaleROute = () => {
+        const path = "/addSale"
+        navigate(path)
+    }
+
+
 
 
 
@@ -148,7 +155,7 @@ const Login = () => {
                     <button className='text-button' onClick={frontpageRoute} >Frontpage</button>
                     <button className='text-button' onClick={userProfileRoute} >Profile</button>
                     <button className='text-button' onClick={vertaaRoute} >Vertaa</button>
-                    <button className='text-button'>Create sale</button>
+                    <button className='text-button' onClick={addSaleROute} >Create sale</button>
                     <button className='text-button' onClick={() => logout()} >Logout</button>
 
 
@@ -157,8 +164,10 @@ const Login = () => {
 
             </Card>
 
-            <div>
-                <p className='pageTextLogin' > Welcome: {userVar.username}</p>
+            <div style={{
+                textAlign: "center"
+            }} >
+                <button onClick={userProfileRoute} className='pageTextLogin' > Welcome: {userVar.username}</button>
             </div>
 
         </div>
@@ -166,10 +175,7 @@ const Login = () => {
    }
 
     return (
-        <div className='loginBackground' >
-
-
-            
+        <div>            
 
             <p className='pageTextLogin' >Login page</p>
             <br/>
