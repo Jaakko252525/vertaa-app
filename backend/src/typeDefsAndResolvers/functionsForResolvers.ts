@@ -389,7 +389,7 @@ export const getChatReqsForSale = async (saleId: string) => {
         // finding forsale
         const sale = await ForSale.findOne({ _id: saleId })
 
-        console.log('found sale')
+
 
 
         // returning forSale chatRequests

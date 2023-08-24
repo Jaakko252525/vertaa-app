@@ -11,10 +11,19 @@ import { useMutation } from "@apollo/client"
 
 import { useState, useEffect } from "react"
 
+// useDispatch 
+import { useDispatch } from "react-redux"
+
+// navigate
+import { useNavigate } from "react-router-dom"
+
 
 // components
 import Chatroom from "./Chatroom"
 import { Button } from "react-bootstrap"
+
+// redux slicer
+import { chatReqIDToStore } from "../Redux/chatReqIdSlice"
 
 
 interface propss {
@@ -46,9 +55,15 @@ const BuyerChatReqs = ({ buyerIdProp }: propss) => {
 
     const [arrayOfChatReqObjectsState, setArrayOfChatReqObjectsState] = useState<chatReqInterface[]>()
 
+    // navigate
+    const navigate = useNavigate()
+
     // chat req id array
     //@ts-ignore
     const [chatReqIds, setChatReqIds] = useState([])
+
+    // dispatch
+    const dispatch = useDispatch()
 
     // maiking mutation
     const [getBuyersChatReqs, {data, error, loading}] = useMutation(GET_BUYERS_CHAT_REQS)
@@ -110,6 +125,26 @@ const BuyerChatReqs = ({ buyerIdProp }: propss) => {
     }, [])
 
 
+    // function to go to room
+    const goToChatroom = async (id: string, buyerIdd: string) => {
+
+
+        // object for chatReq redux store
+        const obj = {
+            id: id,
+            buyerId: buyerIdd
+        }
+
+        // chatrequest id to redux store
+        await dispatch(chatReqIDToStore(obj))
+
+        const path = '/buyersSideChatroom'
+
+        navigate(path)
+        return
+    }
+
+
 
 
     if (chatReqs.length > 0) {
@@ -131,7 +166,7 @@ const BuyerChatReqs = ({ buyerIdProp }: propss) => {
                             Seller ID: {r.seller} <br/>
                             Product: {r.forSale.product} <br/>
                             Price: {r.forSale.price} <br/>
-                            <Chatroom chatRequestIDProp={r.id} />
+                            <button onClick={() => goToChatroom(r.id, r.buyer)} >Go to chatroom</button>
                             <br/>
                             <br/>
                         </li>

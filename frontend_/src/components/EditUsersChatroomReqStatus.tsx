@@ -27,14 +27,14 @@ import { chatReqIDToStore } from "../Redux/chatReqIdSlice"
 
 // interface 
 interface props {
-    chatReqIdProp: string
+    chatReqIdProp: string,
+    buyerIdProp: string
 }
 
 
 
-const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
+const EditUsersChatroomReqStatus = ({ chatReqIdProp, buyerIdProp }: props) => {
 
-    const [goToChatroom, setGoToChatroom] = useState(false)
 
     // mutation
     const [EditReq, { data, loading, error }] = useMutation(EDIT_CHAT_ROOM_REQUEST_STATUS)
@@ -53,20 +53,19 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
         
         await EditReq({ variables: { chatReqId: chatReqIdProp, status: 'accepted' } })
 
-        console.log('here??')
+        // object for chatReq redux store
+        const obj = {
+            id: chatReqIdProp,
+            buyerId: buyerIdProp
+        }
 
-        await setGoToChatroom(true)
-
-        console.log('here 1')
         // chatrequest id to redux store
-        await dispatch(chatReqIDToStore(chatReqIdProp))
-        console.log('here 2')
+        await dispatch(chatReqIDToStore(obj))
 
 
         // navigagte to path
         const path = '/chatRoom'
         await navigate(path)
-        console.log('here 3')
 
 
 
@@ -82,17 +81,7 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp }: props) => {
 
     }
 
-    if (goToChatroom === true) {
 
-
-
-        return (
-            <div>
-             <Chatroom chatRequestIDProp={String(chatReqIdProp)} />
-
-            </div>
-        )
-    }
 
 
     return (

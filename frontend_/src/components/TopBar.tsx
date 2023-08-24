@@ -6,7 +6,8 @@ import { Button, Card, CardGroup } from "react-bootstrap";
 // useSelector
 import { useSelector, useDispatch } from "react-redux";
 
-
+// css
+import '../cssFiles/TopBar.css'
 
 // useNavigate
 import { useNavigate } from "react-router-dom";
@@ -91,15 +92,17 @@ const TopBar = () => {
     return (
         <div>
 
-            <Card className='topBarLogin' >
+            <Card  >
 
-                <Card.Body className='cardBodyTopBar' >
-                <div className='button-container' >
-                    <button className='text-button' onClick={frontpageRoute} >Frontpage</button>
-                    <button className='text-button' onClick={userProfileRoute} >Profile</button>
-                    <button className='text-button' onClick={vertaaRoute} >Vertaa</button>
-                    <button className='text-button' onClick={addSaleROute} >Create sale</button>
-                    <button className="text-button" onClick={() => logout()}>Logout</button>
+                <Card.Body className='cardBodyTopBarr' >
+                <div className='button-containerr' >
+                    <button className='first-button' onClick={frontpageRoute} >Frontpage</button>
+                    <button className='text-buttonn' onClick={userProfileRoute} >Profile</button>
+                    <button className='text-buttonn' onClick={vertaaRoute} >Vertaa</button>
+                    <button className='text-buttonn' onClick={addSaleROute} >Create sale</button>
+                    <button className="text-buttonn" onClick={() => logout()}>Logout</button>
+                    <button className='text-buttonn' onClick={addSaleROute} >Create sale</button>
+                    <button className="text-buttonn" onClick={() => logout()}>Logout</button>
 
 
 

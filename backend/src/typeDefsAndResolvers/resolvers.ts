@@ -497,7 +497,11 @@ export const resolvers = {
         let arrayOfChatroomReqs = []
 
         while ( c < chatRoomReqests.length) {
-            await arrayOfChatroomReqs.push({ id: chatRoomReqests[c]._id })
+            await arrayOfChatroomReqs.push({ 
+                id: chatRoomReqests[c]._id,
+                buyerId: chatRoomReqests[c].buyer
+
+             })
 
             c += 1
 

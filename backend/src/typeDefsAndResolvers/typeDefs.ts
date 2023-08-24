@@ -51,6 +51,7 @@ export const typeDefs = `
 
   type chatRoomRequestId {
     id: String
+    buyerId: String
   }
 
 

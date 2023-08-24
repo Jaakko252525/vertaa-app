@@ -17,6 +17,7 @@ import { userToStore } from "../Redux/userSlice"
 import AddSaleForm from "./AddSaleForm"
 import UsersSales from "./UsersSales"
 import BuyerChatReqs from "./BuyersChatReqs"
+import TopBar from "./TopBar"
 
 
 interface reduxStore {
@@ -68,6 +69,9 @@ const UserProfile = () => {
 
        return (
         <div>
+            <div>
+                <TopBar/>
+            </div>
             <div style={
                 {
                     textAlign: 'center',

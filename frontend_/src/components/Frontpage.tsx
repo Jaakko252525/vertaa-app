@@ -3,7 +3,8 @@
 
 
 
-
+// css
+import '../cssFiles/Frontpage.css'
 
 
 // useNavigation
@@ -31,6 +32,8 @@ import { userToStore } from "../Redux/userSlice"
 // components
 import SaleSearch from "./SaleSearch"
 import ChatRequestButton from "./ChatRequestButton"
+import TopBar from './TopBar'
+
 
 // interface
 interface dataInterface {
@@ -40,18 +43,7 @@ interface dataInterface {
     userId: string
 }
 
-// redux state interface
-interface reduxState {
-    user: Object
-}
 
-interface interfaceForUser {
-    _id: string,
-    username: string,
-    password: string,
-    forSale: Object
-
-}
 
 // Frontpage component
 const Frontpage = () => {
@@ -62,7 +54,7 @@ const Frontpage = () => {
     const [searchWord, setSearchWord] = useState('')
     const [renderSearch, setRenderSearch] = useState(false)
 
-
+    // useNavigate
     const navigate = useNavigate()
 
     // redux store
@@ -105,6 +97,7 @@ const Frontpage = () => {
 
     },[])
 
+    // useEffect to change render state
     useEffect(() => {
 
         if (searchWord === '') {
@@ -120,9 +113,6 @@ const Frontpage = () => {
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        console.log('submitted')
-        console.log('search word', searchWord)
-
         if (searchWord !== '') {        
             setRenderSearch(true)
         } else if (searchWord === '') {
@@ -136,6 +126,9 @@ const Frontpage = () => {
     if (renderSearch === true ) {
         return (
             <div>
+                <div>
+                    <TopBar/>
+                </div>
               <div>
                 <form className="form" onSubmit={submit} >
                     Search sales <input

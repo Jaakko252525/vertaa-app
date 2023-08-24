@@ -18,6 +18,11 @@ interface propsInterface {
 }
 
 
+interface idAndBuyerIDObj {
+    id: string,
+    buyerId: string
+}
+
 
 
 // component
@@ -36,7 +41,6 @@ const GetChatroomReqs = ({ forSaleIdProp }: (propsInterface)) => {
 
     const getAllChatReqs = async () => {
 
-        console.log('propppp', forSaleIdProp)
         if (forSaleIdProp !== null){
         const result = await get_chatroom_reqs({ variables: { forSaleId: forSaleIdProp } })
         const reqsInArray = await result.data.getChatRoomRequests
@@ -48,8 +52,15 @@ const GetChatroomReqs = ({ forSaleIdProp }: (propsInterface)) => {
 
         //@ts-ignore
         await reqsInArray.forEach(r => {
-            idArray.push(r.id)
+            idArray.push(
+                {
+                    id: r.id,
+                    buyerId: r.buyer
+                }
+            )
         })
+
+
       
 
         //@ts-ignore
@@ -77,14 +88,16 @@ const GetChatroomReqs = ({ forSaleIdProp }: (propsInterface)) => {
 
     if (chatReqs.length > 0) {
 
+        console.log('chatreqs', chatReqs)
+
 
         return (
             <div>
                 <ul>
-                    {chatReqIdArray.map((id: string, index: number) => 
-                        <li key={index} >
+                    {chatReqs.map((r: idAndBuyerIDObj) => 
+                        <li key={r.id} >
                             
-                            <EditUsersChatroomReqStatus chatReqIdProp={id} />
+                            <EditUsersChatroomReqStatus chatReqIdProp={r.id} buyerIdProp={r.buyerId} />
                         </li>)}
                 </ul>
             </div>

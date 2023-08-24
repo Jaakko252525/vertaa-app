@@ -36,6 +36,9 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { userToStore } from "../Redux/userSlice"
 
+// components
+import TopBar from './TopBar';
+
 interface userObjetInterface {
     username: string,
     id: string | undefined
@@ -147,22 +150,7 @@ const Login = () => {
    if (userVar.username !== '') {
     return (
         <div>
-
-            <Card className='topBarLogin' >
-
-                <Card.Body className='cardBodyTopBar' >
-                <div className='button-container' >
-                    <button className='text-button' onClick={frontpageRoute} >Frontpage</button>
-                    <button className='text-button' onClick={userProfileRoute} >Profile</button>
-                    <button className='text-button' onClick={vertaaRoute} >Vertaa</button>
-                    <button className='text-button' onClick={addSaleROute} >Create sale</button>
-                    <button className='text-button' onClick={() => logout()} >Logout</button>
-
-
-                </div>
-                </Card.Body>
-
-            </Card>
+            <TopBar/>
 
             <div style={{
                 textAlign: "center"

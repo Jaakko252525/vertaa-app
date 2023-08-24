@@ -32,7 +32,8 @@ interface reduxStore {
     password: string
   },
   chatReqId: {
-    chatReqID: string
+    chatReqID: string,
+    buyerID: string
   }
 }
 
@@ -63,6 +64,7 @@ const App = () => {
 
 
             <Route path="/chatRoom" element={<PrivateRoute childrenProp={<Chatroom  chatRequestIDProp={chatReqId.chatReqID}/>} />}></Route>
+            <Route path="/buyersSideChatroom" element={<PrivateRoute childrenProp={<Chatroom  chatRequestIDProp={chatReqId.chatReqID}/>} />}></Route>
 
             <Route path="/vertaapage" element={<Vertaa  />}  />
           </Routes>

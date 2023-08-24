@@ -36,15 +36,22 @@ const chatReqIdSlice = createSlice({
   name: 'chatReqId',
 
   initialState: {
-    chatReqID: ''
+    chatReqID: '',
+    buyerID: ''
   },
 
   reducers: {
     chatReqIDToStore: (state, action) => {
+      
+
       const data = action.payload
 
+
+      console.log('data in slicer', data)
+
       //@ts-ignore
-      state.chatReqID = data
+      state.chatReqID = data.id
+      state.buyerID = data.buyerId
 
 
 

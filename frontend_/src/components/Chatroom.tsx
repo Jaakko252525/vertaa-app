@@ -11,6 +11,11 @@ import { useEffect, useState } from "react"
 // socket io connection
 import { socket } from "../socketIoConnection";
 
+
+
+// components
+import TopBar from "./TopBar";
+
 // interface
 interface chatReqID {
     chatRequestIDProp: string
@@ -25,7 +30,7 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
     const [receivedMessage, setReceivedMessage] = useState('')
 
 
-    const [messageStorage, setMessageStorage] = useState<string[]>([])
+    const [messageStorage, setMessageStorage] = useState([])
 
     const [currentRoom, setCurrentRoom] = useState('')
 
@@ -38,6 +43,7 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
 
     useEffect(() => {
 
+        console.log('joining room', chatRequestIDProp)
 
         // joining socket io room
         socket.emit('joining-room', chatRequestIDProp )
@@ -56,14 +62,21 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
 
 
 
+
+
         // sending message to backend
         await socket.emit('message', messages)
 
         await socket.on("message-back-to-client", (message: string) => {
-            setReceivedMessage(message)
-
             // message to storage
+            //@ts-ignore
             setMessageStorage(messageStorage.concat(message))
+            
+
+                setReceivedMessage(message)
+                
+                
+
         })
 
 
@@ -77,6 +90,10 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
 
     return (
         <div>
+
+            <div>
+                <TopBar  />
+            </div>
             <p>Current room {currentRoom}</p>
             <form onSubmit={sendMessage} >
 
@@ -94,7 +111,7 @@ const Chatroom = ({ chatRequestIDProp }: chatReqID) => {
             </div>
 
             <div>
-                messages: <ul>
+                Sent Messages: <ul>
                     {messageStorage.map(m => 
                         <li>
                             {m}

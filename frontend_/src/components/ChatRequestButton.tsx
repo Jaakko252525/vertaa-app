@@ -60,11 +60,7 @@ const ChatRequestButton = ({ sellerProp, saleIdProp }: Request) => {
 
 
         await createChatRoomRequest({ variables: { seller:seller, buyer: buyer, saleId: saleId, status: status } })
-        console.log('chat room request sent succesfully☺')
         
-
-
-
 
     }
 

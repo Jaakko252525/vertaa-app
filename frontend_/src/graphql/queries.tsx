@@ -231,6 +231,7 @@ export const GET_CHATROOM_REQUESTS = gql`
     mutation($forSaleId: String!) {
       getChatRoomRequests(forSaleId: $forSaleId) {
         id
+        buyerId
       }
     }
 
