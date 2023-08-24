@@ -68,6 +68,7 @@ const Frontpage = () => {
     // redux store
     const dispatch = useDispatch()
 
+    // function to get all sales
     const getData = async () => {
 
         // use query
@@ -95,12 +96,23 @@ const Frontpage = () => {
         navigate(path)
     }
 
+
+    // useEffect to call function
     useEffect(() => {
 
         getData()
 
 
     },[])
+
+    useEffect(() => {
+
+        if (searchWord === '') {
+            setRenderSearch(false)
+        }
+
+
+    },[searchWord])
 
 
 
@@ -110,13 +122,18 @@ const Frontpage = () => {
 
         console.log('submitted')
         console.log('search word', searchWord)
-        
-        setRenderSearch(true)
-    }
+
+        if (searchWord !== '') {        
+            setRenderSearch(true)
+        } else if (searchWord === '') {
+            setRenderSearch(false)
+        }
+
+        }
 
 
     // if state === true render SaleSearch component
-    if (renderSearch === true) {
+    if (renderSearch === true ) {
         return (
             <div>
               <div>
@@ -154,7 +171,7 @@ const Frontpage = () => {
 
             
         )
-    }else if (sales !== undefined) {
+    }else if (renderSearch === false ) {
         return (
             <div>
                <div>
@@ -179,7 +196,7 @@ const Frontpage = () => {
                 </div>
                 <ul>
                     <p>Sales</p>
-                    {sales.map(s => 
+                    {sales?.map(s => 
                         <li key={s._id} >
                             Product name: {s.product} <br/>
                             Price: {s.price} <br/>
