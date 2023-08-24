@@ -101,18 +101,6 @@ const UserProfile = () => {
            </Card.Text>
         </Card.Body>
       </Card>
-      <Card>
-        <Card.Body>
-          <Card.Title>Create sale</Card.Title>
-          <Card.Text>
-
-
-          <div>
-                <AddSaleForm userIdProp={user.id} />
-            </div>
-          </Card.Text>
-        </Card.Body>
-      </Card>
              </CardGroup>
 
                 </div>

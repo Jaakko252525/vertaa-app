@@ -1,8 +1,11 @@
 
 
 
+// css
+import '../cssFiles/AddSale.css'
+
 // bootstrap
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
 
 // useState
@@ -13,6 +16,11 @@ import { useMutation } from "@apollo/client"
 
 // gql mutation to add sale
 import { ADD_SALE } from "../graphql/queries"
+
+
+
+// components
+import TopBar from './TopBar';
 
 // Define prop types for the component
 interface AddSaleFormProps {
@@ -52,25 +60,36 @@ const AddSaleForm:  React.FC<AddSaleFormProps> = ({ userIdProp }) => {
         return (
 
             <div>
+                 <div>
+                    <TopBar/>
+                </div>
 
-                <form onSubmit={submit} >
+                <div>
+                    <p className='pageText' >Create Sale</p>
+                </div>
 
-                    Product: <input
-                    value={product}
-                    onChange={e => setProduct(e.target.value) }
-                    
-                    />
-                    <br/>
-                    <br/>
+                <Card className='styleForCardd' >
+                    <form className='formStyle' onSubmit={submit} >
 
-                    Price: <input
-                    value={price}
-                    onChange={e => setPrice(e.target.value) }
-                    
-                    />
-                    <Button variant="dark" >Create</Button>
-                    <Button variant="dark" onClick={() => setRender(false)} >Close</Button>
-                </form>
+                        Product: <input
+                        className='input-group'
+                        value={product}
+                        onChange={e => setProduct(e.target.value) }
+                        
+                        />
+                        <br/>
+                        <br/>
+
+                        Price: <input
+                        className='input-group'
+                        value={price}
+                        onChange={e => setPrice(e.target.value) }
+                        
+                        />
+                        <Button variant="dark" >Create</Button>
+                        <Button variant="dark" onClick={() => setRender(false)} >Close</Button>
+                    </form>
+                </Card>
             </div>
             
 
@@ -80,7 +99,15 @@ const AddSaleForm:  React.FC<AddSaleFormProps> = ({ userIdProp }) => {
     return (
 
         <div>
+
+            <div>
+                <TopBar/>
+            </div>
+
+        <div className='createSale' >
             <Button variant="dark" onClick={() => setRender(true)} >Create sale</Button>
+        </div>
+
         </div>
 
     )

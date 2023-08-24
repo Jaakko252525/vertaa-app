@@ -92,11 +92,11 @@ const TopBar = () => {
     return (
         <div>
 
-            <Card  >
+            <Card className="cards-style" >
 
                 <Card.Body className='cardBodyTopBarr' >
                 <div className='button-containerr' >
-                    <button className='first-button' onClick={frontpageRoute} >Frontpage</button>
+                    <button className='text-buttonn' onClick={frontpageRoute} >Frontpage</button>
                     <button className='text-buttonn' onClick={userProfileRoute} >Profile</button>
                     <button className='text-buttonn' onClick={vertaaRoute} >Vertaa</button>
                     <button className='text-buttonn' onClick={addSaleROute} >Create sale</button>

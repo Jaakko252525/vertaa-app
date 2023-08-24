@@ -70,16 +70,7 @@ const Frontpage = () => {
 
     }
 
-    // logout function
-    const logout = () => {
 
-        const userObject = {
-            username: ''
-        }
-
-        // user to 
-        dispatch(userToStore(userObject))
-    }
 
 
     // vertaa page route
@@ -136,7 +127,7 @@ const Frontpage = () => {
                     onChange={(e) => setSearchWord(e.target.value)}                    
 
                     />
-                    <Button variant="dark" type="submit" >Seach</Button>
+                    <button type="submit" >Seach</button>
                 
                 </form>
                 </div>
@@ -167,6 +158,9 @@ const Frontpage = () => {
     }else if (renderSearch === false ) {
         return (
             <div>
+                <div>
+                    <TopBar/>
+                </div>
                <div>
                 <p style={
                     {
@@ -183,7 +177,7 @@ const Frontpage = () => {
                     onChange={e => setSearchWord(e.target.value)}                    
 
                     />
-                    <Button type="submit" >Search</Button>
+                    <button className='search-button' >Search</button>
                 
                 </form>
                 </div>
@@ -201,9 +195,6 @@ const Frontpage = () => {
                         
                 </ul>
 
-                <div>
-                    <Button variant="dark" onClick={logout} >Logout</Button>
-                </div>
 
             </div>
         )
