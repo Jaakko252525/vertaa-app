@@ -28,7 +28,7 @@ interface AddSaleFormProps {
   }
 
 
-const AddSaleForm:  React.FC<AddSaleFormProps> = ({ userIdProp }) => {
+const AddSaleForm= ({ userIdProp }: AddSaleFormProps) => {
 
 
     // state for rendering
@@ -46,6 +46,17 @@ const AddSaleForm:  React.FC<AddSaleFormProps> = ({ userIdProp }) => {
     // function for form submit
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        console.log('here')
+
+        const obj = {
+            product: product,
+            price: price,
+            userId: userIdProp
+        }
+
+        console.log('obj', obj)
+        
 
 
         // adding sale with graphql
@@ -86,7 +97,7 @@ const AddSaleForm:  React.FC<AddSaleFormProps> = ({ userIdProp }) => {
                         onChange={e => setPrice(e.target.value) }
                         
                         />
-                        <Button variant="dark" >Create</Button>
+                        <Button variant="dark" type='submit' >Create</Button>
                         <Button variant="dark" onClick={() => setRender(false)} >Close</Button>
                     </form>
                 </Card>

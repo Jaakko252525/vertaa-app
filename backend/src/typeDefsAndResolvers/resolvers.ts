@@ -164,7 +164,8 @@ interface chatRoomRequest {
 // hmm need to refactor
 interface interfaceForString {
     chatReqId: string,
-    status: string
+    status: string,
+    forSaleId: string
 }
 
 // interface for forSale id
@@ -293,6 +294,9 @@ export const resolvers = {
         // finding user
         const user = await User.findOne({ username })
         // check if password correct
+
+  
+
 
         try {
             // checking if password correct
@@ -462,13 +466,14 @@ export const resolvers = {
 
 
         
-        const { chatReqId, status } = args
+        const { chatReqId, status, forSaleId } = args
 
         try {
 
         const obj = {
             chatReqId,
-            status
+            status,
+            forSaleId
         }
         // calling function that 
         const callingFunction = await changeChatRoomReqStatus(obj)
@@ -496,10 +501,13 @@ export const resolvers = {
         let c = 0
         let arrayOfChatroomReqs = []
 
+        console.log('reqs', chatRoomReqests)
+
         while ( c < chatRoomReqests.length) {
             await arrayOfChatroomReqs.push({ 
                 id: chatRoomReqests[c]._id,
-                buyerId: chatRoomReqests[c].buyer
+                buyerId: chatRoomReqests[c].buyer,
+                forSale: chatRoomReqests[c].forSale
 
              })
 
@@ -507,7 +515,7 @@ export const resolvers = {
 
         }
 
-        console.log('array of chatroom reqs id', arrayOfChatroomReqs)
+        //console.log('array of chatroom reqs id', arrayOfChatroomReqs)
 
         return arrayOfChatroomReqs
 

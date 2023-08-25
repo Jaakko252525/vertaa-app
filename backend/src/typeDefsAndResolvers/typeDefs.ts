@@ -52,6 +52,7 @@ export const typeDefs = `
   type chatRoomRequestId {
     id: String
     buyerId: String
+    forSale: Sale
   }
 
 
@@ -73,7 +74,7 @@ export const typeDefs = `
 
     createChatRoomRequest(seller: String!, buyer: String!,saleId: String!, status: String!): ChatRoomRequest
 
-    editChatRoomRequestStatus(chatReqId: String!, status: String!): ChatRoomRequest
+    editChatRoomRequestStatus(chatReqId: String!, status: String!, forSaleId: String!): ChatRoomRequest
 
     getChatRoomRequests(forSaleId: String!): [chatRoomRequestId]
 

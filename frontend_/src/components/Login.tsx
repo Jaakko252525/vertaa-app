@@ -51,7 +51,7 @@ const Login = () => {
 
     // states for username and password
     const [username, setUsername] = useState('jaakko')
-    const [password, setPassword] = useState('123')
+    const [password, setPassword] = useState('$2b$10$7vprbaEc3/OYiYo.kZSwf.0ybqXXcDoIF9m/vmTY8B0Eu1p1hY58i')
 
     // navigation hook to a variable
     const navigate = useNavigate()

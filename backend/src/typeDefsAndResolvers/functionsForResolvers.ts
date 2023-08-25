@@ -246,6 +246,7 @@ export const newChatRoomRequestFunction = async (seller: string, buyer: string, 
             seller,
             buyer,
             forSale: {
+                _id: saleId,
                 product: sale.product,
                 price: sale.price,
                 userId: sale.userId
@@ -253,6 +254,12 @@ export const newChatRoomRequestFunction = async (seller: string, buyer: string, 
             },
             status
         })
+
+
+        // saving new chat req
+        await newChatRoomRequest.save()
+
+
 
 
         // udating sale with the new chatRoomRequest
@@ -318,14 +325,15 @@ export const getForSale = async () => {
 
 interface chatRoom {
     chatReqId: string,
-    status: string
+    status: string,
+    forSaleId: string
 }
 
 // chatRoomRequest function
 export const changeChatRoomReqStatus = async (args: chatRoom) => {
 
     // variables
-    const { chatReqId, status } = args
+    const { chatReqId, status, forSaleId } = args
 
 
     try {
@@ -342,6 +350,9 @@ export const changeChatRoomReqStatus = async (args: chatRoom) => {
             const chatRoomreqFindUpdated = await ChatRoomRequest.findByIdAndUpdate(chatReqId, {status: 'accepted'})
 
 
+            // finding forSale id from the chatroomRe inside the 
+
+
 
             return chatRoomreqFindUpdated
 
@@ -356,6 +367,12 @@ export const changeChatRoomReqStatus = async (args: chatRoom) => {
             // finding sales and making variable
             const chatRoomreqFindUpdated = await ChatRoomRequest.findByIdAndDelete({ _id: chatReqId })
 
+
+            // finding forSale with id then finding chatRoomReq with id then deleting it
+
+            const siuu = ForSale.find({"chatRoomRequests._id": chatReqId})
+
+            console.log('what is this', siuu)
 
             
 

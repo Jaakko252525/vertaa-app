@@ -205,19 +205,20 @@ mutation CreateChatRoomRequest($seller: String!, $buyer: String!, $saleId: Strin
 
 // edit chat room request status
 export const EDIT_CHAT_ROOM_REQUEST_STATUS = gql`
-    mutation EditReq($chatReqId: String!, $status: String!) {
-      editChatRoomRequestStatus(chatReqId: $chatReqId, status: $status) {
-        id
-        buyer
-        seller
-        forSale {
-          _id
-          product
-          price
+      mutation EditReq($chatReqId: String!, $status: String!, $forSaleId: String!) {
+        editChatRoomRequestStatus(chatReqId: $chatReqId, status: $status, forSaleId: $forSaleId) {
+          id
+          seller
+          buyer
+          forSale {
+            _id
+            product
+            price
+          }
+            
+          }
+          
         }
-        status
-      }
-    }
   
 
 `
@@ -232,6 +233,12 @@ export const GET_CHATROOM_REQUESTS = gql`
       getChatRoomRequests(forSaleId: $forSaleId) {
         id
         buyerId
+        forSale {
+          _id
+          price
+          product
+          userId      
+        }
       }
     }
 

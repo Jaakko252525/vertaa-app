@@ -20,7 +20,12 @@ interface propsInterface {
 
 interface idAndBuyerIDObj {
     id: string,
-    buyerId: string
+    buyerId: string,
+    forSale: {
+        _id: string,
+        price: string,
+        production: string,
+    }
 }
 
 
@@ -97,7 +102,7 @@ const GetChatroomReqs = ({ forSaleIdProp }: (propsInterface)) => {
                     {chatReqs.map((r: idAndBuyerIDObj) => 
                         <li key={r.id} >
                             
-                            <EditUsersChatroomReqStatus chatReqIdProp={r.id} buyerIdProp={r.buyerId} />
+                            <EditUsersChatroomReqStatus forSaleIdProp={r.forSale._id} chatReqIdProp={r.id} buyerIdProp={r.buyerId} />
                         </li>)}
                 </ul>
             </div>

@@ -28,12 +28,13 @@ import { chatReqIDToStore } from "../Redux/chatReqIdSlice"
 // interface 
 interface props {
     chatReqIdProp: string,
-    buyerIdProp: string
+    buyerIdProp: string,
+    forSaleIdProp: string
 }
 
 
 
-const EditUsersChatroomReqStatus = ({ chatReqIdProp, buyerIdProp }: props) => {
+const EditUsersChatroomReqStatus = ({ chatReqIdProp, buyerIdProp, forSaleIdProp }: props) => {
 
 
     // mutation
@@ -49,9 +50,10 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp, buyerIdProp }: props) => {
     const acceptChatRoomReq = async () => {
 
         console.log('id', chatReqIdProp)
+        console.log('forsaleID', forSaleIdProp)
 
         
-        await EditReq({ variables: { chatReqId: chatReqIdProp, status: 'accepted' } })
+        await EditReq({ variables: { chatReqId: chatReqIdProp, status: 'accepted', forSaleId: forSaleIdProp } })
 
         // object for chatReq redux store
         const obj = {
@@ -75,7 +77,7 @@ const EditUsersChatroomReqStatus = ({ chatReqIdProp, buyerIdProp }: props) => {
     // decline chatroomReq
     const declineChatRoomReq = async () => {
         
-        await EditReq({ variables: { chatReqId: chatReqIdProp, status: 'rejected' } })
+        await EditReq({ variables: { chatReqId: chatReqIdProp, status: 'rejected', forSaleId: forSaleIdProp } })
         
 
 
