@@ -67,10 +67,11 @@
 
 .button-containerr {
   display: flex; /* To make the buttons flex horizontally */
-  gap: 3%; /* Adjust the value to control the space between buttons */
+  gap: 0.001%; /* Adjust the value to control the space between buttons */
   background: #d9d2d2;
   margin: auto;
   width: 50%;
+  
 }
 
 .cardBodyTopBarr {
@@ -80,4 +81,8 @@
   
 }
 
+.cards-style {
+  margin: auto;
+  width: 100%;
+}
 

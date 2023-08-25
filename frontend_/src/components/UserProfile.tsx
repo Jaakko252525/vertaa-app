@@ -13,8 +13,11 @@ import { useSelector, useDispatch } from "react-redux"
 // redux slicer
 import { userToStore } from "../Redux/userSlice"
 
+// css
+import '../cssFiles/UserProfile.css'
+
+
 // components
-import AddSaleForm from "./AddSaleForm"
 import UsersSales from "./UsersSales"
 import BuyerChatReqs from "./BuyersChatReqs"
 import TopBar from "./TopBar"
@@ -87,33 +90,32 @@ const UserProfile = () => {
 
             <br/>
             <br/>
-            <Button variant="dark" onClick={deleteUserRoute} >Info for deleting user</Button>
         <div>
 
-              <CardGroup className="YourSalesAndCreateSaleCardGroupSize" >
-      <Card className="YourSalesAndCreateSale" >
-        <Card.Body>
-          <Card.Title>Your sales</Card.Title>
-          <Card.Text>    
-                <div>
-                    <UsersSales/>
-                </div>          
-           </Card.Text>
-        </Card.Body>
-      </Card>
+            <CardGroup  >
+                <Card >
+                    <Card.Body>
+                    <Card.Title>Your sales</Card.Title>
+                    <Card.Text>    
+                            <div>
+                                <UsersSales/>
+                            </div>          
+                    </Card.Text>
+                    </Card.Body>
+                </Card>
+
+                <Card className="YourSalesAndCreateSale" >
+                    <Card.Body>
+                    <Card.Text>    
+                            <div>
+                            <BuyerChatReqs buyerIdProp={user.id} />
+                            </div>          
+                    </Card.Text>
+                    </Card.Body>
+                </Card>
              </CardGroup>
 
                 </div>
-
-            <br/>
-            <br/>
-
-            <div>
-                <Button variant="dark" onClick={vertaaRoute} >Vertaa page</Button>
-            </div>
-            <div>
-                <BuyerChatReqs buyerIdProp={user.id} />
-            </div>
         </div>
     )
 }

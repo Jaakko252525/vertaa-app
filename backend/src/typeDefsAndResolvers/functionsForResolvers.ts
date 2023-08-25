@@ -342,11 +342,11 @@ export const changeChatRoomReqStatus = async (args: chatRoom) => {
             const chatRoomreqFindUpdated = await ChatRoomRequest.findByIdAndUpdate(chatReqId, {status: 'accepted'})
 
 
-            console.log('updated statues☺', chatRoomreqFindUpdated)
 
             return chatRoomreqFindUpdated
 
         } else if ( status === 'rejected') {
+
 
 
              
@@ -355,6 +355,7 @@ export const changeChatRoomReqStatus = async (args: chatRoom) => {
         
             // finding sales and making variable
             const chatRoomreqFindUpdated = await ChatRoomRequest.findByIdAndDelete({ _id: chatReqId })
+
 
             
 

@@ -50,7 +50,7 @@ interface userObjetInterface {
 const Login = () => {
 
     // states for username and password
-    const [username, setUsername] = useState('koodari_matti')
+    const [username, setUsername] = useState('jaakko')
     const [password, setPassword] = useState('123')
 
     // navigation hook to a variable

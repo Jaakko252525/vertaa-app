@@ -70,6 +70,12 @@ const TopBar = () => {
         navigate(path)
     }
 
+    // deleteUserRoute 
+    const deleteUserRoute = () => {
+        const path = "/deleteUser"
+        navigate(path)
+    }
+
     // logout function
     const logout = async () => {
 
@@ -90,7 +96,7 @@ const TopBar = () => {
 
 
     return (
-        <div>
+        <div style={{textAlign: "center"}} >
 
             <Card className="cards-style" >
 
@@ -100,9 +106,9 @@ const TopBar = () => {
                     <button className='text-buttonn' onClick={userProfileRoute} >Profile</button>
                     <button className='text-buttonn' onClick={vertaaRoute} >Vertaa</button>
                     <button className='text-buttonn' onClick={addSaleROute} >Create sale</button>
+                    <button className="text-buttonn" onClick={deleteUserRoute}>Delete user</button>
                     <button className="text-buttonn" onClick={() => logout()}>Logout</button>
-                    <button className='text-buttonn' onClick={addSaleROute} >Create sale</button>
-                    <button className="text-buttonn" onClick={() => logout()}>Logout</button>
+
 
 
 
