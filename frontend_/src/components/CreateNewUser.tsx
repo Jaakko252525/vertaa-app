@@ -4,6 +4,10 @@
 // css
 import '../cssFiles/CreateNewUser.css'
 
+// dispatch
+import { useDispatch } from 'react-redux'
+// redux slicer
+import { userToStore } from '../Redux/userSlice'
 
 // use navigation
 import { useNavigate } from "react-router-dom"
@@ -26,6 +30,9 @@ const CreateNewUser = () => {
     // navigation
     const navigate = useNavigate()
 
+    // dispatch
+    const dispatch = useDispatch()
+
     // using useMutation
     const [create_user, { data, loading, error }] = useMutation(CREATE_USER)
 
@@ -38,6 +45,20 @@ const CreateNewUser = () => {
         // calling create_user mutation
         await create_user({ variables: { username: username, password: password } })
 
+
+
+
+        // making user object
+        const obj = {
+            username,
+            password
+        }
+
+        // user object to redux store
+        await dispatch(userToStore(obj))
+
+        // changing page
+        await navigate('/login')
     }
 
 

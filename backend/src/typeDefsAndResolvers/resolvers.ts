@@ -249,28 +249,15 @@ export const resolvers = {
         if (data.length === 0) {
 
 
-            //Encrypt user password
-            const encryptedPassword = await bcrypt.hash(password, 10);
-
             // making new user
             const newUser =  await new User({
                 username: username,
-                password: encryptedPassword,
+                password: password,
                 forSale: []
                 })
             // saving user
             await newUser.save()
 
-
-            // Create token. username is the payload and TOKEN_SECRET is the secret. Header.Payload.Secret
-            const token = jwt.sign(
-                {username: newUser.username},
-                process.env.TOKEN_SECRET,
-            );
-
-
-            // save user token
-            newUser.token = token;
 
             // Save the updated newUser object to the database
             await newUser.save();

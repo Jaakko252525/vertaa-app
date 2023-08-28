@@ -69,6 +69,8 @@ const Login = () => {
     // submit function
     const submit = async (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+
+
         // using mutation
         const login = await Login({ variables: {username: username, password: password} })
         
