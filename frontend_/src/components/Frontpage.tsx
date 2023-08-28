@@ -134,8 +134,10 @@ const Frontpage = () => {
                 
                 <SaleSearch searchWordProp={searchWord} />
 
-                <div>
-                    <br/>
+
+
+                <div className='vertaaCardDivStyle' >
+                    <p>or</p>
                     <Card style={{
                             height: '150px',
                             width: '300px',
@@ -146,8 +148,7 @@ const Frontpage = () => {
                         }
                     } >
                         <p>Search from tori, huutonet and huutokaupat </p>
-                        
-
+                    
                         <Button variant="dark" onClick={vertaaRoute} >Vertaa page</Button>
                     </Card>
                 </div>

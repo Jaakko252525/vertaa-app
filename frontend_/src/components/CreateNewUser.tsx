@@ -45,9 +45,6 @@ const CreateNewUser = () => {
         // calling create_user mutation
         await create_user({ variables: { username: username, password: password } })
 
-
-
-
         // making user object
         const obj = {
             username,
@@ -94,7 +91,8 @@ const CreateNewUser = () => {
             </div>
             <br/>
             <br/>
-            <div>
+            <div className='loginButton' >
+                <p>or</p>
                 <button onClick={loginRoute}>Login</button>
             </div>
         </div>
