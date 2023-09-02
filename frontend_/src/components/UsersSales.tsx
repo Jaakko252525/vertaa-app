@@ -58,7 +58,7 @@ const UsersSales =() => {
         // making gql query
         const { loading, error, data } = await query
 
-        console.log(data)
+        console.log('user sales fetched!!!')
 
 
         setSales(data.userSales)
