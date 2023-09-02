@@ -26,8 +26,12 @@ const server = new ApolloServer({
 
 )
 
+// production or development
+const PORT = process.env.PORT || 4000
+
+
 startStandaloneServer(server, {
-  listen: { port: 4000 },
+  listen: { port: PORT },
 }).then(({ url }: {url: string}) => {
   console.log(`Server ready at ${url}`)
 })
