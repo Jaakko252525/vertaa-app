@@ -8,11 +8,12 @@ const { startStandaloneServer } = require('@apollo/server/standalone')
 
 
 // resolvers
-import { resolvers } from "./typeDefsAndResolvers/resolvers"
-
+//import { resolvers } from "./typeDefsAndResolvers/resolvers"
+const { resolvers } = require('./typeDefsAndResolvers/resolvers')
 // typeDefs
-import { typeDefs } from './typeDefsAndResolvers/typeDefs'
+//import { typeDefs } from './typeDefsAndResolvers/typeDefs'
 
+const { typeDefs } = require('./typeDefsAndResolvers/typeDefs')
 
 
 
