@@ -37,7 +37,7 @@ import { authUser } from './authMiddleware';
 const jwt = require('jsonwebtoken')
 
 // crypt password
-const bcrypt = require('bcrypt')
+//const bcrypt = require('bcrypt')
 
 
 // importing model
