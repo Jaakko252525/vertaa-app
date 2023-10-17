@@ -3,12 +3,12 @@
 
 
 // mongoose import
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // importing models
-import { User } from "../models/User";
-import { ForSale } from "../models/ForSale";
-import { ChatRoomRequest } from "../models/ChatRoomRequest";
+import { User } from "../models/User.js";
+import { ForSale } from "../models/ForSale.js";
+import { ChatRoomRequest } from "../models/ChatRoomRequest.js";
 
 
 interface ForSaleInterface {
@@ -49,12 +49,14 @@ export const updateSale = async (sale: SaleInterfaceWithId) => {
             }
 
             )
+        
+        if (updatedSale != null) {
 
-        // saving updated sale
-        await updatedSale.save()
+            // saving updated sale
+            await updatedSale.save()
 
 
-        return updateSale
+            return updatedSale}
 
 
 
@@ -81,10 +83,11 @@ export const getUserSales = async (id: string) => {
 
         const user = await User.findOne({ _id: id })
 
-        console.log('users sales', user.forSale)
+        if (user != null)   {
+            console.log('users sales', user.forSale)
 
-        return user.forSale
-        
+            return user.forSale
+            }
 
     } catch (error) {
         console.log('error is:', error)
@@ -129,12 +132,16 @@ export const newSale = async (sale: ForSaleInterface) => {
             { $addToSet: { forSale: newSale } },
             { new: true })
         
+        
+        
+        if (user != null) {
         await user.save()
-
+        return user
+}
         console.log('user updated succesfully')
 
         
-        return user
+
 
  
 
@@ -162,15 +169,17 @@ export const deleteUserFunction = async (username: string, password: string) => 
         // finding user and making variable
         const user = await User.findOne({ username: username })
 
+        if (user != null) {
         const userObject = {
             username: user.username,
             password: user.password,
 
-        }
+        }}
         console.log('here')
 
 
         // check if password correct
+        if (user != null) {
         if (password !== user.password) {
 
             // find all sales with users id and delete
@@ -183,12 +192,12 @@ export const deleteUserFunction = async (username: string, password: string) => 
 
             console.log('succesfully deleted')
 
-            return userObject
+            return user
 
         } else {
             console.log('password incorrect or something else..')
             return
-        } 
+        } }
         
 
     } catch (error) {
@@ -241,36 +250,41 @@ export const newChatRoomRequestFunction = async (seller: string, buyer: string, 
 
         console.log('found the sale', sale)
 
-        // creating new ChatRoomRequest
-        const newChatRoomRequest = await new ChatRoomRequest({
-            seller,
-            buyer,
-            forSale: {
-                _id: saleId,
-                product: sale.product,
-                price: sale.price,
-                userId: sale.userId
+        if (sale != null){
+            // creating new ChatRoomRequest
+            const newChatRoomRequest = await new ChatRoomRequest({
+                seller,
+                buyer,
+                forSale: {
+                    _id: saleId,
+                    product: sale.product,
+                    price: sale.price,
+                    userId: sale.userId
 
-            },
-            status
-        })
+                },
+                status
+            })
+
+            // saving new chat req
+            await newChatRoomRequest.save()
+    
+
+    
 
 
-        // saving new chat req
-        await newChatRoomRequest.save()
 
 
-
-
+        if (ForSale != null && newChatRoomRequest != null){
         // udating sale with the new chatRoomRequest
         const fundSaleAndUpdate = await ForSale.findOneAndUpdate(
             { _id: saleId },
             { $addToSet: { chatRoomRequests: newChatRoomRequest } },
             { new: true })
 
+        if (fundSaleAndUpdate != null){
         await fundSaleAndUpdate.save()
 
-
+}
  
 
         console.log('new cahtroom req made!', newChatRoomRequest)
@@ -282,7 +296,7 @@ export const newChatRoomRequestFunction = async (seller: string, buyer: string, 
         console.log('new request made and saved to DB succesfully ☺')
 
         return newChatRoomRequest
-
+}}
         
        } catch (error) {
         console.log(error)
@@ -299,18 +313,14 @@ export const getForSale = async () => {
         await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
         console.log('connected to database')
 
-        let data = ''        
 
         // getting data from db
         // @ts-ignore
         await ForSale.find().then(result => {
-            data = result
-            
-        })
-        if (!data) {
-            console.log('find dont work', data)
+            const data = result
+            return data
         }
-        return data
+        )
 
 
 
@@ -411,10 +421,11 @@ export const getChatReqsForSale = async (saleId: string) => {
 
 
         // returning forSale chatRequests
-        const requests = await sale.chatRoomRequests
+        if (sale != null){
+            const requests = await sale.chatRoomRequests
 
-        return requests
-
+            return requests
+}
 
     } catch (err) {
         console.log(err)

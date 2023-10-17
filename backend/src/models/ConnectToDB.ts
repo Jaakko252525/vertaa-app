@@ -20,7 +20,7 @@
 
 // importing User schema
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 main().catch(err => console.log(err));
 

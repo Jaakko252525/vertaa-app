@@ -1,12 +1,11 @@
 
 
 // .env file
-require('dotenv').config();
-
 import { config } from "dotenv";
 import { User} from "../models/User";
+import { from } from '@apollo/client';
 // jwt import
-const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken';
 
 
 // @ts-ignore
@@ -28,7 +27,7 @@ export const authUser = async (user, req) => {
         
         try {
         // Validate the Access token
-        const decoded = jwt.verify(access_token, process.env.TOKEN_SECRET )
+        const decoded = jwt.verify(access_token, 'hello' )
         console.log('verifying completed')
 
         user = decoded;

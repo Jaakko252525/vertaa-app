@@ -1,71 +1,52 @@
 
+// npm install @apollo/server express graphql cors body-parser
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
+import pkg from 'body-parser';
+const { json } = pkg;
 
 
-//import { ApolloServer } from 'apollo-server-express'
-const { ApolloServer } = require('@apollo/server')
-const { startStandaloneServer } = require('@apollo/server/standalone')
-
-const http = require("http")
-const express = require('express')
 
 // resolvers
-import { resolvers } from "./typeDefsAndResolvers/resolvers"
-
+//import { resolvers } from "./typeDefsAndResolvers/resolvers"
 // typeDefs
-import { typeDefs } from './typeDefsAndResolvers/typeDefs'
+import { typeDefs } from './typeDefsAndResolvers/typeDefs.js'
+
+import { resolvers } from "./typeDefsAndResolvers/resolvers.js"
 
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-}
 
-)
 
 //////
 
-// production or development
-const PORT = 4000
+interface MyContext {
+  token?: String;
+}
 
-
-startStandaloneServer(server, {
-  listen: { port: PORT },
-}).then(({ url }: {url: string}) => {
-  console.log(`Server ready at ${url}`)
-})
-
-////// express
-
-/*
-// yt video ja mä
-
-const startServer = async () => {
-
-
-    const server = new ApolloServer({
-      typeDefs,
-      resolvers,
-      context: ({ req, res }: any) => ({ req, res })
-    })
+const app = express();
 
 
 
-    const app = express()
+const httpServer = http.createServer(app);
+const server = new ApolloServer<MyContext>({
+  typeDefs,
+  resolvers,
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+});
+await server.start();
+app.use(
+  '/graphql',
+  cors<cors.CorsRequest>(),
+  json(),
+  expressMiddleware(server, {
+    context: async ({ req }) => ({ token: req.headers.token }),
+  }),
+);
 
+await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 
-    server.applyMiddleware({
-      app,
-      cors: {
-        credentials: true,
-        origin: '*'
-      }
-    })
-
-    app.listen({ port: 4000 }, () =>
-    console.log(`server ready at localhost:4000${server.graphqlPath}`)
-    );
-};
-
-startServer();
-
-*/
