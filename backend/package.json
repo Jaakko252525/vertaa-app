@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/client": "^3.8.6",
     "@apollo/server": "^4.9.0",
     "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
