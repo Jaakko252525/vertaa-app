@@ -24,7 +24,7 @@
     "mocha": "^10.2.0",
     "mongoose": "^7.4.2",
     "playwright": "^1.37.0",
-    "puppeteer": "^21.0.3",
+    "puppeteer": "^21.3.8",
     "selenium-webdriver": "^4.11.1",
     "socket.io": "^4.7.2",
     "uuid": "^9.0.0"
