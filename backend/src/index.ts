@@ -48,5 +48,4 @@ app.use(
 );
 
 await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
-console.log(`🚀 Server ready at https://vertaa-app-backend.onrender.com/graphql`);
 
