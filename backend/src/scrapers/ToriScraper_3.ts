@@ -2,21 +2,14 @@
 
 
 import puppeteer from 'puppeteer';
-import { join } from 'path';
 
 // function that searches tori.fi with parameter 
 export const browsing = async (item: string) => {
   const browser = await puppeteer.launch();
-  const page = await browser.newPage();
 
-  
-  /**
-   * @type {import("puppeteer").Configuration}
-   */
-  module.exports = {
-    // Changes the cache location for Puppeteer.
-    cacheDirectory: join(__dirname, '.cache', 'puppeteer'),
-  };
+  const page = await browser.newPage();
+  page.setRequestInterception(true)
+
   await page.goto('https://www.tori.fi/koko_suomi?q=' + item);
 
 
