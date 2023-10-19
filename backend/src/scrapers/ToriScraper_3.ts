@@ -11,6 +11,8 @@ export const browsing = async (item: string) => {
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
 
+    console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeereeeeee')
+
     const page = await browser.newPage();
 
     await page.goto('https://www.tori.fi/koko_suomi?q=' + item);
