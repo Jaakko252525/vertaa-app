@@ -12,19 +12,10 @@ const { json } = pkg;
 
 
 // resolvers
-//import { resolvers } from "./typeDefsAndResolvers/resolvers"
-<<<<<<< HEAD
-const { resolvers } = require('./typeDefsAndResolvers/resolvers')
-// typeDefs
-//import { typeDefs } from './typeDefsAndResolvers/typeDefs'
-=======
 // typeDefs
 import { typeDefs } from './typeDefsAndResolvers/typeDefs.js'
 
 import { resolvers } from "./typeDefsAndResolvers/resolvers.js"
->>>>>>> deploymentTest1
-
-const { typeDefs } = require('./typeDefsAndResolvers/typeDefs')
 
 
 
