@@ -1,7 +1,5 @@
 
 
-// .env file
-require('dotenv').config();
 
 
 // importing functionsForResolvers
@@ -16,35 +14,35 @@ import {
      changeChatRoomReqStatus,
      getChatReqsForSale,
      getBuyersChatReqs
-     } from './functionsForResolvers'
+     } from './functionsForResolvers.js'
 
 
 
 // importing scrapers
-import { browsing } from '../scrapers/ToriScraper_3'; 
-import { getHuutoNetSales } from '../scrapers/HuutoNetScraper';
-import { callingScraper } from '../scrapers/HuutokaupatcomScraper';
+import { browsing } from '../scrapers/ToriScraper_3.js'; 
+import { getHuutoNetSales } from '../scrapers/HuutoNetScraper.js';
+import { callingScraper } from '../scrapers/HuutokaupatcomScraper.js';
 
 // importing jwt generating function
-import { generateAccessToken } from "../JWT/jwt";
+import { generateAccessToken } from "../JWT/jwt.js";
 
 
 
 // authUser that verifys jwt token
-import { authUser } from './authMiddleware';
+import { authUser } from './authMiddleware.js';
 
 // jwt import
-const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken';
 
 // crypt password
-const bcrypt = require('bcrypt')
+//const bcrypt = require('bcrypt')
 
 
 // importing model
-import { ForSale } from "../models/ForSale";
+import { ForSale } from "../models/ForSale.js";
 
 // importing User Model
-import { User } from "../models/User";
+import { User } from "../models/User.js";
 
 import mongoose from 'mongoose';
 import { type } from 'os';
@@ -62,9 +60,8 @@ async function getAllUsersFromDB() {
         let data = ''        
 
         // getting data from db
-        // @ts-ignore
         await User.find().then(result => {
-            data = result
+            const data = result
             
         })
         if (!data) {
@@ -90,18 +87,16 @@ async function main() {
         await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
         console.log('connected to database')
 
-        let data = ''        
 
         // getting data from db
-        // @ts-ignore
         await ForSale.find().then(result => {
-            data = result
-            
+            if (result != null){
+            const data = result
+                return data
+        } else {
+            return
+            }
         })
-        if (!data) {
-            console.log('find dont work', data)
-        }
-        return data
 
 
 
@@ -177,6 +172,14 @@ interface buyerInterface {
     buyerId: string
 }
 
+interface deleteObj {
+    username: string,
+    password: string,
+    token: string,
+    user: string
+}
+
+
 
 export const resolvers = {
   Query: {
@@ -189,8 +192,8 @@ export const resolvers = {
         
         return data
     },
-    // @ts-ignore
-    userSales: async (obj, args: userIdInterface, context, info) => {
+    
+    userSales: async (args: userIdInterface) => {
 
 
         const { id } = args
@@ -238,7 +241,6 @@ export const resolvers = {
 
         let data = []
         // finding usern in DB
-        // @ts-ignore
         await User.find({ username: username }).then(result => {
             data = result
             console.log('data', data, 'and typeof data:', typeof data)
@@ -286,29 +288,30 @@ export const resolvers = {
 
 
         try {
-            // checking if password correct
-            if (user.password === password) {
+            if (user != null){
+                // checking if password correct
+                if (user.password === password) {
 
-                // user for token
-                const userForToken = {
-                    username: user.username
-                }
+                    // user for token
+                    const userForToken = {
+                        username: user.username
+                    }
 
-                // creating jwt token. username is payload and TOKEN_SECRET is secret 
-                const token = await jwt.sign(
-                    username,
-                    process.env.TOKEN_SECRET            
-                    )
-                
-
-                // save user token
-                user.token = token; 
+                    // creating jwt token. username is payload and TOKEN_SECRET is secret 
+                    const token = await jwt.sign(
+                        username,
+                        'hello'            
+                        )
                     
-                return {
-                    username: username,
-                    password: token,
-                    id: user.id
-                } }
+
+                    // save user token
+                    user.token = token; 
+                        
+                    return {
+                        username: username,
+                        password: token,
+                        id: user.id
+                    } }}
             
             } catch (error) {
                 // Handle any errors that occur during the process
@@ -316,11 +319,13 @@ export const resolvers = {
                 throw new Error('An error occurred during login.');
               }
             },
-    
-    // @ts-ignore
-    deleteUser: async (_, {args }, { user }) => {
 
-        const { username, password } = args
+    
+    deleteUser: async (args: deleteObj) => {
+
+        const { username, password, user, token } = args
+
+
 
         if (!user) {
             return {
@@ -484,7 +489,7 @@ export const resolvers = {
 
         // getChatReqsForSale
         const chatRoomReqests = await getChatReqsForSale(forSaleId)
-
+        if (chatRoomReqests != null) {
         let c = 0
         let arrayOfChatroomReqs = []
 
@@ -504,7 +509,7 @@ export const resolvers = {
 
         //console.log('array of chatroom reqs id', arrayOfChatroomReqs)
 
-        return arrayOfChatroomReqs
+        return arrayOfChatroomReqs}
 
     },
 

@@ -3,7 +3,7 @@
 // cheerio
 import * as cheerio from 'cheerio';
 
-const axios = require('axios');
+import axios from 'axios';
 
 // baseURL
 const baseUrl = 'https://www.huuto.net/haku?words='
