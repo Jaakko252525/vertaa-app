@@ -57,7 +57,7 @@ export const typeDefs = `
 
 
   type Query {
-    allSales: [Sale]
+    allSales: [Sale!]
     userSales(id:String!): [Sale]
   }
 

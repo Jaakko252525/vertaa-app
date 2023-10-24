@@ -314,6 +314,14 @@ export const getForSale = async () => {
         console.log('connected to database')
 
 
+        const saless = await ForSale.find()
+
+        console.log('saless', saless)
+
+        return saless
+        
+        /* tässä oli monnivirhe
+
         // getting data from db
         await ForSale.find().then(result => {
             if (result != null) { 
@@ -323,7 +331,7 @@ export const getForSale = async () => {
                 return result
             }
         }
-        )
+        )*/
 
 
 
