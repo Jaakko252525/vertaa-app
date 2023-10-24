@@ -50,4 +50,4 @@ app.use(
 );
 
 await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
-
+console.log('server ready in localhost:4000/graphql')

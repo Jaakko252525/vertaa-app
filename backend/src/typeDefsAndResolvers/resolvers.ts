@@ -187,14 +187,19 @@ export const resolvers = {
     allSales: async () => {
         // connecting to mongoDB
         const data = await getForSale()
+        if (data != null) {
         console.log('daata', data)
 
         
         return data
+        } else {
+            console.log('data not in resolver')
+        }
     },
     
     userSales: async (args: userIdInterface) => {
 
+        console.log('here in usersales')
 
         const { id } = args
 

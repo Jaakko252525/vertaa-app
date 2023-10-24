@@ -315,10 +315,13 @@ export const getForSale = async () => {
 
 
         // getting data from db
-        // @ts-ignore
         await ForSale.find().then(result => {
-            const data = result
-            return data
+            if (result != null) { 
+                
+                console.log('data in function:', result)
+                const data = result
+                return result
+            }
         }
         )
 
