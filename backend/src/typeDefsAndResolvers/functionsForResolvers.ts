@@ -313,17 +313,10 @@ export const getForSale = async () => {
         await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
         console.log('connected to database')
 
+        const daata = await ForSale.find()
 
-        // getting data from db
-        await ForSale.find().then(result => {
-            if (result != null) { 
-                
-                console.log('data in function:', result)
-                const data = result
-                return result
-            }
-        }
-        )
+
+        return daata
 
 
 
