@@ -23,6 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Trigger deployment
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         if: ${{ !contains(env.COMMIT_MESSAGES, '#skip') && github.event_name == 'push'}}
