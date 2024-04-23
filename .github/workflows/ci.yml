@@ -27,5 +27,5 @@ jobs:
       - name: Install dependencies and start npm server
         run: |
           npm install
-          npm start
+          npm run build
         working-directory: ./frontend_
