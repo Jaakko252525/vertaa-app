@@ -1,0 +1,30 @@
+
+
+
+
+
+
+
+name: startingServer
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches: 
+      - main
+      - master
+    types: [opened, synchronize]
+jobs:
+  startingServer:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies and start npm server
+        run: |
+          npm install
+        working-directory: ./frontend_

@@ -1,16 +1,20 @@
 
 
-FROM node:14
-WORKDIR /app/backend/dist
+FROM docker pull ghcr.io/puppeteer/puppeteer:21.4.1 
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+
+
+
+WORKDIR /usr/src/app
+
 COPY package*.json ./
 
-RUN npm install
-
+RUN npm ci
 COPY . .
 
-EXPOSE 3000
-
-CMD ["node", "index.js"]
+["tsc", "node", "./out/index.js"]
 
 
 
