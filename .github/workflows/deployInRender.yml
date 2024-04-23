@@ -4,6 +4,7 @@
 
 
 
+
 name: deployment
 on:
   push:
@@ -23,6 +24,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Install dependencies and start npm server
+        run: |
+          npm install
+          npm start
+        working-directory: ./frontend_
+
+
       - name: Trigger deployment
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
