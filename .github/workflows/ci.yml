@@ -5,7 +5,7 @@
 
 
 
-name: deployment
+name: startingServer
 on:
   push:
     branches:
@@ -17,7 +17,7 @@ on:
       - master
     types: [opened, synchronize]
 jobs:
-  simple_deployment_pipeline:
+  startingServer:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
