@@ -1,16 +1,23 @@
 
 
 
+# pull official base image
+FROM node:13.12.0-alpine
 
-FROM node:20
+# set working directory
+WORKDIR /app
 
-WORKDIR /usr/src/app
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-COPY . .
-
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 
-CMD ["npm", "start"]
+# add app
+COPY . ./
 
-
+# start app
+CMD ["npm", "start"]  
 

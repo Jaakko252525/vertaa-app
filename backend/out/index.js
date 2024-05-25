@@ -8,7 +8,6 @@ import cors from 'cors';
 import pkg from 'body-parser';
 const { json } = pkg;
 // resolvers
-//import { resolvers } from "./typeDefsAndResolvers/resolvers"
 // typeDefs
 import { typeDefs } from './typeDefsAndResolvers/typeDefs.js';
 import { resolvers } from "./typeDefsAndResolvers/resolvers.js";
