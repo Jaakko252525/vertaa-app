@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 main().catch(err => console.log(err));
 async function main() {
     try {
-        await mongoose.connect('mongodb+srv://MrRobots25:KFaQvEBfLrC76xNE@cluster.tt1mykg.mongodb.net/');
+        await mongoose.connect('mongodb+srv:/net/');
         console.log('connected to database');
         // forSaleSchema for use
         const forSaleSchema = new mongoose.Schema({
