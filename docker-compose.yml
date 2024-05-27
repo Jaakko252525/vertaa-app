@@ -6,6 +6,35 @@
 
 
 
+services:
+  front-prod:
+    image: front-prod
+    build:
+      context: ./frontend_/ # The context will pick this directory as the "build context"
+      dockerfile: Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./frontend_/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+
+    ports:
+      - 3000:3000
+    container_name: front-prod # This will name the container hello-front-dev
+
+  be-prod:
+    image: be-prod
+    build:
+      context: ./backend/ # The context will pick this directory as the "build context"
+      dockerfile: Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./backend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+
+    ports:
+      - 4000:4000
+    container_name: be-prod # This will name the container hello-front-dev
+
+
+
+
+
 
 
 
