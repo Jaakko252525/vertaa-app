@@ -17,7 +17,17 @@ services:
   debug-helper:
     image: busybox
 
+  be:
+    image: be
+    build:
+      context: ./backend/ # The context will pick this directory as the "build context"
+      dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./backend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
 
+    ports:
+      - 4000:4000
+    container_name: be # This will name the container hello-front-dev
 
 
 
